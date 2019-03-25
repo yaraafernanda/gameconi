@@ -1,0 +1,22 @@
+.form-group{
+    margin-bottom:0px!important;
+}
+.card-darker{
+    width: 300px;
+    padding:30px;
+    box-sizing: border-box;
+    background-color: #120e21;
+    margin:0 auto;
+    margin-top:30px;
+    color:white;
+    border-radius: 15px;
+}
+hr{
+    color:white;
+    background-color: white;
+}
+.btn-twitch{ 
+    color: #FFFFFF !important; 
+    background-color: #6441A5 !important; 
+    border-color: #2F1F4E !important; 
+  }

@@ -2,6 +2,14 @@
 body{
     background-color:#3D2C73 !important;
 }
+.text-center{
+    text-align: center;
+}
+.btn-glow-green{
+    background-color:#58D2C7 !important;
+    border-color: #58D2C7 !important;
+    color:white !important;
+}
 /*
 ================
 =====HEADER====
