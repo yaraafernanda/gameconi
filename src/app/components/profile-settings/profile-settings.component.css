@@ -1,40 +1,5 @@
-body {
-  background-color: #3D2C73 !important;
-}
-
-.topBar {
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  position: relative;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: .5rem 1rem;
-}
-
-.topBar .container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.topBar .navbar-brand,
-.topBar .nav-link {
-  color: white !important;
-}
-
-.search-bar:focus {
-  color: white !important;
-}
-
-.search-bar {
-  background: inherit !important;
-  border: 0px solid !important;
-  width: 90% !important;
-  border-bottom: 3px solid #3E5593 !important;
+.dropdown{
+  text-align: end;
 }
 
 #dropdownMenu1 {
