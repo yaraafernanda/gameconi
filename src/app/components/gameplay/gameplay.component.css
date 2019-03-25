@@ -1,0 +1,44 @@
+.containerT{
+    text-align: center;
+    padding-top: 10%;
+    color: white;
+    font-family: 'Exo', sans-serif;
+    display: flex;
+    flex-flow: wrap;
+}
+#secondGame button{
+    margin-top: 5px;
+    margin-bottom: 0%;
+
+}
+.large{
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+
+.small{
+    font-size: 20px;
+    margin-top: 25px;
+}
+.circle{
+    width: 20%;
+}
+
+img{
+align-items: center;
+border-width: 2px;
+border:  white;   
+}
+footer{
+    position: fixed;
+    font-size: 25px;
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    left: 0;
+    bottom: 0;
+   }
+  

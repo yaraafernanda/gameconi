@@ -1,0 +1,20 @@
+.containerT{
+    text-align: center;
+    padding-top: 10%;
+    color: white;
+    font-family: 'Exo', sans-serif;
+}
+
+.auxText{
+    margin:35px;
+}
+.containerT button{
+    margin: 5px;
+}
+#playAgain{
+    background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+    color: #fff;
+    padding:5px 10px 5px 10px;
+    box-shadow: 0 6px 25px #235193;
+    transition: box-shadow 0.5s ease;
+}

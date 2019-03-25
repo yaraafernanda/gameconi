@@ -1,0 +1,12 @@
+.containerT{
+    text-align: center;
+    padding-top: 10%;
+    color: white;
+    font-family: 'Exo', sans-serif;
+}
+.containerT button{
+    margin: 25px;
+    background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+    color: #fff;
+    padding:5px 10px 5px 10px;
+}
