@@ -1,0 +1,78 @@
+  <!--The content below is only a placeholder and can be replaced.-->
+  <nav class="topBar">
+    <div class="container">
+      <div class="col-md-4">
+        <a class="navbar-brand" href="#">Logo</a>
+      </div>
+      <div class="col-md-4">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div class="dropdown" id="dropmenu">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="true">
+            username
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div id="profile">
+      <img src="https://media.creativemornings.com/uploads/user/avatar/73303/Holtning-Profile-Square-Site.png"
+        class="rounded-circle">
+      <h3>Username</h3>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs nav-justified" id="tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Games Played</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+    </ul>
+
+    <div class="row" id="settingsRow">
+      <div class="col" id="firstR">
+        <p class="large">Username:</p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+            aria-describedby="basic-addon1">
+        </div>
+        <button type="button" class="btn btn-light">Save</button>
+      </div>
+      <div class="col" id="secondR">
+        <p class="large">Password:</p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">*</span>
+          </div>
+          <input type="password" class="form-control" id="pass1" placeholder="Current password">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">*</span>
+          </div>
+          <input type="password" class="form-control" id="pass1" placeholder="New password">
+        </div>
+        <button type="button" class="btn btn-light">Save</button>
+      </div>
+    </div>
+
+  </div>
