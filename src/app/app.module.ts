@@ -8,6 +8,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { GameplayComponent } from './components/gameplay/gameplay.component';
+import { GameComponent } from './components/game/game.component';
+import { GameoverComponent } from './components/gameover/gameover.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { SignupComponent } from './components/signup/signup.component';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    GameplayComponent,
+    GameComponent,
+    GameoverComponent
   ],
   imports: [
     BrowserModule,
