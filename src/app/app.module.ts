@@ -11,6 +11,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { GameplayComponent } from './components/gameplay/gameplay.component';
 import { GameComponent } from './components/game/game.component';
 import { GameoverComponent } from './components/gameover/gameover.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
+import { GameplayedComponent } from './components/gameplayed/gameplayed.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { GameoverComponent } from './components/gameover/gameover.component';
     SignupComponent,
     GameplayComponent,
     GameComponent,
-    GameoverComponent
+    GameoverComponent,
+    ProfileComponent,
+    ProfileSettingsComponent,
+    GameplayedComponent
   ],
   imports: [
     BrowserModule,
