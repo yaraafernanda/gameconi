@@ -14,6 +14,7 @@ import { GameoverComponent } from './components/gameover/gameover.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 import { GameplayedComponent } from './components/gameplayed/gameplayed.component';
+import { ChallengeListComponent } from './components/challenge-list/challenge-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GameplayedComponent } from './components/gameplayed/gameplayed.componen
     GameoverComponent,
     ProfileComponent,
     ProfileSettingsComponent,
-    GameplayedComponent
+    GameplayedComponent,
+    ChallengeListComponent
   ],
   imports: [
     BrowserModule,
