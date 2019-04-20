@@ -1,40 +1,21 @@
-   <!--The content below is only a placeholder and can be replaced.-->
-   <div class="dropdown" id="dropmenu">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="true">
-      username
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Settings</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a href="#">Logout</a></li>
-    </ul> 
-  </div>
+<div class="container">
 
-   <div class="container">
+        <div id="profile">
+          <img src="https://media.creativemornings.com/uploads/user/avatar/73303/Holtning-Profile-Square-Site.png"
+            class="rounded-circle">
+          <h3>{{user.username}}</h3>
+        </div>
+            <!-- Tabs -->
+        <ul class="nav nav-tabs nav-justified" id="tabs">
+            <li class="nav-item">
+              <a class="nav-link"  (click)="goToGamesPlayed()">Games Played</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  (click)="goToSettings()">Settings</a>
+            </li>
+        </ul>
+    
+        <router-outlet></router-outlet>
 
-     <div id="profile">
-       <img src="https://media.creativemornings.com/uploads/user/avatar/73303/Holtning-Profile-Square-Site.png"
-         class="rounded-circle">
-       <h3>Username</h3>
-     </div>
-
-     <!-- Tabs -->
-     <ul class="nav nav-tabs nav-justified" id="tabs">
-       <li class="nav-item">
-         <a class="nav-link active" href="#">Games Played</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="#">Settings</a>
-       </li>
-     </ul>
-
-     <div id="gamePlayedCard">
-       <h4>Game title</h4>
-       <img
-         src="https://www.telegraph.co.uk/content/dam/gaming/2017/01/12/Yooka-Laylee-xlarge_trans_NvBQzQNjv4BqNJjoeBT78QIaYdkJdEY4CnGTJFJS74MYhNY6w3GNbO8.png">
-     </div>
-
-   </div>
+        
+</div>
