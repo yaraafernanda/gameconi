@@ -1,4 +1,4 @@
-export class Usuario { 
+export class User{ 
     /*id:number;
     nombre: string;
     edad: number;
@@ -10,6 +10,5 @@ export class Usuario {
         public username: string,
         public email: string,
         public password: string){
-
         }
 }
