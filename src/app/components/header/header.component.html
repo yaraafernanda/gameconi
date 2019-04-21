@@ -1,10 +1,16 @@
 <nav class="topBar">
         <div class="col-md-4">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" (click)="goHome()">Logo</a>
         </div>
         <div class="col-md-4">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+            <form [formGroup]="formMainSearch" class="form-inline" id="form-mainSearch">
+                <input  (keyup)="searchUsers()" formControlName="search" class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+                <ul class="topbar-result-list" *ngIf="showList()">
+                  <li *ngFor="let user of userSearchResults" (click)="goToProfile(user.username)">
+                    <img src="{{user.image}}">
+                    <span>{{user.username}}</span>
+                  </li>
+                </ul>
             </form>
         </div>
         <div class="col-md-4">

@@ -10,6 +10,7 @@ import { GameoverComponent } from './components/gameover/gameover.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesPlayedComponent } from './components/profile/games-played/games-played/games-played.component';
+import { GeneralComponent } from './components/profile/general/general.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'profile/:username', component: ProfileComponent,children:[
     //{ path: '',redirectTo:'/', pathMatch:'full'},
     //{ path: ':id',redirectTo:':id/gamesplayed', pathMatch:'full'},
-    { path: '',redirectTo:'gamesplayed', pathMatch:'full'},
+    //{ path: '',redirectTo:'gamesplayed', pathMatch:'full'},
+    { path: '',component: GeneralComponent},
     { path: 'settings', component: SettingsComponent,canActivate:[AuthGuardService]},
     { path: 'gamesplayed', component: GamesPlayedComponent,canActivate:[AuthGuardService] }
   ] },

@@ -12,13 +12,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  usuarios:User[]=[];
+  usuarios:User[];
   userChangeSub: Subscription;
   formLogin:FormGroup;
   errMsg:boolean=false;
   constructor(private usuarioService:UsuarioService,private authService:AuthService, private router:Router) { }
   ngOnInit() {
-    this.usuarioService.leerDatosDelJSON();
+    this.usuarios=this.usuarioService.getUsers();
     this.userChangeSub = this.usuarioService.usersChange.subscribe(
       (arregloUsuarios:User[])=>{
         console.log('CAMBIO USUARIOS',arregloUsuarios);

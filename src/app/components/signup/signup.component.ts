@@ -58,10 +58,13 @@ export class SignupComponent implements OnInit {
     if(this.errMsg==''){
       console.log('ENTRO CREAR');
       ///SUBMIT NEW USER//
+      let image=Math.floor(Math.random() * 100)+1;
       let new_user:User=new User(this.usuarioService.getNextId(),
       this.formSignUp.value.username,
       this.formSignUp.value.email,
-      this.formSignUp.value.password);
+      this.formSignUp.value.password,
+      'https://api.adorable.io/avatars/285/'+image+'.png'
+      );
       this.usuarioService.createUser(new_user);
       ///AUTH USER AND REDIRECT TO PROFILE////
       this.authService.login(new_user);
