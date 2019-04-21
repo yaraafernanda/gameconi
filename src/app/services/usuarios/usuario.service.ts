@@ -50,4 +50,28 @@ export class UsuarioService {
     };
     this.usersChange.next(this.users.slice());
   }
+  findUserbyUsername(username:string){
+    /*if(this.users==undefined){
+      await this.leerDatosDelJSON();
+    }*/
+    let index=this.users.findIndex(item=>{
+      if(item.username==username){
+        return true;
+      };
+    });
+    if(index>=0){
+      return this.users[index];
+    }
+    return null;
+  }
+  searchUsers(search:string):User[]{
+    let patt = new RegExp(search);
+    let users_found=this.users.filter(item=>{
+      if(patt.test(item.username)){
+        return true;
+      }
+    });
+    return users_found;
+  }
+
 }

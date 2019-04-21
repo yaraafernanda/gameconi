@@ -1,12 +1,15 @@
 <div class="container">
 
         <div id="profile">
-          <img src="https://media.creativemornings.com/uploads/user/avatar/73303/Holtning-Profile-Square-Site.png"
+          <img src="{{profile.image}}"
             class="rounded-circle">
-          <h3>{{user.username}}</h3>
+          <h3>{{profile.username}}</h3>
         </div>
             <!-- Tabs -->
-        <ul class="nav nav-tabs nav-justified" id="tabs">
+        <ul class="nav nav-tabs nav-justified" id="tabs" *ngIf="isHisProfile()">
+            <li class="nav-item">
+                <a class="nav-link"  (click)="goToGeneral()">General</a>
+              </li>
             <li class="nav-item">
               <a class="nav-link"  (click)="goToGamesPlayed()">Games Played</a>
             </li>

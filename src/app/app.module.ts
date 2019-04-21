@@ -17,6 +17,7 @@ import { ChallengeListComponent } from './components/challenge-list/challenge-li
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesPlayedComponent } from './components/profile/games-played/games-played/games-played.component';
+import { GeneralComponent } from './components/profile/general/general.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { GamesPlayedComponent } from './components/profile/games-played/games-pl
     ChallengeListComponent,
     SettingsComponent,
     GamesPlayedComponent,
+    GeneralComponent,
   ],
   imports: [
     BrowserModule,
