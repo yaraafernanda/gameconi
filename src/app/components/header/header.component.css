@@ -80,6 +80,8 @@ ul.topbar-result-list{
   height:auto;
   padding:0px;
   margin:0px;
+  max-height:300px;
+  overflow: auto;
  }
  /* if you want style so that's why i use "li a" also */
  ul.topbar-result-list li, 

@@ -4,6 +4,7 @@ import { User } from 'src/app/class/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,16 @@ export class ProfileComponent implements OnInit {
     private location:Location) { }
   user:User;
   profile:User;
+  aparam:string;
+  userChangeSub: Subscription;
   ngOnInit() {
+    /*console.log('params',this.route.snapshot.params);
+    console.log('params',this.route.snapshot.url);
+    console.log('params',this.route.snapshot.component);
+    console.log('params',this.route.url);*/
+    this.aparam=this.route.firstChild.url['_value'][0]['path'];
+    //console.log('params',this.route.firstChild.url['_value'][0]['path']);
+    //console.log('x1',)
     //this.user=this.authService.user;
     if(this.usuarioService.getUsers()){
       this.route.params.subscribe((params)=>{
@@ -24,7 +34,20 @@ export class ProfileComponent implements OnInit {
           this.profile=this.usuarioService.findUserbyUsername(params.username);
         }
       });
+    }else{
+      this.userChangeSub = this.usuarioService.usersChange.subscribe(
+        (arregloUsuarios:User[])=>{
+          console.log('USERS LOADED');
+          this.route.params.subscribe((params)=>{
+            if(params.username){
+              this.profile=this.usuarioService.findUserbyUsername(params.username);
+            }
+          });
+        }
+      );
     }
+    
+      
     
   }
   isHisProfile(){
@@ -41,9 +64,13 @@ export class ProfileComponent implements OnInit {
   goToGeneral(){
     //
     //this.location.go(this.route.url);
+    this.aparam=this.route.firstChild.url['_value'][0]['path'];
     this.router.navigate(['/',{relativeTo:this.route}]);
   }
   goToGamesPlayed(){
+    console.log('ENTRO2');
+    this.aparam='gamesplayed';
+    //this.router.navigate([this.route.url],{relativeTo:this.route});
     this.router.navigate(['gamesplayed'],{relativeTo:this.route});
   }
   goToSettings(){
@@ -51,7 +78,8 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe((params) => {
       console.log('NETRO',params['username']);
     })*/
-    
+    this.aparam='settings';
+    //this.aparam=this.route.firstChild.url['_value'][0]['path'];
     this.router.navigate(['settings'],{relativeTo:this.route});
   }
 
