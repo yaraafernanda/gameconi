@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     //console.log('AUTH?',this.authService.isAuthehticated());
     this.usuarioService.leerDatosDelJSON();
+    console.log('CARGANDO DATOS');
     this.logged=this.authService.isAuthehticated();
     this.loginStatus=this.authService.loginStatusChange.subscribe((usuario:User)=>{
         this.logged=true;
@@ -36,10 +37,28 @@ export class HeaderComponent implements OnInit {
       return true;
     }
   }
-  searchUsers(){
+  searchUsers(e){
     //console.log('USUARIOS',this.usuarioService.getUsers());
-    this.userSearchResults=this.usuarioService.searchUsers(this.formMainSearch.value.search);
-    console.log('USUARIOS',this.userSearchResults);
+    if (e.which <= 90 && e.which >= 48)
+       {
+        this.userSearchResults=this.usuarioService.searchUsers(this.formMainSearch.value.search);
+       }
+    else{
+        if(e.which==38){
+          //UP KEY
+          if(e.target.tagName!='INPUT'){
+
+          }
+        }
+        if(e.which==40){
+          //DOWN KEY
+          if(e.target.tagName=='INPUT'){
+            //let form=e.target.closest('form');
+            //form.querySelector('li').focus();
+          }
+        }
+    }
+    
   }
   goToProfile(username:string){
     this.formMainSearch.value.search='';

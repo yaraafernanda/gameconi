@@ -19,10 +19,10 @@ const routes: Routes = [
   { path: 'profile/:username', component: ProfileComponent,children:[
     //{ path: '',redirectTo:'/', pathMatch:'full'},
     //{ path: ':id',redirectTo:':id/gamesplayed', pathMatch:'full'},
-    //{ path: '',redirectTo:'gamesplayed', pathMatch:'full'},
-    { path: '',component: GeneralComponent},
+    { path: '',redirectTo:'gamesplayed', pathMatch:'full'},
+    //{ path: '',component: GeneralComponent},
     { path: 'settings', component: SettingsComponent,canActivate:[AuthGuardService]},
-    { path: 'gamesplayed', component: GamesPlayedComponent,canActivate:[AuthGuardService] }
+    { path: 'gamesplayed', component: GamesPlayedComponent}
   ] },
   //{ path: 'settings', component: ProfileSettingsComponent,canActivate:[AuthGuardService]},
   //{ path: 'gamesplayed', component: GameplayedComponent },

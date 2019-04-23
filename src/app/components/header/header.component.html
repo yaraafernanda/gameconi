@@ -4,7 +4,7 @@
         </div>
         <div class="col-md-4">
             <form [formGroup]="formMainSearch" class="form-inline" id="form-mainSearch">
-                <input  (keyup)="searchUsers()" formControlName="search" class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+                <input  (keyup)="searchUsers($event)" formControlName="search" class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
                 <ul class="topbar-result-list" *ngIf="showList()">
                   <li *ngFor="let user of userSearchResults" (click)="goToProfile(user.username)">
                     <img src="{{user.image}}">
