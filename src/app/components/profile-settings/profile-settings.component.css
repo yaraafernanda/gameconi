@@ -26,3 +26,16 @@
   box-shadow: 0 3px 25px #235193;
   transition: box-shadow 0.5s ease;
 }
+
+#settingsRow{
+  padding: 15px;
+  color: white;
+} 
+
+.col .input-group{
+  padding-top: 5px;
+}
+
+.col .btn{
+  margin-top: 5%;
+}

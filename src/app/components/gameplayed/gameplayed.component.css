@@ -1,36 +1,23 @@
-.topBar {
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  position: relative;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: .5rem 1rem;
+#gamePlayedCard{
+  background-color: lightgray;
+  padding: 15px;
+  border-radius: 25px;
 }
 
-.topBar .container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+table {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.topBar .navbar-brand,
-.topBar .nav-link {
-  color: white !important;
+table{
+  width: 90%;
 }
 
-.search-bar:focus {
-  color: white !important;
-}
-
-.search-bar {
-  background: inherit !important;
-  border: 0px solid !important;
-  width: 90% !important;
-  border-bottom: 3px solid #3E5593 !important;
+th, td {
+  border-bottom: 2px solid rgb(230, 227, 227);
 }
 
 #profile {
