@@ -102,14 +102,6 @@ ul.topbar-result-list{
   color:#000;
   text-decoration:normal;
  }
- ul.topbar-result-list li:hover .suggested_input{
-  background-color:#FAFFBD;
-  border:1px solid #3C8DBC;
- }
- .topbar-result-list:hover ul.suggestions{
- display:block;
- }
-
 
 .topbar-result-list li{
   display: flex;
