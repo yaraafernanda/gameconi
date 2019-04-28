@@ -1,0 +1,21 @@
+<div class="container">
+
+        <div *ngIf="profile!=null" id="profile">
+          <img src="{{profile.image}}"
+            class="rounded-circle">
+          <h3>{{profile.username}}</h3>
+        </div>
+            <!-- Tabs -->
+        <ul *ngIf="profile" class="nav nav-tabs nav-justified" id="tabs">
+            <li class="nav-item" >
+              <a class="nav-link" [ngClass]="{'active': aparam=='gamesplayed'}"   (click)="goToGamesPlayed()">Games Played</a>
+            </li>
+            <li *ngIf="isHisProfile()" class="nav-item">
+              <a class="nav-link" [ngClass]="{'active': aparam=='settings'}" (click)="goToSettings()">Settings</a>
+            </li>
+        </ul>
+    
+        <router-outlet></router-outlet>
+
+        
+</div>
