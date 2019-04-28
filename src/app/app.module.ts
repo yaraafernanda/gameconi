@@ -13,7 +13,9 @@ import { GameComponent } from './components/game/game.component';
 import { GameoverComponent } from './components/gameover/gameover.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
-import { GameplayedComponent } from './components/gameplayed/gameplayed.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { GamesinprogressComponent } from './gamesinprogress/gamesinprogress.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,12 @@ import { GameplayedComponent } from './components/gameplayed/gameplayed.componen
     GameoverComponent,
     ProfileComponent,
     ProfileSettingsComponent,
-    GameplayedComponent
+    GamesinprogressComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

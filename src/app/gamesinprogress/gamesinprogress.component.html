@@ -1,0 +1,89 @@
+   <!--The content below is only a placeholder and can be replaced.-->
+   <div class="dropdown" id="dropmenu">
+     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="true">
+       username
+       <span class="caret"></span>
+     </button>
+     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+       <li><a href="#">Profile</a></li>
+       <li><a href="#">Settings</a></li>
+       <li role="separator" class="divider"></li>
+       <li><a href="#">Logout</a></li>
+     </ul>
+   </div>
+
+   <div class="container">
+
+     <div id="profile">
+       <img src="https://media.creativemornings.com/uploads/user/avatar/73303/Holtning-Profile-Square-Site.png"
+         class="rounded-circle">
+       <h3>Username</h3>
+     </div>
+
+     <!-- Tabs -->
+     <ul class="nav nav-tabs nav-justified" id="tabs" role="tab-list">
+       <li class="nav-item">
+         <a class="nav-link" id="gp-tab" data-toggle="tab" role="tab" href="profile" aria-controls="gp"
+           aria-selected="false">Games Played</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link active" id="cg-tab" data-toggle="tab" role="tab" href="#" aria-controls="cg"
+           aria-selected="true">Current Games</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" id="set-tab" data-toggle="tab" role="tab" href="settings" aria-controls="set"
+           aria-selected="false">Settings</a>
+       </li>
+     </ul>
+
+     <!-- Tab panes -->
+     <div class="tab-content">
+       <div class="tab-pane" id="gp" role="tabpanel" aria-labelledby="gp-tab">...</div>
+       <div class="tab-pane active" id="cg" role="tabpanel" aria-labelledby="cg-tab">
+         <!-- Cards -->
+         <div class="row">
+           <div class="col-sm-6">
+             <!--Individual Card-->
+             <div class="card text-center border-info">
+               <div class="card-header">
+                 Your turn
+               </div>
+               <img
+                 src="https://www.telegraph.co.uk/content/dam/gaming/2017/01/12/Yooka-Laylee-xlarge_trans_NvBQzQNjv4BqNJjoeBT78QIaYdkJdEY4CnGTJFJS74MYhNY6w3GNbO8.png"
+                 class="card-img-top" alt="...">
+               <div class="card-body">
+                 <h5 class="card-title">yaraafernanda</h5>
+                 <p class="card-text">alvaro021 challenged you</p>
+                 <a href="#" class="btn btn-primary">Jugar</a>
+               </div>
+               <div class="card-footer text-muted">
+                 Your have 2 days to play
+               </div>
+             </div>
+           </div>
+           <div class="col-sm-6">
+             <!--Individual Card-->
+             <div class="card text-center border-info">
+               <div class="card-header">
+                 Your turn
+               </div>
+               <img
+                 src="https://www.telegraph.co.uk/content/dam/gaming/2017/01/12/Yooka-Laylee-xlarge_trans_NvBQzQNjv4BqNJjoeBT78QIaYdkJdEY4CnGTJFJS74MYhNY6w3GNbO8.png"
+                 class="card-img-top" alt="...">
+               <div class="card-body">
+                 <h5 class="card-title">yaraafernanda</h5>
+                 <p class="card-text">mariana challenged you</p>
+                 <a href="#" class="btn btn-primary">Jugar</a>
+               </div>
+               <div class="card-footer text-muted">
+                 Your have 1 days to play
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="tab-pane" id="set" role="tabpanel" aria-labelledby="set-tab">...</div>
+     </div>
+
+   </div>

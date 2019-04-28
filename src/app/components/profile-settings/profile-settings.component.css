@@ -38,4 +38,14 @@
 
 .col .btn{
   margin-top: 5%;
+  width: 150px;
+  background: #26A4B5;
+}
+
+#firstR p {
+  padding-top: 20px;
+}
+
+p {
+  font-weight: bolder;
 }
