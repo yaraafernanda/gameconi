@@ -1,0 +1,29 @@
+.dropdown{
+    text-align: end;
+  }
+  
+  #dropdownMenu1 {
+    background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+    box-shadow: 0 6px 25px #235193;
+    transition: box-shadow 0.5s ease;
+  }
+  
+  #profile {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    color: white;
+    font-family: 'Exo', sans-serif;
+  }
+  
+  #profile img {
+    width: 20%;
+  }
+  
+  #tabs {
+    box-shadow: 0 3px 25px #235193;
+    transition: box-shadow 0.5s ease;
+  }
+  

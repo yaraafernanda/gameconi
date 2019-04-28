@@ -1,24 +1,59 @@
 <nav class="topBar">
-    <div class="container">
         <div class="col-md-4">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" (click)="goHome()">Logo</a>
         </div>
         <div class="col-md-4">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+            <form [formGroup]="formMainSearch" class="form-inline" id="form-mainSearch">
+                <input  (keyup)="searchUsers($event)" formControlName="search" class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+                <ul class="topbar-result-list" *ngIf="showList()">
+                  <li *ngFor="let user of userSearchResults" (click)="goToProfile(user.username)">
+                    <img src="{{user.image}}">
+                    <span>{{user.username}}</span>
+                  </li>
+                </ul>
             </form>
         </div>
         <div class="col-md-4">
             <div id="topBarActions">
-                <ul>
+               <ul *ngIf="!logged">
                   <li>
-                    <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" (click)="goLogin()" >Login <span class="sr-only">(current)</span></a>
                   </li>
                   <li>
-                    <a class=" button signUp-btn" href="#">Signup</a>
+                    <a class=" button signUp-btn" (click)="goSignup()" >Signup</a>
                   </li>
                 </ul>
-              </div>
+                <!--DROPWDOWN WHEN USER IS LOGGED--> 
+                <ul *ngIf="logged">
+                    <li class="relative" dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()">
+                        <a class="nav-link"  dropdownToggle 
+                           aria-controls="basic-link-dropdown">{{user.username}}</a>
+                        <ul id="dropdown-alignment" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+                            role="menu" aria-labelledby="basic-link">
+                          <li (click)="goToProfile(user.username)">
+                            <span class="item-dropdown" >Profile</span>
+                          </li>
+                          <li (click)="logout()">
+                              <span class="item-dropdown">Logout</span>
+                          </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!--ESTE ES TU DROPDOWN ANTIGUO-->
+                <!--<div *ngIf="logged" class="dropdown" id="dropmenu">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="true">
+                    username
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Logout</a></li>
+                  </ul> 
+                </div>-->
+                <!---END DROPDOWN WHEN YOU ARE LOGGED-->
+            </div>
         </div>
-    </div>
   </nav>

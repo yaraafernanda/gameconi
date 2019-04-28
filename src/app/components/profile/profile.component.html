@@ -1,3 +1,4 @@
+<<<<<<< HEAD
    <!--The content below is only a placeholder and can be replaced.-->
    <div class="dropdown" id="dropmenu">
      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
@@ -12,9 +13,28 @@
        <li><a href="#">Logout</a></li>
      </ul>
    </div>
+=======
+<div class="container">
+>>>>>>> 922c643d6e43cfeab69c5f4f37e47fff4d4d1de0
 
-   <div class="container">
+        <div *ngIf="profile!=null" id="profile">
+          <img src="{{profile.image}}"
+            class="rounded-circle">
+          <h3>{{profile.username}}</h3>
+        </div>
+            <!-- Tabs -->
+        <ul *ngIf="profile" class="nav nav-tabs nav-justified" id="tabs">
+            <li class="nav-item" >
+              <a class="nav-link" [ngClass]="{'active': aparam=='gamesplayed'}"   (click)="goToGamesPlayed()">Games Played</a>
+            </li>
+            <li *ngIf="isHisProfile()" class="nav-item">
+              <a class="nav-link" [ngClass]="{'active': aparam=='settings'}" (click)="goToSettings()">Settings</a>
+            </li>
+        </ul>
+    
+        <router-outlet></router-outlet>
 
+<<<<<<< HEAD
      <div id="profile">
        <img src="https://media.creativemornings.com/uploads/user/avatar/73303/Holtning-Profile-Square-Site.png"
          class="rounded-circle">
@@ -80,3 +100,7 @@
        </div>
 
      </div>
+=======
+        
+</div>
+>>>>>>> 922c643d6e43cfeab69c5f4f37e47fff4d4d1de0

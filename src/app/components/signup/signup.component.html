@@ -2,8 +2,9 @@
 <div class="card-darker">
     <div class="text-center">
         <h2 class="form-signin-heading">Please sign up</h2>
+        <!--<p>{{formSignUp.value.email | json}}</p>-->
     </div>
-    <form class="form-signin"> 
+    <form [formGroup]="formSignUp" (ngSubmit)="signUp()" class="form-signin"> 
   
         <div class="text-center">
             <button type="button" class="btn btn-twitch">
@@ -11,24 +12,27 @@
             </button>
         </div>     
         <hr>
+        <div *ngIf="errMsg!=''" class="alert alert-danger" role="alert">
+            {{errMsg}}
+        </div>
        <div class="form-group">
           <label for=""></label>
-          <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
-                    <small id="helpId" class="text-muted">symbols are not valid</small>
+          <input type="text" class="form-control" formControlName="username" name="username" placeholder="Username" required="" autofocus="" />
+                    <small id="helpId" class="text-muted">alphanumerical and can have underscore</small>
         </div>
         <div class="form-group">
             <label for=""></label>
-            <input type="email" class="form-control" name="email" placeholder="Email" required="" autofocus="" />
+            <input type="email" class="form-control" formControlName="email" name="email" placeholder="Email" required="" autofocus="" />
                       <small id="helpId" class="text-muted">correct email address</small>
           </div>
           <div class="form-group">
               <label for=""></label>
-              <input type="password" class="form-control" name="password" placeholder="Password" required="" autofocus="" />
-                        <small id="helpId" class="text-muted">Help text</small>
+              <input type="password" class="form-control" formControlName="password" name="password" placeholder="Password" required="" autofocus="" />
+                        <small id="helpId" class="text-muted">passwrod must be at least 6 characters long</small>
             </div>
         <label>
-          <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Accept Terms and Conditions
+          <input type="checkbox" value="remember-me" formControlName="terms" name="terms"> Accept Terms and Conditions
         </label>
-        <button class="btn btn-lg btn-glow-green btn-block" type="submit">Sign Up</button>   
+        <button [disabled]="!formSignUp.valid" class="btn btn-lg btn-glow-green btn-block" type="submit">Sign Up</button>   
     </form>
   </div>
