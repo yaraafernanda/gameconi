@@ -13,7 +13,7 @@
     <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
   </div>
  <div>
-      <button  type="button" class="btn col-3 btn-primary btn-lg btn-green">
+      <button [disabled]="!userSelected" type="button" class="btn col-3 btn-primary btn-lg btn-green">
           Play
       </button>
  </div> 

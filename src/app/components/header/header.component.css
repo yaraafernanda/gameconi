@@ -57,7 +57,20 @@ text-decoration: none;
 .dropdown{
   text-align: end;
 }
-
+.dropdown-menu{
+  display: none !important;
+  flex-direction: column !important;
+}
+.dropdown-menu.show{
+  display: inline-flex !important;
+}
+.dropdown-menu li,.dropdown-item{
+  width: 100%;
+  cursor: pointer;
+}
+.dropdown-menu.show .dropdown-item:hover{
+  color: #3D2C73 !important;
+}
 #dropdownMenu1 {
   background: linear-gradient(45deg, #26A4B5, #6BE0CC);
   color: #fff;

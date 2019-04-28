@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-4">
             <div id="topBarActions">
-                <ul *ngIf="!logged">
+               <ul *ngIf="!logged">
                   <li>
                     <a class="nav-link" (click)="goLogin()" >Login <span class="sr-only">(current)</span></a>
                   </li>
@@ -23,12 +23,21 @@
                     <a class=" button signUp-btn" (click)="goSignup()" >Signup</a>
                   </li>
                 </ul>
-                <!--DROPWDOWN WHEN USER IS LOGGED-->
+                <!--DROPWDOWN WHEN USER IS LOGGED--> 
                 <ul *ngIf="logged">
-                  <li>
-                    <!--YARA AQUI PONES EL DROPDOWN-->
-                    <a class="nav-link">{{user.username}}</a>
-                  </li>
+                    <li class="relative" dropdown (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()">
+                        <a class="nav-link"  dropdownToggle 
+                           aria-controls="basic-link-dropdown">{{user.username}}</a>
+                        <ul id="dropdown-alignment" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+                            role="menu" aria-labelledby="basic-link">
+                          <li (click)="goToProfile(user.username)">
+                            <span class="dropdown-item" href="#">Profile</span>
+                          </li>
+                          <li (click)="logout()">
+                              <span class="dropdown-item" href="#">Logout</span>
+                          </li>
+                        </ul>
+                    </li>
                 </ul>
                 <!--ESTE ES TU DROPDOWN ANTIGUO-->
                 <!--<div *ngIf="logged" class="dropdown" id="dropmenu">
