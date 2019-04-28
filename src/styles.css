@@ -2,6 +2,12 @@
 body{
     background-color:#3D2C73 !important;
 }
+.drop-header{
+  width:100px;
+}
+.relative{
+  position: relative;
+}
 .margin-t10{
   margin-top: 10px;
 }

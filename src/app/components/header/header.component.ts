@@ -6,6 +6,7 @@ import { User } from 'src/app/class/User';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -32,6 +33,18 @@ export class HeaderComponent implements OnInit {
       search: new FormControl(''),
     });
   }
+
+  onHidden(): void {
+    console.log('Dropdown is hidden');
+  }
+  onShown(): void {
+    console.log('Dropdown is shown');
+  }
+  isOpenChange(): void {
+    console.log('Dropdown state is changed');
+  }
+
+
   showList():boolean{
     if(this.formMainSearch.value.search!=''){
       return true;
@@ -59,6 +72,10 @@ export class HeaderComponent implements OnInit {
         }
     }
     
+  }
+  logout(){
+    this.authService.logout();
+    this.logged=this.authService.isAuthehticated();
   }
   goToProfile(username:string){
     this.formMainSearch.value.search='';
