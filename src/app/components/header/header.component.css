@@ -71,6 +71,18 @@ text-decoration: none;
 .dropdown-menu.show .dropdown-item:hover{
   color: #3D2C73 !important;
 }
+.item-dropdown {
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #3D2C73 !important;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
 #dropdownMenu1 {
   background: linear-gradient(45deg, #26A4B5, #6BE0CC);
   color: #fff;
