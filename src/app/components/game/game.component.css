@@ -1,3 +1,15 @@
+.bg{
+    position: absolute;
+    top: 56px;
+    background-position: center center;
+    background-size: cover;
+    left: 0px;
+    background-repeat: no-repeat;
+    height: calc(100% - 56px);
+    width: 100%;
+    z-index: -1;
+    background-image: url('https://i.imgur.com/iutl3ji.jpg');
+}
 .containerT{
     text-align: center;
     padding-top: 10%;
@@ -5,6 +17,11 @@
 }
 h1{
     font-family: 'Exo', sans-serif;
+    color:#5d55fc;
+    font-size: 4rem;
+}
+h3{
+    color:black;
 }
 .containerT .btn-green{
     margin: 25px;
@@ -57,12 +74,20 @@ ul.users-result-list{
     margin-left: 10px;
     font-size: 14px;
   }
-
+  .btn-purple:hover{
+    color:#ae8cf2!important;
+  }
   /*
   USER SELECTED
   */
   .userSelected {
       margin:10px 0px;
+      background-color:#5d55fc;
+      color:white!important;
+      padding:20px;
+      display: inline-block;
+      border-radius: 15px;
+      font-weight: bold;
   }
 .userSelected img{
     width: 50px;

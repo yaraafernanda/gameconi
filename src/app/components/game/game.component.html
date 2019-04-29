@@ -1,23 +1,26 @@
-<div class="containerT">
-  <div>
-      <h1>Higher Lower</h1>
-      <h1>Game</h1>
-  </div>
-  <div>
-    <h3 class="margin-t10">Choose Rival:</h3>
-    <div *ngIf="userSelected" class="userSelected">
-        <img src="{{userSelected.image}}">
-        {{userSelected.username}}
+<div class="bg"></div>
+  <div class="containerT">
+    <div>
+        <h1>Higher Lower</h1>
+        <h1>Game</h1>
     </div>
-    <button class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select User</button>
-    <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
+    <div>
+      <h3 class="margin-t10">Choose Rival:</h3>
+      <div>
+        <div *ngIf="userSelected" class="userSelected">
+            <img src="{{userSelected.image}}">
+            {{userSelected.username}}
+        </div>
+      </div>
+      <button class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select User</button>
+      <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
+    </div>
+  <div>
+        <button (click)="goToGameplay()" [disabled]="!userSelected" type="button" class="btn col-3 btn-primary btn-lg btn-green">
+            Play
+        </button>
+  </div> 
   </div>
- <div>
-      <button [disabled]="!userSelected" type="button" class="btn col-3 btn-primary btn-lg btn-green">
-          Play
-      </button>
- </div> 
-</div>
 
 <!--MODAL-->
 <ng-template #content let-modal>
