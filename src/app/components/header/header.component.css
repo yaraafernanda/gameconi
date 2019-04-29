@@ -68,9 +68,6 @@ text-decoration: none;
   width: 100%;
   cursor: pointer;
 }
-.dropdown-menu.show .dropdown-item:hover{
-  color: #3D2C73 !important;
-}
 .item-dropdown {
   display: block;
   width: 100%;
