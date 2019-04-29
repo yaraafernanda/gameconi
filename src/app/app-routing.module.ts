@@ -10,25 +10,23 @@ import { GameoverComponent } from './components/gameover/gameover.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesPlayedComponent } from './components/profile/games-played/games-played/games-played.component';
-import { GeneralComponent } from './components/profile/general/general.component';
+import { GamesinprogressComponent } from './components/profile/gamesinprogress/gamesinprogress/gamesinprogress.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'profile/:username', component: ProfileComponent,children:[
-    //{ path: '',redirectTo:'/', pathMatch:'full'},
-    //{ path: ':id',redirectTo:':id/gamesplayed', pathMatch:'full'},
-    { path: '',redirectTo:'gamesplayed', pathMatch:'full'},
-    //{ path: '',component: GeneralComponent},
-    { path: 'settings', component: SettingsComponent,canActivate:[AuthGuardService]},
+  { path: 'profile/:username', component: ProfileComponent, children: [
+    // { path: '',redirectTo:'/', pathMatch:'full'},
+    // { path: ':id',redirectTo:':id/gamesplayed', pathMatch:'full'},
+    { path: '', redirectTo: 'gamesplayed', pathMatch: 'full'},
+    { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService]},
+    { path: 'currentgames', component: GamesinprogressComponent, canActivate: [AuthGuardService]},
     { path: 'gamesplayed', component: GamesPlayedComponent}
   ] },
-  //{ path: 'settings', component: ProfileSettingsComponent,canActivate:[AuthGuardService]},
-  //{ path: 'gamesplayed', component: GameplayedComponent },
   { path: 'game', component: GameComponent },
-  { path: 'gameplay', component: GameplayComponent, canActivate:[AuthGuardService]},
-  { path: 'gameover', component: GameoverComponent, canActivate:[AuthGuardService] }
+  { path: 'gameplay', component: GameplayComponent, canActivate: [AuthGuardService]},
+  { path: 'gameover', component: GameoverComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
@@ -36,4 +34,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-//export const routingComponents = [HomeComponent]
+// export const routingComponents = [HomeComponent]

@@ -1,4 +1,4 @@
-export class User{ 
+export class User {
     /*id:number;
     nombre: string;
     edad: number;
@@ -6,10 +6,10 @@ export class User{
     carrera: string;
     sexo: string;*/
     constructor(
-        public id:number, 
+        public id: number,
         public username: string,
         public email: string,
         public password: string,
-        public image:string){
+        public image: string) {
         }
 }

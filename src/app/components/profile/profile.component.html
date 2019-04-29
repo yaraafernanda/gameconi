@@ -1,106 +1,24 @@
-<<<<<<< HEAD
-   <!--The content below is only a placeholder and can be replaced.-->
-   <div class="dropdown" id="dropmenu">
-     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-       aria-haspopup="true" aria-expanded="true">
-       username
-       <span class="caret"></span>
-     </button>
-     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-       <li><a href="#">Profile</a></li>
-       <li><a href="#">Settings</a></li>
-       <li role="separator" class="divider"></li>
-       <li><a href="#">Logout</a></li>
-     </ul>
-   </div>
-=======
 <div class="container">
->>>>>>> 922c643d6e43cfeab69c5f4f37e47fff4d4d1de0
 
-        <div *ngIf="profile!=null" id="profile">
-          <img src="{{profile.image}}"
-            class="rounded-circle">
-          <h3>{{profile.username}}</h3>
-        </div>
-            <!-- Tabs -->
-        <ul *ngIf="profile" class="nav nav-tabs nav-justified" id="tabs">
-            <li class="nav-item" >
-              <a class="nav-link" [ngClass]="{'active': aparam=='gamesplayed'}"   (click)="goToGamesPlayed()">Games Played</a>
-            </li>
-            <li *ngIf="isHisProfile()" class="nav-item">
-              <a class="nav-link" [ngClass]="{'active': aparam=='settings'}" (click)="goToSettings()">Settings</a>
-            </li>
-        </ul>
-    
-        <router-outlet></router-outlet>
+  <div *ngIf="profile!=null" id="profile">
+    <img src="{{profile.image}}" class="rounded-circle">
+    <h3>{{profile.username}}</h3>
+  </div>
+  
+  <!-- Tabs -->
+  <ul *ngIf="profile" class="nav nav-tabs nav-justified" id="tabs">
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': aparam=='gamesplayed'}" (click)="goToGamesPlayed()"
+      id="gp-tab" data-toggle="tab" role="tab" aria-controls="gp">Games Played</a>
+    </li>
+    <li *ngIf="isHisProfile()" class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': aparam=='currentgames'}" (click)="goToCurrentGames()"
+      id="cg-tab" data-toggle="tab" role="tab" aria-controls="cg">Current Games</a>
+    </li>
+    <li *ngIf="isHisProfile()" class="nav-item">
+      <a class="nav-link" [ngClass]="{'active': aparam=='settings'}" (click)="goToSettings()"
+      id="cg-tab" data-toggle="tab" role="tab" aria-controls="cg">Settings</a>
+    </li>
+  </ul>
 
-<<<<<<< HEAD
-     <div id="profile">
-       <img src="https://media.creativemornings.com/uploads/user/avatar/73303/Holtning-Profile-Square-Site.png"
-         class="rounded-circle">
-       <h3>Username</h3>
-     </div>
-
-     <!-- Tabs -->
-     <ul class="nav nav-tabs nav-justified" id="tabs" role="tab-list">
-       <li class="nav-item">
-         <a class="nav-link active" id="gp-tab" data-toggle="tab" role="tab" href="#" aria-controls="gp"
-           aria-selected="true">Games Played</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" id="cg-tab" data-toggle="tab" role="tab" href="currentgames" aria-controls="cg"
-           aria-selected="false">Current Games</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" id="set-tab" data-toggle="tab" role="tab" href="settings" aria-controls="set"
-           aria-selected="false">Settings</a>
-       </li>
-     </ul>
-
-     <!-- Tab panes -->
-     <div class="tab-content">
-       <div class="tab-pane active" id="gp" role="tabpanel" aria-labelledby="gp-tab">
-         <div id="gamePlayedCard">
-           <h4>Game title</h4>
-           <div class="row" id="settingsRow">
-             <div class="col" id="firstR">
-               <img
-                 src="https://www.telegraph.co.uk/content/dam/gaming/2017/01/12/Yooka-Laylee-xlarge_trans_NvBQzQNjv4BqNJjoeBT78QIaYdkJdEY4CnGTJFJS74MYhNY6w3GNbO8.png">
-             </div>
-             <div class="col" id="secondR">
-               <h5>Players Score</h5>
-               <table class="table table-sm">
-                 <thead>
-                   <tr>
-                     <th scope="col">Username</th>
-                     <th scope="col">Score</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <tr>
-                     <td>yaraafernanda</td>
-                     <td>468</td>
-                   </tr>
-                   <tr>
-                     <td>thornton</td>
-                     <td>274</td>
-                   </tr>
-                   <tr>
-                     <td>littleguy</td>
-                     <td>247</td>
-                   </tr>
-                 </tbody>
-               </table>
-             </div>
-           </div>
-         </div>
-       </div>
-       <div class="tab-pane" id="cg" role="tabpanel" aria-labelledby="cg-tab">
-         <div class="tab-pane" id="set" role="tabpanel" aria-labelledby="set-tab">...</div>
-       </div>
-
-     </div>
-=======
-        
-</div>
->>>>>>> 922c643d6e43cfeab69c5f4f37e47fff4d4d1de0
+<router-outlet></router-outlet>

@@ -6,33 +6,34 @@ import { User } from 'src/app/class/User';
   providedIn: 'root'
 })
 export class UsuarioService {
-  //https://api.myjson.com/bins/wse9o
-  private users:User[];
+  // https://api.myjson.com/bins/wse9o
+  private users: User[];
   usersChange = new Subject<User[]>();
-  private lastId:number=1;
+  private lastId = 1;
   constructor() { }
-  private urlJSON="https://api.myjson.com/bins/wse9o";
-  //leerDatosDelJSON();
+  private urlJSON = 'https://api.myjson.com/bins/wse9o';
+  // leerDatosDelJSON();
   async leerDatosDelJSON() {
-    let response = await fetch(this.urlJSON);
-    if(response.status != 200 ) return [];
-    let arreglo =  await response.json();
-    this.users=arreglo.slice();
+    const response = await fetch(this.urlJSON);
+    // tslint:disable-next-line: triple-equals
+    if (response.status != 200) { return []; }
+    const arreglo = await response.json();
+    this.users = arreglo.slice();
     this.usersChange.next(this.users.slice());
-    this.lastId=this.users.length+1;
+    this.lastId = this.users.length + 1;
   }
-  getNextId():number{
+  getNextId(): number {
     return this.lastId;
   }
-  getUsers():User[]{
+  getUsers(): User[] {
     return this.users;
   }
-  createUser(user:User){
-    console.log('Usuario a crear',user);
+  createUser(user: User) {
+    console.log('Usuario a crear', user);
     this.users.push(user);
-    console.log('USUARIOS',this.users);
+    console.log('USUARIOS', this.users);
     // 1. Crear XMLHttpRequest object
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     // 2. Configurar:  PUT actualizar archivo
     xhr.open('PUT', this.urlJSON);
     // 3. indicar tipo de datos JSON
@@ -41,33 +42,35 @@ export class UsuarioService {
     xhr.send(JSON.stringify(this.users));
     // 5. Una vez recibida la respuesta del servidor
     xhr.onload = function () {
-        if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP 
-            // Ocurrió un error
-            alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
-        } else {
-             console.log(xhr.responseText); // Significa que fue existoso
-        }
+      // tslint:disable-next-line: triple-equals
+      if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP
+        // Ocurrió un error
+        alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
+      } else {
+        console.log(xhr.responseText); // Significa que fue existoso
+      }
     };
     this.usersChange.next(this.users.slice());
   }
-  findUserbyUsername(username:string){
+  findUserbyUsername(username: string) {
     /*if(this.users==undefined){
       await this.leerDatosDelJSON();
     }*/
-    let index=this.users.findIndex(item=>{
-      if(item.username==username){
+    const index = this.users.findIndex(item => {
+      // tslint:disable-next-line: triple-equals
+      if (item.username == username) {
         return true;
-      };
+      }
     });
-    if(index>=0){
+    if (index >= 0) {
       return this.users[index];
     }
     return null;
   }
-  searchUsers(search:string):User[]{
-    let patt = new RegExp(search);
-    let users_found=this.users.filter(item=>{
-      if(patt.test(item.username)){
+  searchUsers(search: string): User[] {
+    const patt = new RegExp(search);
+    const users_found = this.users.filter(item => {
+      if (patt.test(item.username)) {
         return true;
       }
     });
