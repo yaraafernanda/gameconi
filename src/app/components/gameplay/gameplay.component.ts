@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from 'src/app/services/games/higher-lower/game.service';
-import { Game } from 'src/app/class/Game';
+import { GameService } from '../../services/games/higher-lower/game.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Game } from '../../class/Game';
 
 @Component({
   selector: 'app-gameplay',

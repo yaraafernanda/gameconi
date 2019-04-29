@@ -1,4 +1,4 @@
-export class Game{ 
+export class Game {
     /*id:number;
     nombre: string;
     edad: number;
