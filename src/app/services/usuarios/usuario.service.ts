@@ -25,6 +25,9 @@ export class UsuarioService {
     return this.lastId;
   }
   getUsers():User[]{
+    if(this.users){
+      return this.users.slice();
+    }
     return this.users;
   }
   createUser(user:User){
@@ -60,7 +63,8 @@ export class UsuarioService {
       };
     });
     if(index>=0){
-      return this.users[index];
+      return Object.assign({}, this.users[index]);
+      //return this.users[index];
     }
     return null;
   }

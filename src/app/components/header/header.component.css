@@ -3,6 +3,9 @@
 =====HEADER====
 ===============
 */
+.navbar-brand{
+  cursor: pointer;
+}
 .topBar{
   flex-flow: row nowrap;
   justify-content: flex-start;

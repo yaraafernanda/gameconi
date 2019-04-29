@@ -19,7 +19,7 @@ export class GameplayComponent implements OnInit {
   constructor(private gService: GameService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.gService.reset();
+    this.gService.reset(); 
     this.gService.sortGames();
     // this.games.sort(() => Math.random() - 0.5);
     this.getCurrentGamePlay();
