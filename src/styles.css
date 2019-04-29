@@ -15,7 +15,7 @@ body{
     text-align: center;
 }
 .btn-glow-green{
-    background-color:#58D2C7 !important;
+    background-color:#58d2c7 !important;
     border-color: #58D2C7 !important;
     color:white !important;
 }
@@ -84,3 +84,54 @@ body{
     border-radius: 10px;
     cursor: pointer;
   }
+
+ 
+
+    /*
+  ==============
+  GAME PLAY 
+  =============
+  */
+  
+  #firstGame{
+    display: table-cell;
+    background-size: cover;
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7));
+  }
+  #secondGame{
+    background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Gears_of_war_cover_art.jpg/220px-Gears_of_war_cover_art.jpg');
+    background-size: cover;
+   display: table-cell;
+   background-image: linear-gradient(
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7));
+  }
+ 
+
+  footer {
+    position: fixed !important;
+    font-size: 25px;
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    left: 0;
+    bottom: 0;
+   }
+   .score ul {
+    flex-direction: row;
+    display: flex;
+    -ms-flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10;
+    margin-bottom: 0;
+    list-style: none;
+    color:white;
+}
+
+  
+  

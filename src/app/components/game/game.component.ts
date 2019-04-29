@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
-import { User } from 'src/app/class/User';
+import { UsuarioService } from '../../services/usuarios/usuario.service';
+import { User } from '../../class/User';
 
 @Component({
   selector: 'app-game',
