@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/class/User';
-import { AuthService } from 'src/app/services/auth.service';
-import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
+import { User } from '../../class/User';
+import { AuthService } from '../../services/auth.service';
+import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 

@@ -1,56 +1,79 @@
-.containerT{
-    text-align: center;
-    padding-top: 10%;
-    color: white;
-    font-family: 'Exo', sans-serif;
-    display: flex;
-    flex-flow: wrap;
+html, body, .gameContainer{
+    height: 100%;
 }
-#secondGame button{
-    margin-top: 5px;
-    margin-bottom: 0%;
 
+.gameContainer{
+    position: absolute;
+    display: table;
+    width: 100%;
+    height: 100%;
+    padding: 0;   
+    left: 0;
+    box-sizing: border-box;
+  }
+
+.row{
+    height: 100%;
+    display: table-row;
+    align-items: center;
 }
-#secondGame ul{
+
+       /*
+  ==============
+  GAME PLAY DETAILS
+  =============
+  */
+.gameContent{
+    position: relative;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 50%);
     list-style: none;
-}
-.large{
-    font-size: 40px;
+    color: white;
+  }
+  
+
+  .large{
+    font-size: 60px;
     margin-bottom: 0px;
+    font-weight: 800;
 }
 
 .small{
     font-size: 20px;
     margin-top: 25px;
-}
-.circle{
-    width: 20%;
+    font-weight: 500;
 }
 
-img{
-align-items: center;
-border-width: 2px;
-border:  white;   
+.btn{
+    border-radius: 8px;
+    border: 1px solid #58D2C7;
+    text-align: center;
+    outline: none;
+    overflow: hidden;
+    cursor: pointer;
+    color: #58D2C7 0.3s 0.1s ease-out;
+    line-height: 250%;
+  }
+
+.btn::before{
+  border-radius: 50%;
+  transition: box-shadow 0.5s ease-out;
+  z-index: -1;
+  text-align: center;
 }
-footer{
-    position: fixed;
-    font-size: 25px;
-    width: 100%;
-    display: flex;
-    flex-flow: wrap;
-    flex-direction: column;
-    justify-content: space-between;
-    color: white;
-    left: 0;
-    bottom: 0;
-   }
-   .score ul {
-    flex-direction: row;
-    display: flex;
-    -ms-flex-direction: row;
-    justify-content: space-between;
-    padding-left: 10;
-    margin-bottom: 0;
-    list-style: none;
-    color:white;
+
+.btn:hover{
+  color: white;
+  background-color: #58D2C7;
+}
+.btn:hover::before{
+  box-shadow: inset 0 0 0
+  rgba(#58D2C7,1);
+}
+
+  #secondGame button{
+    margin-top: 5px;
+    margin-bottom: 0%;
+
 }
