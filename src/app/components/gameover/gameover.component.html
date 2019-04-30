@@ -1,7 +1,7 @@
 <div class="containerT">
   <div class="title">
           <h1>You scored:</h1>
-          <h1>1</h1>
+          <h1>{{score}}</h1>
   </div>
   <div class="auxText">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, voluptatibus.</p>
@@ -15,9 +15,9 @@
       </button>
   </div>
   <div class="justify-content-center">
-      <button  type="button" class="col-3 btn-secondary btn-lg btn">
-          Menu</button>
-      <button type="button" class="col-3 btn btn-primary btn-lg" id="playAgain"> 
+      <button  type="button" (click)= "goHome()" class="col-3 btn-secondary btn-lg btn">
+          Home</button>
+      <button type="button" (click)="playAgain()" class="col-3 btn btn-primary btn-lg" id="playAgain"> 
           Play Again </button>
   </div>
 </div>
