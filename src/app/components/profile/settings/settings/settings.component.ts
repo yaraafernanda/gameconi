@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
-import { User } from 'src/app/class/User';
+import { AuthService } from '../../../../services/auth.service';
+import { UsuarioService } from '../../../../services/usuarios/usuario.service';
+import { User } from '../../../../class/User';
 import { Subscription, Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { checkUsername } from 'src/app/validators/check-username';
+import { checkUsername } from '../../../../validators/check-username';
 
 @Component({
   selector: 'app-settings',

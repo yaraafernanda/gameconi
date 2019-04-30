@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { User } from '../../class/User';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-game',
@@ -12,7 +13,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class GameComponent implements OnInit {
 
-  constructor( private router: Router, private route: ActivatedRoute,private modalService: NgbModal,private usuarioService:UsuarioService) { }
+  constructor(private authService: AuthService, private router: Router, 
+    private route: ActivatedRoute,private modalService: NgbModal,private usuarioService:UsuarioService) { }
+
   actualPage:number = 1;
   closeResult: string;
   users:User[];
