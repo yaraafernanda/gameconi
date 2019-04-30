@@ -1,23 +1,47 @@
+#tabs {
+  box-shadow: 0 3px 25px #235193;
+  transition: box-shadow 0.5s ease;
+}
 
-  
-  #profile {
-    text-align: center;
-    padding-top: 5%;
-    padding-bottom: 2%;
-    color: white;
-    font-family: 'Exo', sans-serif;
-  }
-  
-  #profile img {
-    width: 20%;
-  }
-  
-  #tabs {
-    box-shadow: 0 3px 25px #235193;
-    transition: box-shadow 0.5s ease;
-  }
-  
-  #gamePlayedCard img {
-    width: 35%;
-  }
-  
+#gamePlayedCard{
+  background-color: lightgray;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 25px;
+}
+
+table {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+table{
+  width: 90%;
+}
+
+th, td {
+  border-bottom: 2px solid rgb(230, 227, 227);
+}
+
+#profile {
+  text-align: center;
+  padding-top: 5%;
+  padding-bottom: 2%;
+  color: white;
+  font-family: 'Exo', sans-serif;
+}
+
+#profile img {
+  width: 20%;
+}
+
+#gamePlayedCard {
+  text-align: center;
+}
+
+#gamePlayedCard img {
+  width: 80%;
+}

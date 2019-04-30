@@ -6,21 +6,21 @@ import { User } from '../class/User';
   providedIn: 'root'
 })
 export class AuthService {
-  token:string='';
-  user:User;
+  token = '';
+  user: User;
   loginStatusChange = new Subject<User>();
   constructor() { }
   isAuthehticated(): boolean {
     console.log('AUTH',this.token.length > 0);
     return this.token.length > 0;
   }
-  login(user:User){
+  login(user: User) {
     this.token = 'esta logeado';
-    this.user=user;
+    this.user = user;
     this.loginStatusChange.next(user);
   }
-  logout(){
-    this.token ='';
-    this.user=null;
+  logout() {
+    this.token = '';
+    this.user = null;
   }
 }

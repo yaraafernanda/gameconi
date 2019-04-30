@@ -14,63 +14,63 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  formSignUp:FormGroup;
+  formSignUp: FormGroup;
   userChangeSub: Subscription;
-  errMsg:string='';
-  usuarios:User[]=[];
-  constructor(private usuarioService:UsuarioService,private authService:AuthService,private route:ActivatedRoute,private router:Router) { }
+  errMsg= '';
+  usuarios: User[] = [];
+  constructor(private usuarioService: UsuarioService, private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.usuarioService.leerDatosDelJSON();
     this.formSignUp = new FormGroup({
-      username: new FormControl('',[Validators.required,checkUsername]),
-      email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl('',[Validators.required,Validators.minLength(6)]),
-      terms: new FormControl('',[Validators.required])
+      username: new FormControl('', [Validators.required, checkUsername]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      terms: new FormControl('', [Validators.required])
     });
     this.userChangeSub = this.usuarioService.usersChange.subscribe(
-      (arregloUsuarios:User[])=>{
-        this.usuarios=arregloUsuarios;
+      (arregloUsuarios: User[]) => {
+        this.usuarios = arregloUsuarios;
       }
     );
   }
-  signUp(){
-    this.errMsg='';
-    let index_username=this.usuarios.findIndex(item=>{
-      if(this.formSignUp.value.username==item.username){
+  signUp() {
+    this.errMsg = '';
+    const index_username = this.usuarios.findIndex(item => {
+      if (this.formSignUp.value.username == item.username) {
         return true;
       }
     });
-    let index_email=this.usuarios.findIndex(item=>{
-      if(this.formSignUp.value.email==item.email){
+    const index_email = this.usuarios.findIndex(item => {
+      if (this.formSignUp.value.email == item.email) {
         return true;
       }
     });
     console.log('ENTRO ACA');
-    if(index_username>=0){
-      //YA EXISTE ESE USERNAME
-      this.errMsg='Sorry that username has been already taken';
+    if (index_username >= 0) {
+      // YA EXISTE ESE USERNAME
+      this.errMsg = 'Sorry that username has been already taken';
     }
-    if(index_email>=0){
-      //YA EXISTE ESE EMAIL
-      this.errMsg='Sorry that email has been already registered';
+    if (index_email >= 0) {
+      // YA EXISTE ESE EMAIL
+      this.errMsg = 'Sorry that email has been already registered';
     }
-    if(this.errMsg==''){
+    if (this.errMsg == '') {
       console.log('ENTRO CREAR');
-      ///SUBMIT NEW USER//
-      let image=Math.floor(Math.random() * 100)+1;
-      let new_user:User=new User(this.usuarioService.getNextId(),
+      /// SUBMIT NEW USER//
+      const image = Math.floor(Math.random() * 100) + 1;
+      const new_user: User = new User(this.usuarioService.getNextId(),
       this.formSignUp.value.username,
       this.formSignUp.value.email,
       this.formSignUp.value.password,
-      'https://api.adorable.io/avatars/285/'+image+'.png'
+      'https://api.adorable.io/avatars/285/' + image + '.png'
       );
       this.usuarioService.createUser(new_user);
-      ///AUTH USER AND REDIRECT TO PROFILE////
+      /// AUTH USER AND REDIRECT TO PROFILE////
       this.authService.login(new_user);
-      this.router.navigate(['/profile',new_user.username]);
+      this.router.navigate(['/profile', new_user.username]);
     }
-    //this.formSignUp.value.username;
+    // this.formSignUp.value.username;
   }
 
 }

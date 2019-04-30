@@ -19,14 +19,24 @@ export class GameComponent implements OnInit {
   searchbox_select_rival:string;
   userChangeSub: Subscription;
   userSelected:User;
+  user:User;
   ngOnInit() {
+    this.user=this.authService.user;
     if(this.usuarioService.getUsers()){
       this.users=this.usuarioService.getUsers();
+      let index=this.users.findIndex(item=>item.username==this.user.username);
+      if(index>=0){
+        this.users.splice(index,1);
+      }
     }else{
       this.userChangeSub = this.usuarioService.usersChange.subscribe(
         (arregloUsuarios:User[])=>{
           console.log('USERS LOADED');
           this.users=this.usuarioService.getUsers();
+            let index=this.users.findIndex(item=>item.username==this.user.username);
+            if(index>=0){
+              this.users.splice(index,1);
+            }
         }
       );
     }
@@ -62,6 +72,10 @@ export class GameComponent implements OnInit {
     }else{
       this.users=this.usuarioService.getUsers();
     }
+    let index=this.users.findIndex(item=>item.username==this.user.username);
+    if(index>=0){
+      this.users.splice(index,1);
+    }
   }
   randomRival(){
     this.userSelected=this.users[Math.floor(Math.random()*this.users.length)];
@@ -71,5 +85,10 @@ export class GameComponent implements OnInit {
   this.modalService.dismissAll();
   this.userSelected=user;
   console.log('USER SELECTeD',user);
+  }
+
+
+  goToGameplay(){
+    this.router.navigate(['gameplay']);
   }
 }
