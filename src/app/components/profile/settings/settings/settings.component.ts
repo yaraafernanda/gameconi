@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
-import { User } from 'src/app/class/User';
-import { Subscription, Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { checkUsername } from 'src/app/validators/check-username';
+import { Subject, Subscription } from 'rxjs';
+import { User } from '../../../../class/User';
+import { UsuarioService } from '../../../../services/usuarios/usuario.service';
+import { AuthService } from '../../../../services/auth.service';
+import { checkUsername } from '../../../../validators/check-username';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -24,7 +24,7 @@ export class SettingsComponent implements OnInit {
   formUsername: FormGroup;
   formPassword: FormGroup;
 
-  constructor(private usuarioService: UsuarioService, private auth: AuthService,
+  constructor(private usuarioService: UsuarioService, private auth: AuthService, 
     private router: Router) { }
 
   ngOnInit() {
