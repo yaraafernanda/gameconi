@@ -1,4 +1,4 @@
-export class Game {
+export class VideoGame {
     /*id:number;
     nombre: string;
     edad: number;
@@ -9,6 +9,7 @@ export class Game {
         public id: number,
         public name: string,
         public searches: number,
-        public imgSrc: string) {
+        public imgSrc: string,
+        public categoria: string) {
         }
 }

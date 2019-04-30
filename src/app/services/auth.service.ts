@@ -10,7 +10,7 @@ export class AuthService {
   user:User;
   loginStatusChange = new Subject<User>();
   constructor() { }
-  isAuthehticated():boolean{
+  isAuthehticated(): boolean {
     console.log('AUTH',this.token.length > 0);
     return this.token.length > 0;
   }
