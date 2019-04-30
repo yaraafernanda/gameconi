@@ -1,29 +1,29 @@
-.dropdown{
-    text-align: end;
+  .row {
+      padding: 25px;
   }
-  
-  #dropdownMenu1 {
+
+  p {
+    font-family: 'Exo', sans-serif;
+    color:white;
+    font-size: 1rem;
+  }
+
+  #puser{
+      margin-top: 20px;
+  }
+
+  button {
+    width: 100px;
+    margin-top: 25px;
     background: linear-gradient(45deg, #26A4B5, #6BE0CC);
     color: #fff;
-    padding: 5px 10px 5px 10px;
-    box-shadow: 0 6px 25px #235193;
-    transition: box-shadow 0.5s ease;
+    padding:5px 10px 5px 10px;
   }
-  
-  #profile {
-    text-align: center;
-    padding-top: 5%;
-    padding-bottom: 2%;
-    color: white;
-    font-family: 'Exo', sans-serif;
+
+  .input-group {
+    margin-bottom: 15px;
   }
-  
-  #profile img {
-    width: 20%;
+
+  form #pswbtn {
+      margin-top: 30px;
   }
-  
-  #tabs {
-    box-shadow: 0 3px 25px #235193;
-    transition: box-shadow 0.5s ease;
-  }
-  
