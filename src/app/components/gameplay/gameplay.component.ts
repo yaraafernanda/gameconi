@@ -19,7 +19,7 @@ export class GameplayComponent implements OnInit {
   constructor(private gService: GameService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.gService.reset(); 
+    this.gService.reset();
     this.gService.sortGames();
     // this.games.sort(() => Math.random() - 0.5);
     this.getCurrentGamePlay();
@@ -45,7 +45,7 @@ export class GameplayComponent implements OnInit {
   isHigher() {
     if (this.game2.searches > this.game1.searches) {
       this.gService.sumPoints();
-      //to get the nex game
+      // to get the nex game
       this.getCurrentGamePlay();
     } else {
       this.endGame();
@@ -55,7 +55,7 @@ export class GameplayComponent implements OnInit {
   isLower() {
     if (this.game2.searches < this.game1.searches) {
       this.gService.sumPoints();
-      //to get the nex game
+      // to get the nex game
       this.getCurrentGamePlay();
     } else {
       this.endGame();

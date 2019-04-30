@@ -1,43 +1,54 @@
-   <!--The content below is only a placeholder and can be replaced.-->
-   <!--<div class="dropdown" id="dropmenu">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="true">
-      username
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Settings</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a href="#">Logout</a></li>
-    </ul> 
-  </div>-->
-  <div  class="row" id="settingsRow">
-      <div class="col" id="firstR">
-        <p class="large">Username:</p>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">@</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-            aria-describedby="basic-addon1">
+<div class="row" id="settingsRow">
+  <div class="col" id="firstR">
+    <form [formGroup]="formUsername" (ngSubmit)="updateUsername()" class="form-settings">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">E-mail Address:</span>
         </div>
-        <button type="button" class="btn btn-light">Save</button>
+        <input type="text" class="form-control" placeholder="{{this.user.email}}" aria-label="Username"
+          aria-describedby="basic-addon1" disabled="true">
       </div>
-      <div class="col" id="secondR">
-        <p class="large">Password:</p>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">*</span>
-          </div>
-          <input type="password" class="form-control" id="pass1" placeholder="Current password">
+      <p class="large" id="puser">Change Username</p>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Username:</span>
         </div>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">*</span>
-          </div>
-          <input type="password" class="form-control" id="pass1" placeholder="New password">
-        </div>
-        <button type="button" class="btn btn-light">Save</button>
+        <input type="text" class="form-control" placeholder="{{this.user.username}}" aria-label="Username"
+          aria-describedby="basic-addon1" disabled="true">
       </div>
-    </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">New Username:</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Type New Username" aria-label="Username"
+          aria-describedby="basic-addon1" formControlName="newusername">
+      </div>
+      <button class="btn btn-style-1 btn-primary" type="submit">Save</button>
+    </form>
+  </div>
+  <div class="col" id="secondR">
+    <form [formGroup]="formPassword" (ngSubmit)="updatePassword()" class="form-settings">
+      <p class="large">Change Password</p>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Current password:</span>
+        </div>
+        <input type="password" class="form-control" id="pass1" placeholder="Type current password">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">New Password:</span>
+        </div>
+        <input type="password" class="form-control" id="pass2" placeholder="Type new password">
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Confirm Password:</span>
+        </div>
+        <input type="password" class="form-control" id="pass3" placeholder="Type new password"
+          formControlName="newpassword">
+      </div>
+      <button class="btn btn-style-1 btn-primary" type="submit" id="pswbtn">Save</button>
+    </form>
+  </div>
+</div>

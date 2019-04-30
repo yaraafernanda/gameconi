@@ -1,15 +1,3 @@
-.dropdown{
-  text-align: end;
-}
-
-#dropdownMenu1 {
-  background: linear-gradient(45deg, #26A4B5, #6BE0CC);
-  color: #fff;
-  padding: 5px 10px 5px 10px;
-  box-shadow: 0 6px 25px #235193;
-  transition: box-shadow 0.5s ease;
-}
-
 #profile {
   text-align: center;
   padding-top: 5%;
@@ -23,10 +11,24 @@
 }
 
 #tabs {
-  box-shadow: 0 3px 25px #235193;
+  box-shadow: 0 3px 25px #eee;
   transition: box-shadow 0.5s ease;
+  background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+  color: #eee;
 }
 
-#gamePlayedCard img {
-  width: 35%;
+#tabs .nav-item .nav-item.show .nav-link, .nav-item .nav-link.active {
+  color: #f3f3f3;
+  background-color: transparent;
+  border-color: transparent transparent #f3f3f3;
+  border-bottom: 4px solid !important;
+  font-size: 20px;
+  font-weight: bold;
+}
+#tabs .nav-item .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  color: #eee;
+  font-size: 20px;
 }

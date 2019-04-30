@@ -15,13 +15,12 @@ import { GameplayComponent } from './components/gameplay/gameplay.component';
 import { GameComponent } from './components/game/game.component';
 import { GameoverComponent } from './components/gameover/gameover.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { GameplayedComponent } from './components/gameplayed/gameplayed.component';
 import { ChallengeListComponent } from './components/challenge-list/challenge-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesPlayedComponent } from './components/profile/games-played/games-played/games-played.component';
-import { GeneralComponent } from './components/profile/general/general.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SettingsComponent } from './components/profile/settings/settings/settings.component';
+import { GamesinprogressComponent } from './components/profile/gamesinprogress/gamesinprogress/gamesinprogress.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +33,10 @@ import { AppRoutingModule } from './app-routing.module';
     GameComponent,
     GameoverComponent,
     ProfileComponent,
-    GameplayedComponent,
     ChallengeListComponent,
-    SettingsComponent,
     GamesPlayedComponent,
-    GeneralComponent,
+    SettingsComponent,
+    GamesinprogressComponent
   ],
   imports: [
     BrowserModule,
