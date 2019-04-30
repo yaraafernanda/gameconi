@@ -24,7 +24,8 @@ export class SettingsComponent implements OnInit {
   formUsername: FormGroup;
   formPassword: FormGroup;
 
-  constructor(private usuarioService: UsuarioService, private auth: AuthService) { }
+  constructor(private usuarioService: UsuarioService, private auth: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
     this.user = this.auth.user;
@@ -76,6 +77,7 @@ export class SettingsComponent implements OnInit {
       }
     };
     this.usersChange.next(this.users.slice());
+    this.router.navigateByUrl('/profile/' + this.users[index].username + '/settings');
     console.log('Username updated');
   }
 
