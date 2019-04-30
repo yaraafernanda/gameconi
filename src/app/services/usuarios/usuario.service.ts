@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { User } from 'src/app/class/User';
+import { User } from '../../class/User';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class UsuarioService {
   // leerDatosDelJSON();
   async leerDatosDelJSON() {
     const response = await fetch(this.urlJSON);
-    // tslint:disable-next-line: triple-equals
     if (response.status != 200) { return []; }
     const arreglo = await response.json();
     this.users = arreglo.slice();
@@ -25,7 +24,10 @@ export class UsuarioService {
   getNextId(): number {
     return this.lastId;
   }
-  getUsers(): User[] {
+  getUsers():User[]{
+    if(this.users){
+      return this.users.slice();
+    }
     return this.users;
   }
   createUser(user: User) {
@@ -42,7 +44,6 @@ export class UsuarioService {
     xhr.send(JSON.stringify(this.users));
     // 5. Una vez recibida la respuesta del servidor
     xhr.onload = function () {
-      // tslint:disable-next-line: triple-equals
       if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP
         // Ocurrió un error
         alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
@@ -52,18 +53,18 @@ export class UsuarioService {
     };
     this.usersChange.next(this.users.slice());
   }
-  findUserbyUsername(username: string) {
+  findUserbyUsername(username:string){
     /*if(this.users==undefined){
       await this.leerDatosDelJSON();
     }*/
-    const index = this.users.findIndex(item => {
-      // tslint:disable-next-line: triple-equals
-      if (item.username == username) {
+    let index=this.users.findIndex(item=>{
+      if(item.username==username){
         return true;
-      }
+      };
     });
-    if (index >= 0) {
-      return this.users[index];
+    if(index>=0){
+      return Object.assign({}, this.users[index]);
+      //return this.users[index];
     }
     return null;
   }

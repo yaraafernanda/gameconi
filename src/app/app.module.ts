@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +16,7 @@ import { ChallengeListComponent } from './components/challenge-list/challenge-li
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesPlayedComponent } from './components/profile/games-played/games-played/games-played.component';
+import { AppRoutingModule } from './app-routing.module';
 import { GamesinprogressComponent } from './components/profile/gamesinprogress/gamesinprogress/gamesinprogress.component';
 
 @NgModule({
@@ -39,8 +39,8 @@ import { GamesinprogressComponent } from './components/profile/gamesinprogress/g
 
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,

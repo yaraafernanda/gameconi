@@ -1,40 +1,34 @@
-<div class="containerT">
-    <div class="col" id="firstGame">
-            <p class="large">Nombre Juego</p>
-            <p class="small">has</p>
-            <p class="large">3000</p>
-            <p class="small">average monthly searches</p>
-    </div>
-    <div class="circle" >
-        <img class="rounded-circle" src="/html/proyecto/vs.PNG" alt="" >
-    </div>
-    <div class="col" id="secondGame">
-        <ul>
-            <li>
-                    <p class="large">Nombre Juego</p>
-            </li>
-            <li>
-                    <p class="small">has</p>
-            </li>
-            <li>
-                <button type="button" class="btn btn-sm btn-light col-4">Higher</button>
-            </li>
-            <li><button type="button" class="btn btn-sm btn-light col-4">Lower</button></li>
-            <li> <p class="small">searches than Game 1</p></li>            
+<div class="gameContainer">
+<div class="row">
+    <div class="col-6 w-50" [style.background-image] ="'url('+game1.imgSrc+')'" id="firstGame" >
+        <ul class="gameContent"> 
+               <li><p class="large">{{game1.name}}</p></li>
+               <li><p class="small">has</p></li>
+               <li><p class="large">{{game1.searches}}</p></li>
+               <li> <p class="small">average monthly searches</p></li>            
         </ul>
-           
+          
+    </div>
+   <!--  <div class="circle" >
+        <img class="rounded-circle" src="" alt="VS" >
+    </div> -->
+    <div class="col-6 w-50" id="secondGame" [style.background-image] ="'url('+game2.imgSrc+')'">
+        <ul class="gameContent">
+            <li><p class="large">{{game2.name}}</p></li>
+            <li><p class="small">has</p> </li>
+            <li><button type="button" class="btn btn-sm btn-light col-4" (click)= isHigher()>Higher</button></li>
+            <li><button type="button" class="btn btn-sm btn-light col-4"(click)= isLower()>Lower</button></li>
+            <li> <p class="small">searches than {{game1.name}}</p></li>            
+        </ul>
     </div>
 
-
+</div>
+</div>
 <footer>
     <div class="score">
         <ul>
-            <li>                
-                <p>Highscore:6</p>
-            </li>
-            <li class="end">                
-                <p>Score:0 </p>
-            </li>
+            <li><p>Highscore:6</p></li>
+            <li class="end"><p>Score:{{points}} </p></li>
         </ul>
     </div>
 </footer>

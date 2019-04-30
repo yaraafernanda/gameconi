@@ -24,9 +24,9 @@ const routes: Routes = [
     { path: 'currentgames', component: GamesinprogressComponent, canActivate: [AuthGuardService]},
     { path: 'gamesplayed', component: GamesPlayedComponent, canActivate: [AuthGuardService]}
   ] },
-  { path: 'game', component: GameComponent },
-  { path: 'gameplay', component: GameplayComponent, canActivate: [AuthGuardService]},
-  { path: 'gameover', component: GameoverComponent, canActivate: [AuthGuardService] }
+  { path: 'game', component: GameComponent,canActivate:[AuthGuardService]},
+  { path: 'gameplay', component: GameplayComponent,canActivate:[AuthGuardService]},
+  { path: 'gameover', component: GameoverComponent,canActivate:[AuthGuardService] }
 ];
 
 @NgModule({
