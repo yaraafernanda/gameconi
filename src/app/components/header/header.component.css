@@ -3,6 +3,9 @@
 =====HEADER====
 ===============
 */
+.navbar-brand{
+  cursor: pointer;
+}
 .topBar{
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -67,9 +70,6 @@ text-decoration: none;
 .dropdown-menu li,.dropdown-item{
   width: 100%;
   cursor: pointer;
-}
-.dropdown-menu.show .dropdown-item:hover{
-  color: #3D2C73 !important;
 }
 .item-dropdown {
   display: block;

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { checkUsername } from 'src/app/validators/check-username';
+import { checkUsername } from '../../validators/check-username';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/class/User';
-import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
+import { User } from '../../class/User';
+import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { ThrowStmt } from '@angular/compiler';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',

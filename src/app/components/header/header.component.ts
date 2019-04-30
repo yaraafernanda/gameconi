@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/class/User';
+import { User } from '../../class/User';
 import { FormGroup, FormControl } from '@angular/forms';
-import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
+import { UsuarioService } from '../../services/usuarios/usuario.service';
 
 
 @Component({
