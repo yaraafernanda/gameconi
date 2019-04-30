@@ -5,7 +5,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import {NgxPaginationModule} from 'ngx-pagination';
-import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -22,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesPlayedComponent } from './components/profile/games-played/games-played/games-played.component';
 import { GeneralComponent } from './components/profile/general/general.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -42,8 +42,8 @@ import { GeneralComponent } from './components/profile/general/general.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
