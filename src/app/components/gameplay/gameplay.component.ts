@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/games/higher-lower/game.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Game } from '../../class/Game';
+import { VideoGame} from '../../class/VideoGame';
 
 @Component({
   selector: 'app-gameplay',
@@ -11,9 +11,9 @@ import { Game } from '../../class/Game';
 })
 export class GameplayComponent implements OnInit {
 
-  games: Game[] = [];
-  game1: Game;
-  game2: Game;
+  games: VideoGame[] = [];
+  game1: VideoGame;
+  game2: VideoGame;
   points: number;
   subscript: Subscription;
   constructor(private gService: GameService, private router: Router, private route: ActivatedRoute) { }

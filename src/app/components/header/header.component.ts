@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { User } from '../../class/User';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UsuarioService } from '../../services/usuarios/usuario.service';
+import { GameService } from '../../services/games/higher-lower/game.service';
 
 
 @Component({
@@ -18,10 +19,11 @@ export class HeaderComponent implements OnInit {
   formMainSearch:FormGroup;
   user:User;
   userSearchResults:User[];
-  constructor(private authService:AuthService,private route:ActivatedRoute,private router:Router,private usuarioService:UsuarioService) { }
+  constructor(private authService:AuthService,private route:ActivatedRoute,private router:Router,private usuarioService:UsuarioService,private gameService:GameService) { }
   ngOnInit() {
     //console.log('AUTH?',this.authService.isAuthehticated());
     this.usuarioService.leerDatosDelJSON();
+    this.gameService.leerCategorias();
     console.log('CARGANDO DATOS');
     this.logged=this.authService.isAuthehticated();
     this.loginStatus=this.authService.loginStatusChange.subscribe((usuario:User)=>{

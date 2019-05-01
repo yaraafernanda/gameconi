@@ -5,6 +5,8 @@ import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { User } from '../../class/User';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Category } from '../../class/Category';
+import { GameService } from '../../services/games/higher-lower/game.service';
 
 @Component({
   selector: 'app-game',
@@ -14,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
 export class GameComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, 
-    private route: ActivatedRoute,private modalService: NgbModal,private usuarioService:UsuarioService) { }
+    private route: ActivatedRoute,private modalService: NgbModal,private usuarioService:UsuarioService,private gameService:GameService) { }
 
   actualPage:number = 1;
   closeResult: string;
@@ -24,18 +26,19 @@ export class GameComponent implements OnInit {
   userChangeSub: Subscription;
   userSelected:User;
   user:User;
+  gameCategories:Category[];
+  r_category:number=0;
+
   ngOnInit() {
     this.user=this.authService.user;
     if(this.usuarioService.getUsers()){
       this.my_followers=this.authService.my_followers.slice();
-      
-      
       this.all_users=this.usuarioService.getUsers();
       let index=this.all_users.findIndex(item=>item.username==this.user.username);
       if(index>=0){
         this.all_users.splice(index,1);
       }
-
+ 
     }else{
       this.userChangeSub = this.usuarioService.usersChange.subscribe(
         (arregloUsuarios:User[])=>{
@@ -49,6 +52,13 @@ export class GameComponent implements OnInit {
         }
       );
     }
+    this.gameCategories=this.gameService.getCategories();
+  }
+  shouldPlay(){
+    if(this.userSelected && this.r_category>0){
+      return true;
+    }
+    return false;
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -91,10 +101,8 @@ export class GameComponent implements OnInit {
     this.userSelected=user;
     console.log('USER SELECTeD',user);
   }
-
-
   goToGameplay(){
-
+    //this.userSelected   this.r_category
     this.router.navigate(['gameplay']);
   }
 }
