@@ -7,7 +7,7 @@ export class Partida {
     sexo: string;*/
     constructor(
         public game_id: number,
-        public categoria_id: number,
+        public category_id: number,
         public user_id: number,
         public score: number,
         public opponent_score: number,
