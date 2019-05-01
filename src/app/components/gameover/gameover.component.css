@@ -1,16 +1,29 @@
 .containerT{
     text-align: center;
     padding-top: 10%;
-    color: white;
     font-family: 'Exo', sans-serif;
 }
-
-.auxText{
-    margin:35px;
+.title{
+    color: #ae8cf2;
 }
+
 .containerT button{
     margin: 5px;
 }
+
+.bg{
+    position: absolute;
+    top: 56px;
+    background-position: center center;
+    background-size: cover;
+    left: 0px;
+    background-repeat: no-repeat;
+    height: calc(100% - 56px);
+    width: 100%;
+    z-index: -1;
+    background-image: url('https://i.imgur.com/iutl3ji.jpg');
+}
+
 #playAgain{
     background: linear-gradient(45deg, #26A4B5, #6BE0CC);
     color: #fff;
@@ -18,3 +31,18 @@
     box-shadow: 0 6px 25px #235193;
     transition: box-shadow 0.5s ease;
 }
+
+.fa{
+    text-align: center;
+    text-decoration: none;
+    padding:5px 10px 5px 10px;
+
+}
+.fa-twitter{
+    background: #55ACEE;
+    color:white!important;
+}
+.fa-facebook {
+    background: #3B5998;
+    color: white!important;
+  }
