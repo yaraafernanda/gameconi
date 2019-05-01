@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit {
         this.logged=true;
         this.user=this.authService.user;
         console.log('USUARIO LOGEADO',usuario);
+        //this.usuarioService.get_my_followers();
+        //console.log('FOLLOWERS2',this.usuarioService.get_my_followers());
     });
     this.formMainSearch = new FormGroup({
       search: new FormControl(''),

@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'gamesplayed', pathMatch: 'full'},
     { path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService]},
     { path: 'currentgames', component: GamesinprogressComponent, canActivate: [AuthGuardService]},
-    { path: 'gamesplayed', component: GamesPlayedComponent, canActivate: [AuthGuardService]}
+    { path: 'gamesplayed', component: GamesPlayedComponent}
   ] },
   { path: 'game', component: GameComponent, canActivate: [AuthGuardService]},
   { path: 'gameplay', component: GameplayComponent, canActivate: [AuthGuardService]},

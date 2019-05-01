@@ -18,7 +18,8 @@ export class GameComponent implements OnInit {
 
   actualPage:number = 1;
   closeResult: string;
-  users:User[];
+  my_followers:User[];
+  all_users:User[];
   searchbox_select_rival:string;
   userChangeSub: Subscription;
   userSelected:User;
@@ -26,19 +27,24 @@ export class GameComponent implements OnInit {
   ngOnInit() {
     this.user=this.authService.user;
     if(this.usuarioService.getUsers()){
-      this.users=this.usuarioService.getUsers();
-      let index=this.users.findIndex(item=>item.username==this.user.username);
+      this.my_followers=this.authService.my_followers.slice();
+      
+      
+      this.all_users=this.usuarioService.getUsers();
+      let index=this.all_users.findIndex(item=>item.username==this.user.username);
       if(index>=0){
-        this.users.splice(index,1);
+        this.all_users.splice(index,1);
       }
+
     }else{
       this.userChangeSub = this.usuarioService.usersChange.subscribe(
         (arregloUsuarios:User[])=>{
-          console.log('USERS LOADED');
-          this.users=this.usuarioService.getUsers();
-            let index=this.users.findIndex(item=>item.username==this.user.username);
+          this.my_followers=this.authService.my_followers.slice();
+            
+            this.all_users=this.usuarioService.getUsers();
+            let index=this.all_users.findIndex(item=>item.username==this.user.username);
             if(index>=0){
-              this.users.splice(index,1);
+              this.all_users.splice(index,1);
             }
         }
       );
@@ -71,27 +77,24 @@ export class GameComponent implements OnInit {
     console.log('ENRTO');
     console.log('USERNAME',this.searchbox_select_rival);
     if(this.searchbox_select_rival!=''){
-      this.users=this.usuarioService.searchUsers(this.searchbox_select_rival);
+      this.my_followers=this.authService.searchFollowers(this.searchbox_select_rival);
     }else{
-      this.users=this.usuarioService.getUsers();
-    }
-    let index=this.users.findIndex(item=>item.username==this.user.username);
-    if(index>=0){
-      this.users.splice(index,1);
+      this.my_followers=this.authService.my_followers.slice();
     }
   }
   randomRival(){
-    this.userSelected=this.users[Math.floor(Math.random()*this.users.length)];
+    this.userSelected=this.all_users[Math.floor(Math.random()*this.all_users.length)];
   }
   selectUser(user:User){
   //this.modal.close();
-  this.modalService.dismissAll();
-  this.userSelected=user;
-  console.log('USER SELECTeD',user);
+    this.modalService.dismissAll();
+    this.userSelected=user;
+    console.log('USER SELECTeD',user);
   }
 
 
   goToGameplay(){
+
     this.router.navigate(['gameplay']);
   }
 }
