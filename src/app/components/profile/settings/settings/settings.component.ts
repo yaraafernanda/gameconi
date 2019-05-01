@@ -102,7 +102,7 @@ export class SettingsComponent implements OnInit {
   updatePassword() {
     console.log('Usuario a modificar', this.user);
     this.infMsg = '';
-    //obtener index de usuario loggeado
+    // obtener index de usuario loggeado
     const index = this.users.findIndex(item => {
       if (this.auth.isAuthehticated) {
         if (this.auth.user.username === item.username) {

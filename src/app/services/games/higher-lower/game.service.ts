@@ -69,6 +69,9 @@ new VideoGame(18, 'Mario Tennis Aces', 630000,
   }
 
   getGamesPlayed(): Partida[] {
+    if (this.gamesplayed) {
+      return this.gamesplayed.slice();
+    }
     return this.gamesplayed;
   }
 
