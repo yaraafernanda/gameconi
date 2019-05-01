@@ -4,7 +4,7 @@ export class Follower {
     edad: number;
     calificacion: number;
     carrera: string;
-    sexo: string;*/
+    sexo: string;*/ 
     constructor(
         public id: number,
         public user_id: number,
