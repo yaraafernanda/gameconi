@@ -11,7 +11,7 @@ export class AuthService {
   loginStatusChange = new Subject<User>();
   constructor() { }
   isAuthehticated(): boolean {
-    console.log('AUTH', this.token.length > 0);
+    console.log('AUTH',this.token.length > 0);
     return this.token.length > 0;
   }
   login(user: User) {

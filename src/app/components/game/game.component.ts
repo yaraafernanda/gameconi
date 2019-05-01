@@ -3,7 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { User } from '../../class/User';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +13,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class GameComponent implements OnInit {
 
-  constructor(private modalService: NgbModal,private usuarioService:UsuarioService,private router:Router,private authService:AuthService) { }
+  constructor(private authService: AuthService, private router: Router, 
+    private route: ActivatedRoute,private modalService: NgbModal,private usuarioService:UsuarioService) { }
+
   actualPage:number = 1;
   closeResult: string;
   users:User[];
@@ -48,6 +50,10 @@ export class GameComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  play() {
+    this.router.navigate(['/gameplay']);
   }
 
   private getDismissReason(reason: any): string {
