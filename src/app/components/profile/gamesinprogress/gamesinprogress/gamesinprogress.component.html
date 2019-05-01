@@ -1,7 +1,20 @@
 <!-- Cards -->
 <!-- PADRE -->
 <div class="row">
-  <div *ngFor="let item of mygames" class="col-sm-6">-->
+
+  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="r_option" style="width: 100%;">
+    <label ngbButtonLabel class="btn btn-default">
+      <input ngbButton type="radio" [value]="1" (click)="getMyGames()"> My turn
+    </label>
+    <label ngbButtonLabel class="btn btn-default">
+      <input ngbButton type="radio" [value]="2" (click)="getMyGames()"> Waiting for response
+    </label>
+    <label ngbButtonLabel class="btn btn-default">
+      <input ngbButton type="radio" [value]="0" (click)="getMyGames()"> All
+    </label>
+  </div>
+
+  <div *ngFor="let item of mygames" class="col-sm-6">
     <!--Individual Card-->
     <div class="card text-center border-info">
       <div *ngIf="item.turn==1" class="card-header">
@@ -15,7 +28,8 @@
         <h5 class="card-title">{{item.category_name}}</h5>
         <p *ngIf="item.turn==1" class="card-text">{{item.opponent_name}} challenged you</p>
         <p *ngIf="item.turn==0" class="card-text">You challenged {{item.opponent_name}}</p>
-        <a *ngIf="item.turn==1" href="#" class="btn btn-primary">Jugar</a>
+
+        <a *ngIf="item.turn==1" href="/gameplay/{{item.game_id}}" class="btn btn-primary">Jugar</a>
         <p *ngIf="item.turn==0" id="space"></p>
       </div>
     </div>
