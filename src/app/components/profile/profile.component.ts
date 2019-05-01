@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { Follower } from '../../class/Follower';
 
 @Component({
   selector: 'app-profile',
@@ -83,9 +84,16 @@ export class ProfileComponent implements OnInit {
     let index=all_followers.findIndex(item=>{
       return item.user_id==this.authService.user.id;
     });
-    all_followers[index].followers.push(this.profile.id);
-    this.usuarioService.replaceAllFollowersFile(all_followers);
-    this.following=true;
+    if(index>=0){
+      all_followers[index].followers.push(this.profile.id);
+      this.usuarioService.replaceAllFollowersFile(all_followers);
+      this.following=true;
+    }else{
+      let new_follower:Follower=new Follower(all_followers.length+1,this.authService.user.id,[this.profile.id]);
+      all_followers.push(new_follower);
+      this.usuarioService.replaceAllFollowersFile(all_followers);
+      this.following=true;
+    }
     this.authService.get_my_followers();
   }
   unfollow(){
