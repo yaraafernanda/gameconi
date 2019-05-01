@@ -15,12 +15,26 @@
       <button class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select from Following list</button>
       <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
     </div>
-  <div>
+    <div>
         <button (click)="goToGameplay()" [disabled]="!userSelected" type="button" class="btn col-3 btn-primary btn-lg btn-green">
             Play
         </button>
-  </div> 
+    </div> 
+  <div>
+    <h3 class="margin-t10">Choose Rival:</h3>
+    <div *ngIf="userSelected" class="userSelected">
+        <img src="{{userSelected.image}}">
+        {{userSelected.username}}
+    </div>
+    <button class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select User</button>
+    <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
   </div>
+ <div>
+      <button [disabled]="!userSelected" type="button" (click) = "play()" class="btn col-3 btn-primary btn-lg btn-green">
+          Play
+      </button>
+ </div> 
+</div>
 
 <!--MODAL-->
 <ng-template #content let-modal>

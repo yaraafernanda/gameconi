@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../class/User';
 import { AuthService } from '../../services/auth.service';
@@ -120,5 +120,6 @@ export class ProfileComponent implements OnInit {
     this.aparam = 'settings';
     this.router.navigate(['settings'], { relativeTo: this.route });
   }
+
 
 }

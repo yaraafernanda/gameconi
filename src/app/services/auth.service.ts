@@ -14,7 +14,7 @@ export class AuthService {
   my_followers:User[];
   constructor(private usuarioService:UsuarioService) { }
   isAuthehticated(): boolean {
-    //console.log('AUTH', this.token.length > 0);
+    console.log('AUTH',this.token.length > 0);
     return this.token.length > 0;
   }
   get_my_followers(){
