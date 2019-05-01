@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/games/higher-lower/game.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { VideoGame } from '../../class/VideoGame';
+import { VideoGame} from '../../class/VideoGame';
 
 @Component({
   selector: 'app-gameplay',

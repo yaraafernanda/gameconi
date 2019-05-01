@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -47,7 +48,8 @@ import { GamecardComponent } from './components/profile/gamesinprogress/gamecard
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

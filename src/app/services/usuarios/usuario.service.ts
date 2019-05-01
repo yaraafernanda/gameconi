@@ -1,18 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { User } from '../../class/User';
+import { HttpClient } from '@angular/common/http';
+import { Follower } from '../../class/Follower';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
   // https://api.myjson.com/bins/wse9o
+  constructor(private httpClient:HttpClient) { 
+
+  }
   private users: User[];
+  private all_followers:Follower[];
   usersChange = new Subject<User[]>();
   private lastId = 1;
-  constructor() { }
   private urlJSON = 'https://api.myjson.com/bins/wse9o';
+  private followersJSON = 'https://api.myjson.com/bins/b3u6w';
   // leerDatosDelJSON();
+  leerFollowers(){
+    this.httpClient.get(this.followersJSON).subscribe((data:Follower[]) => {
+     this.all_followers=data;
+     console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
+    });
+  }
+  replaceAllFollowersFile(all_followers){
+    console.log('REPLACING JSON');
+    this.httpClient.put(this.followersJSON,all_followers).subscribe((data:Follower[]) => {
+      this.all_followers=data;
+      console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
+     });
+  }
+  
+  getAllUsers(){
+    return this.users;
+  }
+  getAllFollowers():Follower[]{
+    return this.all_followers;
+  }
   async leerDatosDelJSON() {
     const response = await fetch(this.urlJSON);
     if (response.status != 200) { return []; }
@@ -20,6 +46,7 @@ export class UsuarioService {
     this.users = arreglo.slice();
     this.usersChange.next(this.users.slice());
     this.lastId = this.users.length + 1;
+    this.leerFollowers();
   }
   getNextId(): number {
     return this.lastId;

@@ -3,8 +3,11 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { User } from '../../class/User';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Category } from '../../class/Category';
+import { GameService } from '../../services/games/higher-lower/game.service';
+import { Partida } from '../../class/Partida';
 
 @Component({
   selector: 'app-game',
@@ -13,34 +16,52 @@ import { AuthService } from '../../services/auth.service';
 })
 export class GameComponent implements OnInit {
 
-  constructor(private modalService: NgbModal,private usuarioService:UsuarioService,private router:Router,private authService:AuthService) { }
+  constructor(private authService: AuthService, private router: Router, private gService: GameService,
+    private route: ActivatedRoute,private modalService: NgbModal,
+    private usuarioService:UsuarioService,private gameService:GameService) { }
+
+  partida: Partida;
   actualPage:number = 1;
   closeResult: string;
-  users:User[];
+  my_followers:User[];
+  all_users:User[];
   searchbox_select_rival:string;
   userChangeSub: Subscription;
   userSelected:User;
   user:User;
+  gameCategories:Category[];
+  r_category:number=0;
+
   ngOnInit() {
     this.user=this.authService.user;
     if(this.usuarioService.getUsers()){
-      this.users=this.usuarioService.getUsers();
-      let index=this.users.findIndex(item=>item.username==this.user.username);
+      this.my_followers=this.authService.my_followers.slice();
+      this.all_users=this.usuarioService.getUsers();
+      let index=this.all_users.findIndex(item=>item.username==this.user.username);
       if(index>=0){
-        this.users.splice(index,1);
+        this.all_users.splice(index,1);
       }
+ 
     }else{
       this.userChangeSub = this.usuarioService.usersChange.subscribe(
         (arregloUsuarios:User[])=>{
-          console.log('USERS LOADED');
-          this.users=this.usuarioService.getUsers();
-            let index=this.users.findIndex(item=>item.username==this.user.username);
+          this.my_followers=this.authService.my_followers.slice();
+            
+            this.all_users=this.usuarioService.getUsers();
+            let index=this.all_users.findIndex(item=>item.username==this.user.username);
             if(index>=0){
-              this.users.splice(index,1);
+              this.all_users.splice(index,1);
             }
         }
       );
     }
+    this.gameCategories=this.gameService.getCategories();
+  }
+  shouldPlay(){
+    if(this.userSelected && this.r_category>0){
+      return true;
+    }
+    return false;
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -48,6 +69,10 @@ export class GameComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  play() {
+    this.router.navigate(['/gameplay']);
   }
 
   private getDismissReason(reason: any): string {
@@ -65,27 +90,28 @@ export class GameComponent implements OnInit {
     console.log('ENRTO');
     console.log('USERNAME',this.searchbox_select_rival);
     if(this.searchbox_select_rival!=''){
-      this.users=this.usuarioService.searchUsers(this.searchbox_select_rival);
+      this.my_followers=this.authService.searchFollowers(this.searchbox_select_rival);
     }else{
-      this.users=this.usuarioService.getUsers();
-    }
-    let index=this.users.findIndex(item=>item.username==this.user.username);
-    if(index>=0){
-      this.users.splice(index,1);
+      this.my_followers=this.authService.my_followers.slice();
     }
   }
   randomRival(){
-    this.userSelected=this.users[Math.floor(Math.random()*this.users.length)];
+    this.userSelected=this.all_users[Math.floor(Math.random()*this.all_users.length)];
   }
   selectUser(user:User){
   //this.modal.close();
-  this.modalService.dismissAll();
-  this.userSelected=user;
-  console.log('USER SELECTeD',user);
+    this.modalService.dismissAll();
+    this.userSelected=user;
+    console.log('USER SELECTeD',user);
   }
-
-
   goToGameplay(){
-    this.router.navigate(['gameplay']);
+    this.partida = new Partida(this.gService.getnextId(), this.r_category,
+    this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, 0);
+    console.log('t:', this.partida.user_id, this.partida.opponent_id, this.partida.category_id);
+    //TODO: poner categoria
+    console.log('new game: ', this.partida);
+
+    this.gService.addGamePlayed(this.partida);
+    this.router.navigate(['gameplay', this.partida.game_id]);
   }
 }

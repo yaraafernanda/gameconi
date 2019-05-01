@@ -29,6 +29,14 @@ body{
 .btn-purple{
   color: #ae8cf2!important;
 }
+.btn-purple-fill{
+  background-color: #5d55fc !important;
+  color:white !important;
+}
+.btn-purple-fill:hover,.btn-purple-fill.active{
+  background-color: #6441a5 !important;
+  color:white !important;
+}
   /*
   ==============
   TITLE
