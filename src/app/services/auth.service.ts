@@ -24,11 +24,16 @@ export class AuthService {
         return true;
       }
     });
-    let users:User[]=this.usuarioService.getAllUsers().filter((item)=>{
+    if(follower_object){
+      let users:User[]=this.usuarioService.getAllUsers().filter((item)=>{
         return follower_object.followers.includes(item.id);
     });
     console.log('FOLLOWERS USUARIO',users);
     this.my_followers=users;
+    }else{
+      this.my_followers=[];
+    }
+
   }
   searchFollowers(search: string): User[] {
     const patt = new RegExp(search);
