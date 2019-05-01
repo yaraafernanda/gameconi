@@ -19,3 +19,7 @@
   font-family: 'Exo', sans-serif;
   background: linear-gradient(45deg, #26A4B5, #6BE0CC);
 }
+
+#space {
+  height: 22px;
+}
