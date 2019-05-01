@@ -12,7 +12,7 @@
             {{userSelected.username}}
         </div>
       </div>
-      <button class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select from Following list</button>
+      <button *ngIf="my_followers.length>0" class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select from Following list</button>
       <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
     </div>
     <h3 class="margin-t10">Choose category</h3>

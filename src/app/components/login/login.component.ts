@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { User } from '../../class/User';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
   userChangeSub: Subscription;
   formLogin: FormGroup;
   errMsg = false;
-  constructor(private usuarioService: UsuarioService, private authService: AuthService, private router: Router) { }
+  redirectURL: string;
+
+  constructor(private route: ActivatedRoute,private usuarioService: UsuarioService, private authService: AuthService, private router: Router) { }
   ngOnInit() {
     this.usuarios = this.usuarioService.getUsers();
     this.userChangeSub = this.usuarioService.usersChange.subscribe(
@@ -46,7 +48,19 @@ export class LoginComponent implements OnInit {
     if (index >= 0) {
       //// USUARIO CORRECTO
       this.authService.login(this.usuarios[index]);
-      this.router.navigate(['/profile', this.usuarios[index].username]);
+      
+      
+      let params = this.route.snapshot.queryParams;
+          if (params['redirectURL']) {
+              this.redirectURL = params['redirectURL'];
+          }
+          if (this.redirectURL) {        
+              this.router.navigateByUrl(this.redirectURL,)
+                  .catch(() => this.router.navigate(['homepage']))
+          } else {
+            this.router.navigate(['/profile', this.usuarios[index].username]);
+          }
+      
     } else {
       //// DATOS INCORRECTOS
       this.errMsg = true;

@@ -21,6 +21,7 @@ export class GameplayComponent implements OnInit {
   game2: VideoGame;
   points: number;
   gid:number;
+  cid: number;
 
   loginS: Subscription;
   subscript: Subscription;
@@ -28,17 +29,18 @@ export class GameplayComponent implements OnInit {
   constructor(private authService: AuthService, private gService: GameService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.gService.leerJSON();
     // checa si esta loggeado para poder jugar
     this.logged = this.authService.isAuthehticated();
     this.user =  this.authService.user;
     this.route.params.subscribe((params) => {
      this.gid = Number(params.id);
     });
-    
+
     // toma los datos de los juegos
     this.gService.reset();
-    this.gService.sortGames();
-    // this.games.sort(() => Math.random() - 0.5);
+    // get same category videogames
+    this.gService.getGames(this.gid);
     this.getCurrentGamePlay();
     this.subscript = this.gService.updatePoints.subscribe(
       (n: number) => { this.points = n; }
@@ -47,7 +49,7 @@ export class GameplayComponent implements OnInit {
 
 
   getCurrentGamePlay() {
-    this.games = this.gService.getGames();
+    this.games = this.gService.getcurrentGame();
     if (this.games.length === undefined) {
       this.endGame();
     } else {
@@ -81,7 +83,7 @@ export class GameplayComponent implements OnInit {
        this.points = 0;
        console.log('score: ', this.points);
      }
-     this.gService.updateGame(this.gid, this.points);
+    this.gService.updateGame(this.gid, this.points);
     this.router.navigate(['gameover']);
 }
 
