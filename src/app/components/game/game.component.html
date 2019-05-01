@@ -12,7 +12,7 @@
             {{userSelected.username}}
         </div>
       </div>
-      <button class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select User</button>
+      <button class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select from Following list</button>
       <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
     </div>
   <div>
@@ -25,7 +25,7 @@
 <!--MODAL-->
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Select User</h4>
+      <h4 class="modal-title" id="modal-basic-title">Select from Following</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -33,7 +33,7 @@
     <div class="modal-body">
         <input  (keyup)="searchUsers()" [(ngModel)]="searchbox_select_rival"  class="form-control mr-sm-2" type="search" placeholder="Search User" aria-label="Search">
         <ul class="users-result-list">
-            <li (click)="selectUser(user)" *ngFor="let user of users | paginate: {itemsPerPage:7,currentPage:actualPage}">
+            <li (click)="selectUser(user)" *ngFor="let user of my_followers | paginate: {itemsPerPage:7,currentPage:actualPage}">
                     <img src="{{user.image}}">
                     <span>{{user.username}}</span>
             </li>
