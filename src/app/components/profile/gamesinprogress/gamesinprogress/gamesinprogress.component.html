@@ -1,10 +1,23 @@
 <!-- Cards -->
 <!-- PADRE -->
 <div class="row">
-    <app-gamecard 
-    *ngFor="let item of allgames" 
-    [partida]="item"
-    >
-    </app-gamecard>
-    
+  <div *ngFor="let item of mygames" class="col-sm-6">-->
+    <!--Individual Card-->
+    <div class="card text-center border-info">
+      <div *ngIf="item.turn==1" class="card-header">
+        Your turn
+      </div>
+      <div *ngIf="item.turn==0" class="card-header">
+        Waiting for {{item.opponent_name}} to play
+      </div>
+      <img src="{{item.category_img}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{item.category_name}}</h5>
+        <p *ngIf="item.turn==1" class="card-text">{{item.opponent_name}} challenged you</p>
+        <p *ngIf="item.turn==0" class="card-text">You challenged {{item.opponent_name}}</p>
+        <a *ngIf="item.turn==1" href="#" class="btn btn-primary">Jugar</a>
+        <p *ngIf="item.turn==0" id="space"></p>
+      </div>
+    </div>
+  </div>
 </div>

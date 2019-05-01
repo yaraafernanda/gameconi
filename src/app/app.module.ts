@@ -22,7 +22,6 @@ import { GamesPlayedComponent } from './components/profile/games-played/games-pl
 import { AppRoutingModule } from './app-routing.module';
 import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesinprogressComponent } from './components/profile/gamesinprogress/gamesinprogress/gamesinprogress.component';
-import { GamecardComponent } from './components/profile/gamesinprogress/gamecard/gamecard.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +37,7 @@ import { GamecardComponent } from './components/profile/gamesinprogress/gamecard
     ChallengeListComponent,
     GamesPlayedComponent,
     SettingsComponent,
-    GamesinprogressComponent,
-    GamecardComponent
+    GamesinprogressComponent
   ],
   imports: [
     BrowserModule,
