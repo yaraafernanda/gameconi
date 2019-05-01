@@ -7,8 +7,7 @@ import { User } from '../../../../class/User';
 import { Subscription, Subject } from 'rxjs';
 import { Category } from '../../../../class/Category';
 import { CurrentGame } from '../../../../class/CurrentGame';
-import { isNgTemplate } from '@angular/compiler';
-import { InjectableCompiler } from '@angular/compiler/src/injectable_compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gamesinprogress',
@@ -27,17 +26,18 @@ export class GamesinprogressComponent implements OnInit {
   allcategories: Category[];
   allusers: User[];
   user: User;
+  r_option = 0;
 
   //estos arreglos simulan el servicio
   private srcgames: Partida[] = [
-    new Partida(1, 1, 1, 0, 0, 3, 0, 6, 1),
-    new Partida(4, 3, 3, 0, 0, 2, 0, 6, 1),
-    new Partida(2, 1, 6, 0, 0, 1, 0, 6, 0),
-    new Partida(3, 1, 6, 0, 0, 1, 0, 6, 0)
+    new Partida(1, 1, 1, 0, 0, 3, 0, 0, 1),
+    new Partida(4, 3, 3, 0, 0, 2, 0, 0, 1),
+    new Partida(2, 2, 1, 0, 0, 3, 0, 0, 1),
+    new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0)
   ];
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
-    private auth: AuthService) { }
+    private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.user = this.auth.user;
@@ -69,24 +69,32 @@ export class GamesinprogressComponent implements OnInit {
 
   getMyGames() {
     console.log('getting my games...');
-    let indexGame = this.allgames.findIndex(item => item.user_id == this.user.id);
-    if (indexGame >= 0) {
-      const indexCat = this.allcategories.findIndex(item => item.id == this.allgames[indexGame].category_id);
-      const indexOpponent = this.allusers.findIndex(item => item.id == this.allgames[indexGame].opponent_id);
-      const newCurrentG = new CurrentGame(this.allgames[indexGame].game_id,
-        this.allcategories[indexCat].name, this.allcategories[indexCat].image,
-        this.allusers[indexOpponent].username, 0);
-      this.mygames.push(newCurrentG);
+    this.mygames.splice(0, this.mygames.length);
+    //yo reté
+    if (this.r_option === 2 || this.r_option === 0) {
+      this.allgames.forEach(item => {
+        if ((item.user_id === this.user.id) && (item.game_over === 0)) {
+          const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
+          const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.opponent_id);
+          const newCurrentG = new CurrentGame(item.game_id,
+            this.allcategories[indexCat].name, this.allcategories[indexCat].image,
+            this.allusers[indexOpponent].username, 0);
+          this.mygames.push(newCurrentG);
+        }
+      });
     }
-    indexGame = this.allgames.findIndex(item => item.opponent_id == this.user.id);
-    if (indexGame >= 0) {
-      const indexCat = this.allcategories.findIndex(item => item.id == this.allgames[indexGame].category_id);
-      const indexOpponent = this.allusers.findIndex(item => item.id == this.allgames[indexGame].user_id);
-      const newCurrentG = new CurrentGame(this.allgames[indexGame].game_id,
-        this.allcategories[indexCat].name, this.allcategories[indexCat].image,
-        this.allusers[indexOpponent].username, 1);
-      this.mygames.push(newCurrentG);
+    //me retaron
+    if (this.r_option === 1 || this.r_option === 0) {
+      this.allgames.forEach(item => {
+        if ((item.opponent_id === this.user.id) && (item.game_over === 0)) {
+          const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
+          const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.user_id);
+          const newCurrentG = new CurrentGame(item.game_id,
+            this.allcategories[indexCat].name, this.allcategories[indexCat].image,
+            this.allusers[indexOpponent].username, 1);
+          this.mygames.push(newCurrentG);
+        }
+      });
     }
   }
-
 }
