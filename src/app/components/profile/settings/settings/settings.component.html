@@ -25,6 +25,9 @@
       </div>
       <button class="btn btn-style-1 btn-primary" type="submit">Save</button>
     </form>
+    <div *ngIf="errMsg!=''" class="alert alert-danger" role="alert">
+      {{errMsg}}
+    </div>
   </div>
   <div class="col" id="secondR">
     <form [formGroup]="formPassword" (ngSubmit)="updatePassword()" class="form-settings">
@@ -33,22 +36,30 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Current password:</span>
         </div>
-        <input type="password" class="form-control" id="pass1" placeholder="Type current password">
+        <input type="password" class="form-control" id="pass1" placeholder="Type current password"
+        formControlName="password">
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">New Password:</span>
         </div>
-        <input type="password" class="form-control" id="pass2" placeholder="Type new password">
+        <input type="password" class="form-control" id="pass2" placeholder="Type new password"
+        formControlName="newpassword">
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Confirm Password:</span>
         </div>
         <input type="password" class="form-control" id="pass3" placeholder="Type new password"
-          formControlName="newpassword">
+          formControlName="confirmedpassword">
       </div>
       <button class="btn btn-style-1 btn-primary" type="submit" id="pswbtn">Save</button>
     </form>
+    <div *ngIf="infMsg!=''" class="alert alert-info" role="alert">
+        {{infMsg}}
+      </div>
   </div>
+  <div *ngIf="updateMsg!=''" class="alert alert-info" role="alert">
+      {{updateMsg}}
+    </div>
 </div>

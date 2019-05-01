@@ -17,48 +17,48 @@ import { Partida } from '../../class/Partida';
 export class GameComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private gService: GameService,
-    private route: ActivatedRoute,private modalService: NgbModal,
-    private usuarioService:UsuarioService,private gameService:GameService) { }
+    private route: ActivatedRoute, private modalService: NgbModal,
+    private usuarioService: UsuarioService, private gameService: GameService) { }
 
   partida: Partida;
-  actualPage:number = 1;
+  actualPage = 1;
   closeResult: string;
-  my_followers:User[];
-  all_users:User[];
-  searchbox_select_rival:string;
+  my_followers: User[];
+  all_users: User[];
+  searchbox_select_rival: string;
   userChangeSub: Subscription;
-  userSelected:User;
-  user:User;
-  gameCategories:Category[];
-  r_category:number=0;
+  userSelected: User;
+  user: User;
+  gameCategories: Category[];
+  r_category = 0;
 
   ngOnInit() {
-    this.user=this.authService.user;
-    if(this.usuarioService.getUsers()){
-      this.my_followers=this.authService.my_followers.slice();
-      this.all_users=this.usuarioService.getUsers();
-      let index=this.all_users.findIndex(item=>item.username==this.user.username);
-      if(index>=0){
-        this.all_users.splice(index,1);
+    this.user = this.authService.user;
+    if (this.usuarioService.getUsers()) {
+      this.my_followers = this.authService.my_followers.slice();
+      this.all_users = this.usuarioService.getUsers();
+      const index = this.all_users.findIndex(item => item.username == this.user.username);
+      if (index >= 0) {
+        this.all_users.splice(index, 1);
       }
- 
-    }else{
+
+    } else {
       this.userChangeSub = this.usuarioService.usersChange.subscribe(
-        (arregloUsuarios:User[])=>{
-          this.my_followers=this.authService.my_followers.slice();
-            
-            this.all_users=this.usuarioService.getUsers();
-            let index=this.all_users.findIndex(item=>item.username==this.user.username);
-            if(index>=0){
-              this.all_users.splice(index,1);
+        (arregloUsuarios: User[]) => {
+          this.my_followers = this.authService.my_followers.slice();
+
+            this.all_users = this.usuarioService.getUsers();
+            const index = this.all_users.findIndex(item => item.username == this.user.username);
+            if (index >= 0) {
+              this.all_users.splice(index, 1);
             }
         }
       );
     }
-    this.gameCategories=this.gameService.getCategories();
+    this.gameCategories = this.gameService.getCategories();
   }
-  shouldPlay(){
-    if(this.userSelected && this.r_category>0){
+  shouldPlay() {
+    if (this.userSelected && this.r_category > 0) {
       return true;
     }
     return false;
@@ -86,29 +86,29 @@ export class GameComponent implements OnInit {
   }
 
 
-  searchUsers(){
+  searchUsers() {
     console.log('ENRTO');
-    console.log('USERNAME',this.searchbox_select_rival);
-    if(this.searchbox_select_rival!=''){
-      this.my_followers=this.authService.searchFollowers(this.searchbox_select_rival);
-    }else{
-      this.my_followers=this.authService.my_followers.slice();
+    console.log('USERNAME', this.searchbox_select_rival);
+    if (this.searchbox_select_rival != '') {
+      this.my_followers = this.authService.searchFollowers(this.searchbox_select_rival);
+    } else {
+      this.my_followers = this.authService.my_followers.slice();
     }
   }
-  randomRival(){
-    this.userSelected=this.all_users[Math.floor(Math.random()*this.all_users.length)];
+  randomRival() {
+    this.userSelected = this.all_users[Math.floor(Math.random() * this.all_users.length)];
   }
-  selectUser(user:User){
-  //this.modal.close();
+  selectUser(user: User) {
+  // this.modal.close();
     this.modalService.dismissAll();
-    this.userSelected=user;
-    console.log('USER SELECTeD',user);
+    this.userSelected = user;
+    console.log('USER SELECTeD', user);
   }
-  goToGameplay(){
+  goToGameplay() {
     this.partida = new Partida(this.gService.getnextId(), this.r_category,
     this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, 0);
     console.log('t:', this.partida.user_id, this.partida.opponent_id, this.partida.category_id);
-    //TODO: poner categoria
+    // TODO: poner categoria
     console.log('new game: ', this.partida);
 
     this.gService.addGamePlayed(this.partida);
