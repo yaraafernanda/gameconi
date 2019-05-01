@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { VideoGame } from '../../../class/VideoGame';
 import { Partida } from '../../../class/Partida';
+import { HttpClient } from '@angular/common/http';
+import { Category } from '../../../class/Category';
 
 @Injectable({
   providedIn: 'root'
@@ -50,9 +52,15 @@ new VideoGame(18, 'Mario Tennis Aces', 630000,
 'https://cdn.vox-cdn.com/thumbor/TAXlsbd0aDLNJYXbXe_IuKvOwIk=/0x0:1920x1080/1200x675/filters:focal(1008x265:1314x571)/cdn.vox-cdn.com/uploads/chorus_image/image/60111239/mario_tennis_aces_mario_1920.1529429284.jpg', 'deporte'),
 ];
 
-  constructor() { }
+private categories:Category[];
+
+
+
+  constructor(private httpClient:HttpClient) { }
 
   private urlJSON = 'https://api.myjson.com/bins/s4q5o';
+  private urlCategories='https://api.myjson.com/bins/1856js';
+
 
   async leerJSON() {
     let response = await fetch(this.urlJSON);
@@ -63,6 +71,15 @@ new VideoGame(18, 'Mario Tennis Aces', 630000,
     this.lastId = this.gamesplayed.length + 1;
   }
 
+   leerCategorias(){
+    this.httpClient.get(this.urlCategories).subscribe((data:Category[]) => {
+      this.categories=data;
+      console.log('READING ALL CATEGORIES.JSON',this.categories);
+     });
+   }
+  getCategories():Category[]{
+    return this.categories.slice();
+  }
   getGamesPlayed(): Partida[] {
     return this.gamesplayed;
   }

@@ -1,47 +1,42 @@
-#tabs {
-  box-shadow: 0 3px 25px #235193;
-  transition: box-shadow 0.5s ease;
+#gamePlayedCard:hover {
+  box-shadow:0 30px 70px rgba(0,0,0,.2);
 }
 
 #gamePlayedCard{
-  background-color: lightgray;
-  padding: 15px;
-  margin: 15px;
-  border-radius: 25px;
+  background-color: rgb(230, 229, 240);
+  margin-top: 20px;
+  margin-left: 65px;
+  margin-right: 65px;
+  border-radius: 15px;
+  box-shadow:0 20px 50px rgba(0,0,0,.1);
+  height: 250px;
+}
+
+#col2 {
+  text-align: center;
+}
+
+h5, th {
+  font-family: 'Exo', sans-serif;
 }
 
 table {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-table{
-  width: 90%;
+  width: 100%;
+  margin: 0 auto;
+  transition: all .3s ease;
+  -o-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+  border-radius: 5px;
+  background: lightblue;
 }
 
 th, td {
   border-bottom: 2px solid rgb(230, 227, 227);
 }
 
-#profile {
-  text-align: center;
-  padding-top: 5%;
-  padding-bottom: 2%;
-  color: white;
-  font-family: 'Exo', sans-serif;
-}
-
-#profile img {
-  width: 20%;
-}
-
-#gamePlayedCard {
-  text-align: center;
-}
-
-#gamePlayedCard img {
-  width: 80%;
+img {
+  border-radius: 15px;
+  width: auto;
+  height: 250px;
 }

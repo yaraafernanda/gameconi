@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 import {NgxPaginationModule} from 'ngx-pagination';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
@@ -14,13 +18,12 @@ import { GameoverComponent } from './components/gameover/gameover.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChallengeListComponent } from './components/challenge-list/challenge-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesPlayedComponent } from './components/profile/games-played/games-played/games-played.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesinprogressComponent } from './components/profile/gamesinprogress/gamesinprogress/gamesinprogress.component';
 
 @NgModule({
-
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -28,15 +31,14 @@ import { GamesinprogressComponent } from './components/profile/gamesinprogress/g
     LoginComponent,
     SignupComponent,
     GameplayComponent,
-    GamesPlayedComponent,
     GameComponent,
     GameoverComponent,
     ProfileComponent,
     ChallengeListComponent,
+    GamesPlayedComponent,
     SettingsComponent,
     GamesinprogressComponent
   ],
-
   imports: [
     BrowserModule,
     FormsModule,
@@ -44,11 +46,10 @@ import { GamesinprogressComponent } from './components/profile/gamesinprogress/g
     ReactiveFormsModule,
     NgbModule,
     NgxPaginationModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    HttpClientModule
   ],
-
   providers: [],
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }

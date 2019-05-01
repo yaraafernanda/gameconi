@@ -16,9 +16,10 @@ import { AuthService } from '../../services/auth.service';
 export class SignupComponent implements OnInit {
   formSignUp: FormGroup;
   userChangeSub: Subscription;
-  errMsg= '';
+  errMsg = '';
   usuarios: User[] = [];
-  constructor(private usuarioService: UsuarioService, private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private usuarioService: UsuarioService, private authService: AuthService,
+    private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.usuarioService.leerDatosDelJSON();
@@ -37,11 +38,13 @@ export class SignupComponent implements OnInit {
   signUp() {
     this.errMsg = '';
     const index_username = this.usuarios.findIndex(item => {
+// tslint:disable-next-line: triple-equals
       if (this.formSignUp.value.username == item.username) {
         return true;
       }
     });
     const index_email = this.usuarios.findIndex(item => {
+// tslint:disable-next-line: triple-equals
       if (this.formSignUp.value.email == item.email) {
         return true;
       }
@@ -55,15 +58,16 @@ export class SignupComponent implements OnInit {
       // YA EXISTE ESE EMAIL
       this.errMsg = 'Sorry that email has been already registered';
     }
+// tslint:disable-next-line: triple-equals
     if (this.errMsg == '') {
       console.log('ENTRO CREAR');
       /// SUBMIT NEW USER//
       const image = Math.floor(Math.random() * 100) + 1;
       const new_user: User = new User(this.usuarioService.getNextId(),
-      this.formSignUp.value.username,
-      this.formSignUp.value.email,
-      this.formSignUp.value.password,
-      'https://api.adorable.io/avatars/285/' + image + '.png'
+        this.formSignUp.value.username,
+        this.formSignUp.value.email,
+        this.formSignUp.value.password,
+        'https://api.adorable.io/avatars/285/' + image + '.png'
       );
       this.usuarioService.createUser(new_user);
       /// AUTH USER AND REDIRECT TO PROFILE////
