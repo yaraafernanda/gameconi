@@ -71,13 +71,13 @@ private categories:Category[];
     this.lastId = this.gamesplayed.length + 1;
   }
 
-   leerCategorias(){
-    this.httpClient.get(this.urlCategories).subscribe((data:Category[]) => {
-      this.categories=data;
-      console.log('READING ALL CATEGORIES.JSON',this.categories);
+   leerCategorias() {
+    this.httpClient.get(this.urlCategories).subscribe((data: Category[]) => {
+      this.categories = data;
+      console.log('READING ALL CATEGORIES.JSON', this.categories);
      });
    }
-  getCategories():Category[]{
+  getCategories(): Category[]{
     return this.categories.slice();
   }
   getGamesPlayed(): Partida[] {
@@ -99,6 +99,40 @@ private categories:Category[];
       }
   };
   this.updateGamePlayed.next(this.gamesplayed.slice());
+  }
+
+  updateGame(id, score) {
+    console.log('datos entry', id,score);
+    let pos = this.gamesplayed.findIndex(ga => ga.game_id == id );
+    if (pos) {
+      if (id == this.gamesplayed[pos].user_id) {
+        this.gamesplayed[pos].score = score;
+        this.gamesplayed[pos].turn_user_id = this.gamesplayed[pos].opponent_id;
+      } else {
+        if (id == this.gamesplayed[pos].opponent_id) {
+          this.gamesplayed[pos].opponent_score = score;
+          this.gamesplayed[pos].game_over = 1;
+          if (this.gamesplayed[pos].opponent_score > this.gamesplayed[pos].score) {
+            this.gamesplayed[pos].winner_id = this.gamesplayed[pos].opponent_id;
+          } else {
+            this.gamesplayed[pos].winner_id = this.gamesplayed[pos].user_id;
+          }
+        }
+      }
+    }
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', this.urlJSON);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(this.gamesplayed));
+    xhr.onload = function () {
+      if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP 
+          // Ocurrió un error
+          alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
+      } else {
+           console.log(xhr.responseText); // Significa que fue existoso
+      }
+    };
+    this.updateGamePlayed.next(this.gamesplayed.slice());
   }
 
   getnextId() {

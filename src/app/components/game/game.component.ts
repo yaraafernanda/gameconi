@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Category } from '../../class/Category';
 import { GameService } from '../../services/games/higher-lower/game.service';
+import { Partida } from '../../class/Partida';
 
 @Component({
   selector: 'app-game',
@@ -15,9 +16,11 @@ import { GameService } from '../../services/games/higher-lower/game.service';
 })
 export class GameComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, 
-    private route: ActivatedRoute,private modalService: NgbModal,private usuarioService:UsuarioService,private gameService:GameService) { }
+  constructor(private authService: AuthService, private router: Router, private gService: GameService,
+    private route: ActivatedRoute,private modalService: NgbModal,
+    private usuarioService:UsuarioService,private gameService:GameService) { }
 
+  partida: Partida;
   actualPage:number = 1;
   closeResult: string;
   my_followers:User[];
@@ -102,7 +105,13 @@ export class GameComponent implements OnInit {
     console.log('USER SELECTeD',user);
   }
   goToGameplay(){
-    //this.userSelected   this.r_category
-    this.router.navigate(['gameplay']);
+    this.partida = new Partida(this.gService.getnextId(), this.r_category,
+    this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, 0);
+    console.log('t:', this.partida.user_id, this.partida.opponent_id, this.partida.category_id);
+    //TODO: poner categoria
+    console.log('new game: ', this.partida);
+
+    this.gService.addGamePlayed(this.partida);
+    this.router.navigate(['gameplay', this.partida.game_id]);
   }
 }
