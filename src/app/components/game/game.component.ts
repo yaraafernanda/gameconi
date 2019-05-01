@@ -33,6 +33,7 @@ export class GameComponent implements OnInit {
   r_category = 0;
 
   ngOnInit() {
+    this.gService.leerJSON();
     this.user = this.authService.user;
     if (this.usuarioService.getUsers()) {
       this.my_followers = this.authService.my_followers.slice();
@@ -56,6 +57,7 @@ export class GameComponent implements OnInit {
       );
     }
     this.gameCategories = this.gameService.getCategories();
+    
   }
   shouldPlay() {
     if (this.userSelected && this.r_category > 0) {
