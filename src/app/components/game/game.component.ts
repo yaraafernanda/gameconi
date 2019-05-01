@@ -110,8 +110,6 @@ export class GameComponent implements OnInit {
     this.partida = new Partida(this.gService.getnextId(), this.r_category,
     this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, 0);
     console.log('t:', this.partida.user_id, this.partida.opponent_id, this.partida.category_id);
-    // TODO: poner categoria
-    console.log('new game: ', this.partida);
 
     this.gService.addGamePlayed(this.partida);
     this.router.navigate(['gameplay', this.partida.game_id]);

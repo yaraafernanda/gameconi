@@ -25,11 +25,14 @@ export class GameplayComponent implements OnInit {
 
   loginS: Subscription;
   subscript: Subscription;
+  readg: Subscription;
+  readc: Subscription;
 
   constructor(private authService: AuthService, private gService: GameService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.gService.leerJSON();
+
     // checa si esta loggeado para poder jugar
     this.logged = this.authService.isAuthehticated();
     this.user =  this.authService.user;
@@ -40,8 +43,18 @@ export class GameplayComponent implements OnInit {
     // toma los datos de los juegos
     this.gService.reset();
     // get same category videogames
-    this.gService.getGames(this.gid);
+    if (this.gService.gamesplayed) {
+      this.gService.getGames(this.gid);
+    } else {
+      console.log('not loaded');
+      this.readg = this.gService.updateGamePlayed.subscribe((rg: Partida[]) => {
+        console.log('GAMES LOADED');
+        this.gService.getGames(this.gid);
+
+      });
+    }
     this.getCurrentGamePlay();
+
     this.subscript = this.gService.updatePoints.subscribe(
       (n: number) => { this.points = n; }
     );
@@ -62,6 +75,7 @@ export class GameplayComponent implements OnInit {
   isHigher() {
     if (this.game2.searches > this.game1.searches) {
       this.gService.sumPoints();
+      console.log('score so far:', this.points);
       //to get the nex game
       this.getCurrentGamePlay();
     } else {
@@ -72,6 +86,7 @@ export class GameplayComponent implements OnInit {
   isLower() {
     if (this.game2.searches < this.game1.searches) {
       this.gService.sumPoints();
+      console.log('score so far:',this.points);
       //to get the nex game
       this.getCurrentGamePlay();
     } else {
@@ -79,12 +94,28 @@ export class GameplayComponent implements OnInit {
     }
   }
   endGame() {
+    this.subscript = this.gService.updatePoints.subscribe(
+      (n: number) => { this.points = n; }
+    );
      if (this.points === undefined) {
        this.points = 0;
-       console.log('score: ', this.points);
+       console.log('score undefined: ', this.points);
      }
-    this.gService.updateGame(this.gid, this.points);
-    this.router.navigate(['gameover']);
+     if(!this.gService.getCategories()){
+      this.gService.leerCategorias();
+
+     }
+     if(this.gService.gamesplayed.findIndex(g => g.game_id == this.gid)){
+      this.gService.updateGame(this.gid, this.user.id, this.points);
+     } else{
+      this.readg = this.gService.updateGamePlayed.subscribe((rg: Partida[]) => {
+        this.gService.updateGame(this.gid, this.user.id, this.points);
+        console.log('ACTUALIZADO', rg);
+      });
+     }
+    
+
+    this.router.navigate(['gameover'], {relativeTo: this.route});
 }
 
 

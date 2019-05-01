@@ -1,5 +1,5 @@
 <div class="gameContainer">
-<div class="row">
+<div class="row" *ngIf="game1 != undefined">
     <div class="col-6 w-50" [style.background-image] ="'url('+game1.imgSrc+')'" id="firstGame" >
         <ul class="gameContent"> 
                <li><p class="large">{{game1.name}}</p></li>
