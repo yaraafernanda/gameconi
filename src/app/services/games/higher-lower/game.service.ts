@@ -4,6 +4,7 @@ import { VideoGame } from '../../../class/VideoGame';
 import { Partida } from '../../../class/Partida';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Category } from '../../../class/Category';
+import { HighScore } from '../../../class/HighScore';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,7 @@ new VideoGame(0, 'Halo', 53600,
 new VideoGame(1, 'Gears of War 1', 86400,
      'https://videosjuegos.files.wordpress.com/2008/10/gears-of-war-1024x768.jpg', 2),
 new VideoGame(2, 'Mario', 195000,
-'https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/bb/8b/eb/bb8beb7b-a7c6-ce90-ef4a-b81cd10d1524/AppIcon-0-1x_U007emarketing-0-85-220-6.png/246x0w.jpg',
- 1),
+'https://img.jakpost.net/c/2016/12/13/2016_12_13_17692_1481599628._large.jpg', 1),
 new VideoGame(3, 'Fortnite', 43500,
     'https://cdn2.unrealengine.com/Fortnite%2Fbattle-royale%2FBR08_GetFortnite_3Up-1924x999-f74a2d27ca27d9a7e4905aa43edb06d29427b0af.jpg',
     2),
@@ -26,12 +26,12 @@ new VideoGame(5, 'Legend of Zelda', 113000,
 'https://www.quefriki.com/wp-content/uploads/P%C3%B3ster-Legend-of-Zelda-Breath-of-the-Wild-portada.jpg', 2),
 new VideoGame(6, 'Grand Theft Auto V', 595900, 'https://i.blogs.es/7864d3/official-artwork-the-trio/450_1000.jpg', 2),
 new VideoGame(7, 'FIFA 19', 230000,
-'https://media.contentapi.ea.com/content/dam/ea/easports/fifa/fifa-19-home/fifa19_refresh/franchise-hero-tertiary-fifa19-home-update-key-art-xs.jpg', 4),
+'https://www.24horas.cl/incoming/fifa19jpg-2817001/ALTERNATES/BASE_LANDSCAPE/fifa19.JPG', 4),
 new VideoGame(8, 'NBA 2K19', 500000,
- 'https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fbrianmazique%2Ffiles%2F2018%2F10%2FNBA2K19HERO2-hero.jpg', 4),
+ 'https://www.nintendoenthusiast.com/wp-content/uploads/2018/09/Lebron-James-in-NBA-2k19-1170x585.jpg', 4),
 new VideoGame(9, 'MLB The Show 19', 150000, 'https://img.youtube.com/vi/8tjGE9iNS8I/maxresdefault.jpg', 4),
 new VideoGame(10, 'Madden NFL 19', 486000,
-'https://data4.origin.com/content/dam/originx/web/app/games/madden/madden-19/merchcomponents/MaddenNFL19_pdp_stafeature_UltimateChallenge_en_ww_v1.jpg', 4),
+'https://blog.bestbuy.ca/wp-content/uploads/2018/08/madden-e1534450034123.jpg', 4),
 new VideoGame(11, 'NHL 19', 206000,
 'https://media.contentapi.ea.com/content/www-easports/en_US/nhl/news/2018/nhl-19-release-date/_jcr_content/imageShare.img.jpg', 4),
 new VideoGame(12, 'WWE 2K19', 97000, 'https://cdn.2kgames.com/wwe.2k.com/news/wwe2k19/claymorezz1920.jpg', 4),
@@ -42,17 +42,17 @@ new VideoGame(14, 'Freestyle Street Basketball 2', 280000,
 new VideoGame(15, 'Golf IT', 210000, 'https://i.ytimg.com/vi/IIPCWLF4omI/maxresdefault.jpg', 4),
 new VideoGame(16, 'Fishing Planet', 130000, 'https://i.ytimg.com/vi/kSXxYDsfcho/maxresdefault.jpg', 4),
 new VideoGame(17, 'Mario Super Sluggers', 900000, 'https://i.ytimg.com/vi/EffVyHiVANY/maxresdefault.jpg', 4),
-new VideoGame(18, 'Mario Tennis Aces', 630000,
-'https://cdn.vox-cdn.com/thumbor/TAXlsbd0aDLNJYXbXe_IuKvOwIk=/0x0:1920x1080/1200x675/filters:focal(1008x265:1314x571)/cdn.vox-cdn.com/uploads/chorus_image/image/60111239/mario_tennis_aces_mario_1920.1529429284.jpg', 4),
+new VideoGame(18, 'Mario Tennis Aces', 630000, 'http://mariotennis.nintendo.com/aces/assets/img/home/hero-home-fallback.jpg', 4),
 ];
 
 private categories: Category[];
+updateCategories: Subject<Category[]>;
 private points = 0;
 updatePoints = new Subject<number>();
-private gamesplayed: Partida[];
+gamesplayed: Partida[];
 updateGamePlayed = new Subject<Partida[]>();
 private lastId = 1;
-private sameCategoryGames: VideoGame[];
+private sameCategoryGames: VideoGame[] = [];
 
 constructor(private httpClient: HttpClient) { }
 
@@ -73,6 +73,7 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
       this.categories = data;
       console.log('READING ALL CATEGORIES.JSON', this.categories);
      });
+
    }
   getCategories(): Category[] {
     return this.categories.slice();
@@ -99,15 +100,16 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
   this.updateGamePlayed.next(this.gamesplayed.slice());
   }
 
-  updateGame(id, score) {
-    console.log('datos entry', id, score);
-    let pos = this.gamesplayed.findIndex(ga => ga.game_id == id );
-    if (pos) {
-      if (id == this.gamesplayed[pos].user_id) {
+  updateGame(id, userid, score) {
+    console.log('datos entry', id, score, 'juegos', this.gamesplayed);
+    let pos = this.gamesplayed.findIndex(ga => ga.game_id === id );
+    console.log('posicion: ', pos);
+    if (pos >= 0) {
+      if (userid == this.gamesplayed[pos].user_id) {
         this.gamesplayed[pos].score = score;
         this.gamesplayed[pos].turn_user_id = this.gamesplayed[pos].opponent_id;
       } else {
-        if (id == this.gamesplayed[pos].opponent_id) {
+        if (userid == this.gamesplayed[pos].opponent_id) {
           this.gamesplayed[pos].opponent_score = score;
           this.gamesplayed[pos].game_over = 1;
           if (this.gamesplayed[pos].opponent_score > this.gamesplayed[pos].score) {
@@ -117,9 +119,8 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
           }
         }
       }
-     this.updateHighScore(score,pos);
-    }
-    let xhr = new XMLHttpRequest();
+     this.updateHighScore(score,pos, userid);
+     let xhr = new XMLHttpRequest();
     xhr.open('PUT', this.urlJSON);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(this.gamesplayed));
@@ -128,46 +129,47 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
           // Ocurrió un error
           alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
       } else {
-           console.log(xhr.responseText); // Significa que fue existoso
+           console.log('update exitoso'); // Significa que fue existoso
       }
     };
     this.updateGamePlayed.next(this.gamesplayed.slice());
+    console.log('updated game: ', this.gamesplayed[pos]);
+    } else {
+      console.log('not founded');
+    }
   }
 
-  updateHighScore(score, pos){
-     //actualizar highscore
-     let cat = this.categories.findIndex(c => c.id == this.gamesplayed[pos].category_id);
-     if (score > this.categories[cat].highscore[0]) {
-       this.categories[cat].highscore[2] = this.categories[cat].highscore[1];
-       this.categories[cat].highscore[1] = this.categories[cat].highscore[0];
-       this.categories[cat].highscore[0].score = score;
-       this.categories[cat].highscore[0].id_usuario = this.gamesplayed[pos].user_id;
+  updateHighScore(score, pos, id) {
+    let cat= this.categories.findIndex(c => c.id == this.gamesplayed[pos].category_id);
+    console.log('categoria que etamos actualizando hs: ', cat);
+    let hs = this.categories[cat].highscore.findIndex(h => h.id_usuario === id);
 
-     } else {
-       if (score > this.categories[cat].highscore[1]) {
-         this.categories[cat].highscore[2] = this.categories[cat].highscore[1];
-         this.categories[cat].highscore[1].score = score;
-         this.categories[cat].highscore[1].id_usuario = this.gamesplayed[pos].user_id;
-
-       } else {
-         if (score > this.categories[cat].highscore[2]) {
-          this.categories[cat].highscore[2].score = score;
-          this.categories[cat].highscore[2].id_usuario = this.gamesplayed[pos].user_id;         }
-       }
-     }
-  }
+    if (hs >= 0) {
+      if (score > this.categories[cat].highscore[hs].score) {
+        this.categories[cat].highscore[hs].score = score;
+      }
+    } else {
+      this.categories[cat].highscore.push(new HighScore(id, score));
+    }
+    // ordenarlo
+    for (let i = 1; i < this.categories[cat].highscore.length; i++) {
+      for (let j = 0; j < (this.categories[cat].highscore.length - i ); j++) {
+        if (this.categories[cat].highscore[j] > this.categories[cat].highscore[j + 1]) {
+          let k = this.categories[cat].highscore[j + 1];
+          this.categories[cat].highscore[j + 1] = this.categories[cat].highscore[j];
+          this.categories[cat].highscore[j] = k;
+        }
+      }
+    }
+    console.log('ordenado: ', this.categories[cat].highscore);
+    }
 
   getnextId() {
     return this.lastId;
   }
 
   getScore(id) {
-    console.log('JSON READ', this.gamesplayed);
-    let index = this.gamesplayed.findIndex(i => {
-      if (i.game_id === id) {
-        return true;
-      }
-    });
+    let index = this.gamesplayed.findIndex(i => i.game_id === id);
     console.log('INDEX:', index);
     if (index >= 0) {
       return this.gamesplayed[index].score;
@@ -175,21 +177,24 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
     return null;
   }
 
-  getGames(id): VideoGame[] {
+  getGames(id) {
     let pos = this.gamesplayed.findIndex(ga => ga.game_id == id );
     let cat = this.gamesplayed[pos].category_id;
     for (let i = 0; i < this.games.length; i++) {
       if (this.games[i].category_id == cat) {
         this.sameCategoryGames.push(this.games[i]);
+        console.log('pushed:', this.games[i]);
       }
     }
-
-    return this.sameCategoryGames.sort(() => Math.random() - 0.5);
+    console.log('SAMECAT CREATED: ', this.sameCategoryGames);
+    this.sameCategoryGames.sort(() => Math.random() - 0.5);
   }
 
   getcurrentGame() {
-    if (this.points + 1 < this.games.length) {
-      return this.games.slice(this.points, this.points + 2);
+    console.log('samecategory: ', this.sameCategoryGames);
+
+    if (this.points + 1 < this.sameCategoryGames.length) {
+      return this.sameCategoryGames.slice(this.points, this.points + 2);
     } else {
       return Object.assign({});
     }
