@@ -81,7 +81,7 @@ export class GameplayComponent implements OnInit {
        this.points = 0;
        console.log('score: ', this.points);
      }
-     this.gService.updateGame(this.gid, this.points);
+    this.gService.updateGame(this.gid, this.points);
     this.router.navigate(['gameover']);
 }
 

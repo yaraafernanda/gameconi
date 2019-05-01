@@ -117,6 +117,7 @@ private categories: Category[];
           }
         }
       }
+     this.updateHighScore(score);
     }
     const xhr = new XMLHttpRequest();
     xhr.open('PUT', this.urlJSON);
@@ -131,6 +132,25 @@ private categories: Category[];
       }
     };
     this.updateGamePlayed.next(this.gamesplayed.slice());
+  }
+
+  updateHighScore(score){
+     //actualizar highscore
+     let cat = this.categories.findIndex(c => c.id == this.gamesplayed[pos].category_id);
+     if (score > this.categories[cat].highscore[0]) {
+       this.categories[cat].highscore[2] = this.categories[cat].highscore[1];
+       this.categories[cat].highscore[1] = this.categories[cat].highscore[0];
+       this.categories[cat].highscore[0] = score;
+     } else {
+       if (score > this.categories[cat].highscore[1]) {
+         this.categories[cat].highscore[2] = this.categories[cat].highscore[1];
+         this.categories[cat].highscore[1] = score;
+       } else {
+         if (score > this.categories[cat].highscore[2]) {
+           this.categories[cat].highscore[2] = score;
+         }
+       }
+     }
   }
 
   getnextId() {
