@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Partida } from '../../../../class/Partida';
 import { User } from '../../../../class/User';
@@ -8,6 +8,7 @@ import { UsuarioService } from '../../../../services/usuarios/usuario.service';
 import { AuthService } from '../../../../services/auth.service';
 import { Subject, Subscription } from 'rxjs';
 import { CurrentGame } from '../../../../class/CurrentGame';
+import { ProfileService } from '../../../../services/profile/profile.service';
 
 @Component({
   selector: 'app-games-played',
@@ -16,8 +17,9 @@ import { CurrentGame } from '../../../../class/CurrentGame';
 })
 export class GamesPlayedComponent implements OnInit {
 
-  updateGamePlayed = new Subject<Partida[]>();
   userChangeSub: Subscription;
+  ownerChangeSub: Subscription;
+  profileVisited: Subscription;
 
   //provisional
   private srcgames: Partida[] = [
@@ -28,13 +30,15 @@ export class GamesPlayedComponent implements OnInit {
 
   mygames: CurrentGame[] = [];
   user: User;
-  allusers: User[];
+  allusers: User[] = [];
   allgames: Partida[];
   allcategories: Category[];
-  owner = 1;
+  mycategories: Category[];
+  owner = true;
+  profileV: User;
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
-    private auth: AuthService) { }
+    private auth: AuthService, private route: ActivatedRoute, private profService: ProfileService) { }
 
   ngOnInit() {
     this.user = this.auth.user;
@@ -57,10 +61,22 @@ export class GamesPlayedComponent implements OnInit {
         }
       );
     }
+    this.ownerChangeSub = this.profService.updateOwner.subscribe(
+      (owner: boolean) => {
+        this.owner = owner;
+      }
+    );
+    this.profileVisited = this.profService.updateUserVisited.subscribe(
+      (profile: User) => {
+        this.profileV = profile;
+        console.log(this.profileV);
+      }
+    );
     this.allcategories = this.gService.getCategories();
     console.log('Categorias: ', this.allcategories);
     this.allgames = this.srcgames;
     this.getMyGames();
+    this.getCategoriesPlayed();
     console.log('Partidas: ', this.mygames);
   }
 
@@ -89,6 +105,16 @@ export class GamesPlayedComponent implements OnInit {
         this.mygames.push(newCurrentG);
       }
     });
+  }
+
+  getCategoriesPlayed() {
+    console.log('getting my categories...');
+    //obtener el id del perfil visitado en el arreglo de usuarios 
+    const indexProfileV = this.allusers.findIndex(item => item.id == this.profileV.id);
+    this.allcategories.forEach(item => {
+      //this.mycategories.push();
+    });
+    //const newCat = new Category();
   }
 
 }
