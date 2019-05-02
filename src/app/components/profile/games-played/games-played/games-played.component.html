@@ -1,15 +1,15 @@
 <div class="container">
-  <div class="container" *ngIf="owner==0">
-    <div *ngFor="let item of partidas" class="card mb-3" id="gamePlayedCard">
+  <div class="container" *ngIf="!owner">
+    <div *ngFor="let item of mycategories" class="card mb-3" id="gamePlayedCard">
       <div class="row">
         <div class="col">
           <img
-            src="https://www.telegraph.co.uk/content/dam/gaming/2017/01/12/Yooka-Laylee-xlarge_trans_NvBQzQNjv4BqNJjoeBT78QIaYdkJdEY4CnGTJFJS74MYhNY6w3GNbO8.png"
+            src="{{item.image}}"
             class="card-img" alt="...">
         </div>
         <div class="col" id="col2">
           <div class="card-body">
-            <h5 class="card-title">Category title</h5>
+            <h5 class="card-title">{{item.name}}</h5>
             <h6 class="card-text">Highscore Table</h6>
             <table class="table table-sm">
               <thead>
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="owner==1">
+  <div class="row" *ngIf="owner">
     <div *ngFor="let item of mygames" class="col-sm-6" id="gameFinishedCard">
       <!--Individual Card-->
       <div class="card text-center border-info">
