@@ -7,12 +7,16 @@
   </div>
 
   <div class="justify-content-center">
-      <a class="btn col-2 fa fa-twitter">
-          Tweet this
-      </a>
-      <a class="btn col-2 fa fa-facebook">
-          Share this
-      </a>
+        <share-buttons 
+        [theme]="'default'"
+        [include]="['facebook','twitter']"
+        [show]="2"
+        [showText]="true"
+        [size]="4"
+        [description]="'I just played High Lower game from gameconi'"
+       ></share-buttons>
+       
+    
   </div>
   <div class="justify-content-center">
       <button  type="button" (click)= "goHome()" class="col-3 btn-secondary btn-lg btn">
