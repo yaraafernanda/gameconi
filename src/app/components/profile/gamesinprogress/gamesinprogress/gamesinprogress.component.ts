@@ -40,7 +40,10 @@ export class GamesinprogressComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit() {
+    this.gService.leerJSON();
     this.user = this.auth.user;
+    //this.gService.getGamesPlayed();
+    //ALTOAQUI
     if (this.usuarioService.getUsers()) {
       console.log('ENTRÓ AL IF');
       this.allusers = this.usuarioService.getUsers();
