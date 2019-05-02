@@ -19,17 +19,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>yaraafernanda</td>
-                  <td>468</td>
-                </tr>
-                <tr>
-                  <td>thornton</td>
-                  <td>274</td>
-                </tr>
-                <tr>
-                  <td>littleguy</td>
-                  <td>247</td>
+                <tr *ngFor="let i of mycategories.highscore">
+                  <td>{{i.id_usuario}}</td>
+                  <td>{{i.score}}</td>
                 </tr>
               </tbody>
             </table>
