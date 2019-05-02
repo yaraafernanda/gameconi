@@ -1,3 +1,5 @@
+import { HighScore } from "./HighScore";
+
 export class Category{
     /*id:number;
     nombre: string;
@@ -7,8 +9,9 @@ export class Category{
     sexo: string;*/
     constructor(
         public id: number,
-        public name:string,
-        public image:string
+        public name: string,
+        public image: string,
+        public highscore: HighScore[]
         ) {
         }
 }

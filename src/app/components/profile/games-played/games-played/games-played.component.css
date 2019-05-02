@@ -1,14 +1,14 @@
 #gamePlayedCard:hover {
-  box-shadow:0 30px 70px rgba(0,0,0,.2);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .2);
 }
 
-#gamePlayedCard{
+#gamePlayedCard {
   background-color: rgb(230, 229, 240);
   margin-top: 20px;
   margin-left: 65px;
   margin-right: 65px;
   border-radius: 15px;
-  box-shadow:0 20px 50px rgba(0,0,0,.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .1);
   height: 250px;
 }
 
@@ -16,7 +16,8 @@
   text-align: center;
 }
 
-h5, th {
+h5,
+th {
   font-family: 'Exo', sans-serif;
 }
 
@@ -31,12 +32,43 @@ table {
   background: lightblue;
 }
 
-th, td {
+th,
+td {
   border-bottom: 2px solid rgb(230, 227, 227);
 }
 
-img {
+#gamePlayedCard img {
   border-radius: 15px;
   width: auto;
   height: 250px;
+}
+
+
+.row {
+  padding: 15px;
+}
+
+.row img {
+  height: 150px;
+}
+
+#gameFinishedCard:hover .card{
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .2);
+}
+
+#gameFinishedCard .card{
+  border-radius: 15px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .1);
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+#gameFinishedCard .card-body .btn {
+  font-family: 'Exo', sans-serif;
+  background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+  width: 200px;
+}
+
+#space {
+  height: 22px;
 }

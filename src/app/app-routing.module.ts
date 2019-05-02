@@ -25,8 +25,11 @@ const routes: Routes = [
     { path: 'gamesplayed', component: GamesPlayedComponent}
   ] },
   { path: 'game', component: GameComponent, canActivate: [AuthGuardService]},
-  { path: 'gameplay', component: GameplayComponent, canActivate: [AuthGuardService]},
-  { path: 'gameover', component: GameoverComponent, canActivate: [AuthGuardService] }
+  { path: 'gameplay', children: [
+    {path: '', redirectTo: '/game', pathMatch: 'full'},
+    {path: ':id', component: GameplayComponent, canActivate: [AuthGuardService]},
+    { path: ':id/gameover', component: GameoverComponent, canActivate: [AuthGuardService] }
+  ]}
 ];
 
 @NgModule({

@@ -10,6 +10,6 @@ export class VideoGame {
         public name: string,
         public searches: number,
         public imgSrc: string,
-        public categoria: string) {
+        public category_id: number) {
         }
 }

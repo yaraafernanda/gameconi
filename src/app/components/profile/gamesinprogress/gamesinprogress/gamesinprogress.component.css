@@ -13,9 +13,30 @@
 .card{
   border-radius: 15px;
   box-shadow:0 20px 50px rgba(0,0,0,.1);
+  margin-bottom: 20px;
 }
 
-.btn {
+.card-body .btn {
   font-family: 'Exo', sans-serif;
   background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+  width: 200px;
+}
+
+#space {
+  height: 22px;
+}
+
+label {
+  margin: 5px;
+}
+
+.btn-group .btn {
+  background-color: azure;
+  color: black;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+h5 {
+  font-family: 'Exo', sans-serif;
 }

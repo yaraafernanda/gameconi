@@ -1,40 +1,36 @@
 <!-- Cards -->
+<!-- PADRE -->
 <div class="row">
-  <div class="col-sm-6">
-    <!--Individual Card-->
-    <div class="card text-center border-info">
-      <div class="card-header">
-        Your turn
-      </div>
-      <img
-        src="https://www.telegraph.co.uk/content/dam/gaming/2017/01/12/Yooka-Laylee-xlarge_trans_NvBQzQNjv4BqNJjoeBT78QIaYdkJdEY4CnGTJFJS74MYhNY6w3GNbO8.png"
-        class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">yaraafernanda</h5>
-        <p class="card-text">alvaro021 challenged you</p>
-        <a href="#" class="btn btn-primary">Jugar</a>
-      </div>
-      <div class="card-footer text-muted">
-        Your have 2 days to play
-      </div>
-    </div>
+
+  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="r_option" style="width: 100%;">
+    <label ngbButtonLabel class="btn btn-default">
+      <input ngbButton type="radio" [value]="1" (click)="getMyGames()"> My turn
+    </label>
+    <label ngbButtonLabel class="btn btn-default">
+      <input ngbButton type="radio" [value]="2" (click)="getMyGames()"> Waiting for response
+    </label>
+    <label ngbButtonLabel class="btn btn-default">
+      <input ngbButton type="radio" [value]="0" (click)="getMyGames()"> All
+    </label>
   </div>
-  <div class="col-sm-6">
+
+  <div *ngFor="let item of mygames" class="col-sm-6">
     <!--Individual Card-->
     <div class="card text-center border-info">
-      <div class="card-header">
+      <div *ngIf="item.turn==1" class="card-header">
         Your turn
       </div>
-      <img
-        src="https://www.telegraph.co.uk/content/dam/gaming/2017/01/12/Yooka-Laylee-xlarge_trans_NvBQzQNjv4BqNJjoeBT78QIaYdkJdEY4CnGTJFJS74MYhNY6w3GNbO8.png"
-        class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">yaraafernanda</h5>
-        <p class="card-text">mariana challenged you</p>
-        <a href="#" class="btn btn-primary">Jugar</a>
+      <div *ngIf="item.turn==0" class="card-header">
+        Waiting for {{item.opponent_name}} to play
       </div>
-      <div class="card-footer text-muted">
-        Your have 1 days to play
+      <img src="{{item.category_img}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{item.category_name}}</h5>
+        <p *ngIf="item.turn==1" class="card-text">{{item.opponent_name}} challenged you</p>
+        <p *ngIf="item.turn==0" class="card-text">You challenged {{item.opponent_name}}</p>
+
+        <a *ngIf="item.turn==1" href="/gameplay/{{item.game_id}}" class="btn btn-primary">Jugar</a>
+        <p *ngIf="item.turn==0" id="space"></p>
       </div>
     </div>
   </div>
