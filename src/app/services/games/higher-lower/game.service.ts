@@ -12,44 +12,122 @@ import { HighScore } from '../../../class/HighScore';
 export class GameService {
 
 games: VideoGame[] = [
-new VideoGame(0, 'Halo', 53600,
-'https://as01.epimg.net/meristation/imagenes/2019/03/18/noticias/1552889337_702986_1552889388_noticia_normal.jpg', 2),
-new VideoGame(1, 'Gears of War 1', 86400,
-     'https://videosjuegos.files.wordpress.com/2008/10/gears-of-war-1024x768.jpg', 2),
-new VideoGame(2, 'Mario', 195000,
-'https://img.jakpost.net/c/2016/12/13/2016_12_13_17692_1481599628._large.jpg', 1),
-new VideoGame(3, 'Fortnite', 43500,
-    'https://cdn2.unrealengine.com/Fortnite%2Fbattle-royale%2FBR08_GetFortnite_3Up-1924x999-f74a2d27ca27d9a7e4905aa43edb06d29427b0af.jpg',
-    2),
-new VideoGame(4, 'Pacman', 59500, 'https://i.pinimg.com/originals/33/07/37/330737871eb6b5258ff38f4d441bfc1e.png', 3),
-new VideoGame(5, 'Legend of Zelda', 113000,
-'https://www.quefriki.com/wp-content/uploads/P%C3%B3ster-Legend-of-Zelda-Breath-of-the-Wild-portada.jpg', 2),
-new VideoGame(6, 'Grand Theft Auto V', 595900, 'https://i.blogs.es/7864d3/official-artwork-the-trio/450_1000.jpg', 2),
-new VideoGame(7, 'FIFA 19', 230000,
+
+new VideoGame(1, 'FIFA 19', 230000,
 'https://www.24horas.cl/incoming/fifa19jpg-2817001/ALTERNATES/BASE_LANDSCAPE/fifa19.JPG', 4),
-new VideoGame(8, 'NBA 2K19', 500000,
+new VideoGame(2, 'NBA 2K19', 500000,
  'https://www.nintendoenthusiast.com/wp-content/uploads/2018/09/Lebron-James-in-NBA-2k19-1170x585.jpg', 4),
-new VideoGame(9, 'MLB The Show 19', 150000, 'https://img.youtube.com/vi/8tjGE9iNS8I/maxresdefault.jpg', 4),
-new VideoGame(10, 'Madden NFL 19', 486000,
+new VideoGame(3, 'MLB The Show 19', 150000, 'https://img.youtube.com/vi/8tjGE9iNS8I/maxresdefault.jpg', 4),
+new VideoGame(4, 'Madden NFL 19', 486000,
 'https://blog.bestbuy.ca/wp-content/uploads/2018/08/madden-e1534450034123.jpg', 4),
-new VideoGame(11, 'NHL 19', 206000,
+new VideoGame(5, 'NHL 19', 206000,
 'https://media.contentapi.ea.com/content/www-easports/en_US/nhl/news/2018/nhl-19-release-date/_jcr_content/imageShare.img.jpg', 4),
-new VideoGame(12, 'WWE 2K19', 97000, 'https://cdn.2kgames.com/wwe.2k.com/news/wwe2k19/claymorezz1920.jpg', 4),
-new VideoGame(13, 'EA Sports UFC 3', 330000,
+new VideoGame(6, 'WWE 2K19', 97000, 'https://cdn.2kgames.com/wwe.2k.com/news/wwe2k19/claymorezz1920.jpg', 4),
+new VideoGame(7, 'EA Sports UFC 3', 330000,
 'https://www.justpushstart.com/wp-content/uploads/2018/04/maxresdefault-63-890x606-890x606.jpg', 4),
-new VideoGame(14, 'Freestyle Street Basketball 2', 280000,
+new VideoGame(8, 'Freestyle Street Basketball 2', 280000,
 'https://steamcdn-a.akamaihd.net/steam/apps/339610/ss_cf615c1949f16be418bc117c71e803621baae0b2.1920x1080.jpg?t=1515195348', 4),
-new VideoGame(15, 'Golf IT', 210000, 'https://i.ytimg.com/vi/IIPCWLF4omI/maxresdefault.jpg', 4),
-new VideoGame(16, 'Fishing Planet', 130000, 'https://i.ytimg.com/vi/kSXxYDsfcho/maxresdefault.jpg', 4),
-new VideoGame(17, 'Mario Super Sluggers', 900000, 'https://i.ytimg.com/vi/EffVyHiVANY/maxresdefault.jpg', 4),
-new VideoGame(18, 'Mario Tennis Aces', 630000, 'http://mariotennis.nintendo.com/aces/assets/img/home/hero-home-fallback.jpg', 4),
+new VideoGame(9, 'Golf IT', 210000, 'https://i.ytimg.com/vi/IIPCWLF4omI/maxresdefault.jpg', 4),
+new VideoGame(10, 'Fishing Planet', 130000, 'https://i.ytimg.com/vi/kSXxYDsfcho/maxresdefault.jpg', 4),
+new VideoGame(11, 'Mario Super Sluggers', 900000, 'https://i.ytimg.com/vi/EffVyHiVANY/maxresdefault.jpg', 4),
+new VideoGame(12, 'Mario Tennis Aces', 630000, 'http://mariotennis.nintendo.com/aces/assets/img/home/hero-home-fallback.jpg', 4),
+
+new VideoGame(13, 'Days Gone', 866700, 'https://static-cdn.jtvnw.net/ttv-boxart/Days%20Gone-285x380.jpg', 1),
+new VideoGame(14, 'Sekiro: Shadows Die Twice', 57800,
+'https://static-cdn.jtvnw.net/ttv-boxart/Sekiro:%20Shadows%20Die%20Twice-285x380.jpg', 1),
+new VideoGame(15, 'Rust', 221400, 'https://static-cdn.jtvnw.net/ttv-boxart/Rust-285x380.jpg', 1),
+new VideoGame(16, 'Tibia', 99800, 'https://static-cdn.jtvnw.net/ttv-boxart/Tibia-285x380.jpg', 1),
+new VideoGame(17, 'Super Mario 64', 126400, 'https://static-cdn.jtvnw.net/ttv-boxart/Super%20Mario%2064-285x380.jpg', 1),
+new VideoGame(18, 'Forager', 345003, 'https://static-cdn.jtvnw.net/ttv-boxart/Forager-285x380.jpg', 1),
+new VideoGame(19, 'The Legend of Zelda: Breath of the wild', 83210,
+'https://static-cdn.jtvnw.net/ttv-boxart/The%20Legend%20of%20Zelda:%20Breath%20of%20the%20Wild-285x380.jpg', 1),
+new VideoGame(20, 'Dark Souls III', 64400, 'https://static-cdn.jtvnw.net/ttv-boxart/Dark%20Souls%20III-285x380.jpg', 1),
+new VideoGame(21, 'Eastshade', 66400, 'https://static-cdn.jtvnw.net/ttv-boxart/Eastshade-285x380.jpg',1),
+new VideoGame(22, 'Resident Evil 2', 65400, 'https://static-cdn.jtvnw.net/ttv-boxart/Resident%20Evil%202-285x380.jpg', 1),
+new VideoGame(23, 'Pokémon Ruby/Sapphire', 67400, 'https://static-cdn.jtvnw.net/ttv-boxart/Pok%C3%A9mon%20Ruby/Sapphire-285x380.jpg', 1),
+new VideoGame(24, 'Detroit: Become Human', 688400, 'https://static-cdn.jtvnw.net/ttv-boxart/Detroit:%20Become%20Human-285x380.jpg', 1),
+new VideoGame(25, 'Outlast', 49900, 'https://static-cdn.jtvnw.net/ttv-boxart/Outlast-285x380.jpg', 1),
+
+new VideoGame(26, 'Fortnite', 48600, 'https://static-cdn.jtvnw.net/ttv-boxart/Fortnite-285x380.jpg', 2),
+new VideoGame(27, 'PLAYERUNKNOWNS BATTLEGROUNDS', 40000,
+'https://static-cdn.jtvnw.net/ttv-boxart/PLAYERUNKNOWN%27S%20BATTLEGROUNDS-285x380.jpg', 2),
+new VideoGame(28, 'Counter-Strike: Global Offensive', 404320,
+'https://static-cdn.jtvnw.net/ttv-boxart/Counter-Strike:%20Global%20Offensive-285x380.jpg', 2),
+new VideoGame(29, 'Overwatch', 401110, 'https://static-cdn.jtvnw.net/ttv-boxart/Overwatch-285x380.jpg', 2),
+new VideoGame(30, 'Apex Legends', 42100, 'https://static-cdn.jtvnw.net/ttv-boxart/Apex%20Legends-285x380.jpg', 2),
+new VideoGame(31, 'Call of Duty: Black Ops 4', 411700,
+'https://static-cdn.jtvnw.net/ttv-boxart/Call%20of%20Duty:%20Black%20Ops%204-285x380.jpg', 2),
+new VideoGame(32, 'Tom Clancys Rainbow Six Siege', 94600,
+'https://static-cdn.jtvnw.net/ttv-boxart/Tom%20Clancy%27s%20Rainbow%20Six:%20Siege-285x380.jpg', 2),
+new VideoGame(33, 'Escape From Tarkov', 90870, 'https://static-cdn.jtvnw.net/ttv-boxart/Escape%20From%20Tarkov-285x380.jpg', 2),
+new VideoGame(34, 'Destiny 2', 12200, 'https://static-cdn.jtvnw.net/ttv-boxart/Destiny%202-285x380.jpg', 2),
+new VideoGame(35, 'Rust', 19800, 'https://static-cdn.jtvnw.net/ttv-boxart/Rust-285x380.jpg', 2),
+new VideoGame(36, 'Portal 2', 190000, 'https://static-cdn.jtvnw.net/ttv-boxart/Portal%202-285x380.jpg', 2),
+new VideoGame(37, 'Tom Clancys The Division 2', 942200,
+'https://static-cdn.jtvnw.net/ttv-boxart/Tom%20Clancy%27s%20The%20Division%202-285x380.jpg', 2),
+new VideoGame(38, 'Warframe', 90000, 'https://static-cdn.jtvnw.net/ttv-boxart/Warframe-285x380.jpg', 2),
+new VideoGame(39, 'Borderlands 3', 982300, 'https://static-cdn.jtvnw.net/ttv-boxart/Borderlands%203-285x380.jpg', 2),
+
+new VideoGame(40, 'Grand Theft Auto V', 99100, 'https://static-cdn.jtvnw.net/ttv-boxart/Grand%20Theft%20Auto%20V-285x380.jpg', 3),
+new VideoGame(41, 'Days Gone', 55600, 'https://static-cdn.jtvnw.net/ttv-boxart/Days%20Gone-285x380.jpg', 3),
+new VideoGame(42, 'Minecraft', 54200, 'https://static-cdn.jtvnw.net/ttv-boxart/Minecraft-285x380.jpg', 3),
+new VideoGame(43, 'Dark Souls', 50000, 'https://static-cdn.jtvnw.net/ttv-boxart/Dark%20Souls-285x380.jpg', 3),
+new VideoGame(44, 'The Elder Scrolls Online', 234600,
+'https://static-cdn.jtvnw.net/ttv-boxart/The%20Elder%20Scrolls%20Online-285x380.jpg', 3),
+new VideoGame(45, 'Black Desert Online', 56700, 'https://static-cdn.jtvnw.net/ttv-boxart/Black%20Desert%20Online-285x380.jpg', 3),
+new VideoGame(46, 'DayZ', 58900, 'https://static-cdn.jtvnw.net/ttv-boxart/DayZ-285x380.jpg', 3),
+new VideoGame(47, 'Final Fantasy XV', 51000, 'https://static-cdn.jtvnw.net/ttv-boxart/Final%20Fantasy%20XV-285x380.jpg', 3),
+new VideoGame(48, 'Tom Clancys The Division 2', 51100,
+'https://static-cdn.jtvnw.net/ttv-boxart/Tom%20Clancy%27s%20The%20Division%202-285x380.jpg', 3),
+new VideoGame(49, 'Star Citizen', 86400, 'https://static-cdn.jtvnw.net/ttv-boxart/Star%20Citizen-285x380.jpg', 3),
+new VideoGame(50, 'Borderlands 2', 86400, 'https://static-cdn.jtvnw.net/ttv-boxart/Borderlands%202-285x380.jpg', 3),
+new VideoGame(51, 'Metal Gear Solid V:', 86400, 'https://static-cdn.jtvnw.net/ttv-boxart/Grand%20Theft%20Auto%20V-285x380.jpg', 3),
+new VideoGame(52, 'The Legend of Zelda: Breath of the wild', 86400,
+'https://static-cdn.jtvnw.net/ttv-boxart/The%20Legend%20of%20Zelda:%20Breath%20of%20the%20Wild-285x380.jpg', 3),
+new VideoGame(53, 'Chrono Trigger', 51200, 'https://static-cdn.jtvnw.net/ttv-boxart/Chrono%20Trigger-285x380.jpg', 3),
+new VideoGame(54, 'Bloodborne', 51300, 'https://static-cdn.jtvnw.net/ttv-boxart/Bloodborne-285x380.jpg', 3),
+
+new VideoGame(55, 'Grand Theft Auto V', 51400,
+     'https://static-cdn.jtvnw.net/ttv-boxart/Grand%20Theft%20Auto%20V-285x380.jpg', 5),
+new VideoGame(56, 'Sea of Thieves', 96300,
+     'https://static-cdn.jtvnw.net/ttv-boxart/Sea%20of%20Thieves-285x380.jpg', 5),
+new VideoGame(57, 'Minecraft', 34500, 'https://static-cdn.jtvnw.net/ttv-boxart/Minecraft-285x380.jpg', 5),
+new VideoGame(58, 'Days Gone', 33200, 'https://static-cdn.jtvnw.net/ttv-boxart/Days%20Gone-285x380.jpg', 5),
+new VideoGame(59, 'Mordhau', 300000, 'https://static-cdn.jtvnw.net/ttv-boxart/Mordhau-285x380.jpg', 5),
+new VideoGame(60, 'Dead by Daylight', 45600, 'https://static-cdn.jtvnw.net/ttv-boxart/Dead%20by%20Daylight-285x380.jpg', 5),
+new VideoGame(61, 'Dark Souls', 32100, 'https://static-cdn.jtvnw.net/ttv-boxart/Dark%20Souls-285x380.jpg', 5),
+new VideoGame(62, 'Rocket League', 31100, 'https://static-cdn.jtvnw.net/ttv-boxart/Rocket%20League-285x380.jpg', 5),
+new VideoGame(63, 'Path of Exile', 34500, 'https://static-cdn.jtvnw.net/ttv-boxart/Path%20of%20Exile-285x380.jpg', 5),
+new VideoGame(64, 'World of Tanks', 37800, 'https://static-cdn.jtvnw.net/ttv-boxart/World%20of%20Tanks-285x380.jpg',5),
+new VideoGame(65, 'Final Fantasy XV', 39900, 'https://static-cdn.jtvnw.net/ttv-boxart/Final%20Fantasy%20XV-285x380.jpg', 5),
+new VideoGame(66, 'ARK', 90300, 'https://static-cdn.jtvnw.net/ttv-boxart/ARK-285x380.jpg', 5),
+new VideoGame(67, 'Diablo II: Lord of Destruction', 39000,
+'https://static-cdn.jtvnw.net/ttv-boxart/Diablo%20II:%20Lord%20of%20Destruction-285x380.jpg', 5),
+new VideoGame(68, 'Warframe', 95500, 'https://static-cdn.jtvnw.net/ttv-boxart/Warframe-285x380.jpg', 5),
+new VideoGame(69, 'Metro 2033', 98800, 'https://static-cdn.jtvnw.net/ttv-boxart/Metro%202033-285x380.jpg', 5),
+new VideoGame(70, 'Battlefield V', 864400, 'https://static-cdn.jtvnw.net/ttv-boxart/Battlefield%20V-285x380.jpg', 5),
+
+new VideoGame(71, 'Auto Chess', 90700, 'https://static-cdn.jtvnw.net/ttv-boxart/Auto%20Chess-285x380.jpg', 6),
+new VideoGame(72, 'Warcraft III: The Frozen Theft', 12300,
+'https://static-cdn.jtvnw.net/ttv-boxart/Warcraft%20III:%20The%20Frozen%20Throne-285x380.jpg', 6),
+new VideoGame(73, 'Anno 1800', 223400, 'https://static-cdn.jtvnw.net/ttv-boxart/Anno%201800-285x380.jpg', 6),
+new VideoGame(74, 'StarCraft II', 11200, 'https://static-cdn.jtvnw.net/ttv-boxart/StarCraft%20II-285x380.jpg', 6),
+new VideoGame(75, 'Slay the Spire', 145600, 'https://static-cdn.jtvnw.net/ttv-boxart/Slay%20the%20Spire-285x380.jpg', 6),
+new VideoGame(76, 'Super Seducer 2', 17800, 'https://static-cdn.jtvnw.net/ttv-boxart/Super%20Seducer%202-285x380.jpg', 6),
+new VideoGame(77, 'Chess', 12100, 'https://static-cdn.jtvnw.net/ttv-boxart/Chess-285x380.jpg', 6),
+new VideoGame(78, 'Clash Royale', 18990, 'https://static-cdn.jtvnw.net/ttv-boxart/Clash%20Royale-285x380.jpg', 6),
+new VideoGame(79, 'RimWorld', 98700, 'https://static-cdn.jtvnw.net/ttv-boxart/RimWorld-285x380.jpg', 6),
+new VideoGame(80, 'Diablo III: Reaper of Souls', 86300,
+'https://static-cdn.jtvnw.net/ttv-boxart/Diablo%20III:%20Reaper%20of%20Souls-285x380.jpg', 6),
+new VideoGame(81, 'Total War: Warhammer II', 86400,
+'https://static-cdn.jtvnw.net/ttv-boxart/Total%20War:%20Warhammer%20II-285x380.jpg', 6)
 ];
 
 private categories: Category[];
 updateCategories: Subject<Category[]>;
 private points = 0;
-updatePoints = new Subject<number>();
-gamesplayed: Partida[];
+updatePoints = new Subject<number>(); 
+gamesplayed: Partida[]; 
 updateGamePlayed = new Subject<Partida[]>();
 private lastId = 1;
 private sameCategoryGames: VideoGame[] = [];
@@ -94,13 +172,15 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
           // Ocurrió un error
           alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
       } else {
-           console.log(xhr.responseText); // Significa que fue existoso
+           console.log('added successfully'); // Significa que fue existoso
       }
   };
   this.updateGamePlayed.next(this.gamesplayed.slice());
   }
 
   updateGame(id, userid, score) {
+    this.notificarCambiosGames();
+
     console.log('datos entry', id, score, 'juegos', this.gamesplayed);
     let pos = this.gamesplayed.findIndex(ga => ga.game_id === id );
     console.log('posicion: ', pos);
@@ -177,9 +257,14 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
     return null;
   }
 
+  notificarCambiosGames(){
+    this.updateGamePlayed.next(this.gamesplayed.slice());
+  }
+
   getGames(id) {
     let pos = this.gamesplayed.findIndex(ga => ga.game_id == id );
     let cat = this.gamesplayed[pos].category_id;
+    console.log('game index: ', pos, 'categoria: ', cat);
     for (let i = 0; i < this.games.length; i++) {
       if (this.games[i].category_id == cat) {
         this.sameCategoryGames.push(this.games[i]);

@@ -31,7 +31,8 @@ export class GameplayComponent implements OnInit {
   constructor(private authService: AuthService, private gService: GameService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.gService.leerJSON();
+    // this.gService.leerJSON();
+    this.gService.notificarCambiosGames();
 
     // checa si esta loggeado para poder jugar
     this.logged = this.authService.isAuthehticated();
@@ -105,12 +106,13 @@ export class GameplayComponent implements OnInit {
       this.gService.leerCategorias();
 
      }
-     if(this.gService.gamesplayed.findIndex(g => g.game_id == this.gid)){
+     if (this.gService.gamesplayed.findIndex(g => g.game_id == this.gid)){
+       console.log('encontrado');
       this.gService.updateGame(this.gid, this.user.id, this.points);
-     } else{
+     } else {
       this.readg = this.gService.updateGamePlayed.subscribe((rg: Partida[]) => {
-        this.gService.updateGame(this.gid, this.user.id, this.points);
         console.log('ACTUALIZADO', rg);
+        this.gService.updateGame(this.gid, this.user.id, this.points);
       });
      }
     
