@@ -80,6 +80,7 @@ export class HeaderComponent implements OnInit {
   logout(){
     this.authService.logout();
     this.logged=this.authService.isAuthehticated();
+    this.router.navigate(['/']);
   }
   goToProfile(username:string){
     this.formMainSearch.value.search='';
