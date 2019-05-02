@@ -16,6 +16,9 @@ export class GameoverComponent implements OnInit {
   readg: Subscription;
 
   constructor(private gService: GameService, private router: Router, private route: ActivatedRoute) { }
+// INSTALAR ESTO 
+// npm i -S @ngx-share/core @ngx-share/button @ngx-share/buttons @angular/cdk
+// npm i -S @fortawesome/fontawesome-svg-core @fortawesome/angular-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons
 
   ngOnInit() {
     this.gService.leerJSON();

@@ -6,6 +6,7 @@ import { UsuarioService } from '../../services/usuarios/usuario.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Follower } from '../../class/Follower';
+import { ProfileService } from '../../services/profile/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +15,7 @@ import { Follower } from '../../class/Follower';
 })
 export class ProfileComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,
+    private profService: ProfileService,
     private authService: AuthService, private usuarioService: UsuarioService,
     private location: Location) { }
   user: User;
@@ -21,6 +23,8 @@ export class ProfileComponent implements OnInit {
   aparam: string;
   userChangeSub: Subscription;
   following:boolean=false;
+  owner: boolean;
+
   ngOnInit() {
     /*console.log('params',this.route.snapshot.params);
     console.log('params',this.route.snapshot.url);
@@ -34,8 +38,10 @@ export class ProfileComponent implements OnInit {
       this.route.params.subscribe((params) => {
         if (params.username) {
           this.profile = this.usuarioService.findUserbyUsername(params.username);
+          this.profService.currentUserProfile(this.profile);
           this.following=false;
           this.checkFollowing();
+          this.isHisProfile();
         }
       });
     } else {
@@ -45,8 +51,10 @@ export class ProfileComponent implements OnInit {
           this.route.params.subscribe((params) => {
             if (params.username) {
               this.profile = this.usuarioService.findUserbyUsername(params.username);
+              this.profService.currentUserProfile(this.profile);
               this.following=false;
               this.checkFollowing();
+              this.isHisProfile();
             }
           });
         }
@@ -60,11 +68,14 @@ export class ProfileComponent implements OnInit {
   isHisProfile() {
     if (this.authService.isAuthehticated()) {
       if (this.authService.user.username === this.profile.username) {
+        this.profService.setOwner(true);
         return true;
       } else {
+        this.profService.setOwner(false);
         return false;
       }
     } else {
+      this.profService.setOwner(false);
       return false;
     }
   }

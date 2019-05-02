@@ -29,18 +29,22 @@ export class GamesinprogressComponent implements OnInit {
   r_option = 0;
 
   //estos arreglos simulan el servicio
-  private srcgames: Partida[] = [
-    new Partida(1, 1, 1, 0, 0, 3, 0, 0, 1),
-    new Partida(4, 3, 3, 0, 0, 2, 0, 0, 1),
-    new Partida(2, 2, 1, 0, 0, 3, 0, 0, 1),
-    new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0)
-  ];
+  // private srcgames: Partida[] = [
+  //   new Partida(1, 1, 1, 0, 0, 3, 0, 0, 1),
+  //   new Partida(4, 3, 3, 0, 0, 2, 0, 0, 1),
+  //   new Partida(2, 2, 1, 0, 0, 3, 0, 0, 1),
+  //   new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0)
+  // ];
+ private srcgames: Partida[] = [];
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
     private auth: AuthService) { }
 
   ngOnInit() {
+    this.gService.leerJSON();
     this.user = this.auth.user;
+    //this.gService.getGamesPlayed();
+    //ALTOAQUI
     if (this.usuarioService.getUsers()) {
       console.log('ENTRÓ AL IF');
       this.allusers = this.usuarioService.getUsers();
@@ -60,6 +64,9 @@ export class GamesinprogressComponent implements OnInit {
         }
       );
     }
+    this.gService.notificarCambiosGames();
+    this.srcgames = this.gService.getGamesPlayed();
+    console.log('partidas check:', this.srcgames);
     this.allcategories = this.gService.getCategories();
     console.log('Categorias: ', this.allcategories);
     this.allgames = this.srcgames;

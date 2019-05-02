@@ -22,6 +22,8 @@ import { GamesPlayedComponent } from './components/profile/games-played/games-pl
 import { AppRoutingModule } from './app-routing.module';
 import { SettingsComponent } from './components/profile/settings/settings/settings.component';
 import { GamesinprogressComponent } from './components/profile/gamesinprogress/gamesinprogress/gamesinprogress.component';
+import { ShareButtonsModule } from '@ngx-share/buttons';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { GamesinprogressComponent } from './components/profile/gamesinprogress/g
     ChallengeListComponent,
     GamesPlayedComponent,
     SettingsComponent,
-    GamesinprogressComponent
+    GamesinprogressComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { GamesinprogressComponent } from './components/profile/gamesinprogress/g
     NgbModule,
     NgxPaginationModule,
     BsDropdownModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ShareButtonsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
