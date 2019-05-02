@@ -36,3 +36,7 @@ label {
   border-radius: 10px;
   margin-bottom: 15px;
 }
+
+h5 {
+  font-family: 'Exo', sans-serif;
+}
