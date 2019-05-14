@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { User } from '../../class/User';
 import { HttpClient } from '@angular/common/http';
 import { Follower } from '../../class/Follower';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,32 @@ export class UsuarioService {
   private followersJSON = 'https://api.myjson.com/bins/b3u6w';
   // leerDatosDelJSON();
   leerFollowers(){
-    this.httpClient.get(this.followersJSON).subscribe((data:Follower[]) => {
+    console.log('LEYENDO FOLLOWERS...');
+    this.httpClient.get(environment.apiUrl+'api/v1/followers/getAll').subscribe((data:Follower[]) => {
+      if(data){
+        this.all_followers=data;
+        console.log('READING ALL FOLLOWERS',this.all_followers);
+      }
+      },error => {
+        console.log('Error',error);
+      });
+
+    /*this.httpClient.get(this.followersJSON).subscribe((data:Follower[]) => {
      this.all_followers=data;
      console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
-    });
+    });*/
+
   }
+
+  update_follower(follower:Follower){
+    this.httpClient.put(environment.apiUrl+'api/v1/user/follow',follower).subscribe((data:Follower[]) => {
+      console.log('PUT FOLLOWER',data);
+      this.all_followers=data;
+      console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
+     });
+  }
+
   replaceAllFollowersFile(all_followers){
-    console.log('REPLACING JSON');
     this.httpClient.put(this.followersJSON,all_followers).subscribe((data:Follower[]) => {
       this.all_followers=data;
       console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
@@ -37,16 +57,27 @@ export class UsuarioService {
     return this.users;
   }
   getAllFollowers():Follower[]{
+    console.log('FOLLOWERS',this.all_followers);
     return this.all_followers;
   }
   async leerDatosDelJSON() {
-    const response = await fetch(this.urlJSON);
+    this.httpClient.get(environment.apiUrl+'api/v1/users/getAll').subscribe((data:User[]) => {
+        if(data){
+          this.users=data;
+          this.usersChange.next(this.users.slice());
+          this.lastId = this.users.length + 1;
+          this.leerFollowers();
+          //console.log('===All users loaded',data);
+          //console.log('===USERS',this.users);
+        }
+     },error => {
+       console.log('Error',error);
+    });
+    /*const response = await fetch(this.urlJSON);
     if (response.status != 200) { return []; }
     const arreglo = await response.json();
-    this.users = arreglo.slice();
-    this.usersChange.next(this.users.slice());
-    this.lastId = this.users.length + 1;
-    this.leerFollowers();
+    this.users = arreglo.slice();*/
+    
   }
   getNextId(): number {
     return this.lastId;
@@ -57,29 +88,35 @@ export class UsuarioService {
     }
     return this.users;
   }
+  pushUser(user:User){
+    this.users.push(user);
+  }
   createUser(user: User) {
-    console.log('Usuario a crear', user);
+    /*console.log('Usuario a crear', user);
     this.users.push(user);
     console.log('USUARIOS', this.users);
-    // 1. Crear XMLHttpRequest object
     const xhr = new XMLHttpRequest();
-    // 2. Configurar:  PUT actualizar archivo
     xhr.open('PUT', this.urlJSON);
-    // 3. indicar tipo de datos JSON
     xhr.setRequestHeader('Content-Type', 'application/json');
-    // 4. Enviar solicitud a la red
     xhr.send(JSON.stringify(this.users));
-    // 5. Una vez recibida la respuesta del servidor
     xhr.onload = function () {
       if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP
-        // Ocurrió un error
         alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
       } else {
         console.log(xhr.responseText); // Significa que fue existoso
       }
-    };
-    this.usersChange.next(this.users.slice());
+    };*/
+    /*this.httpClient.post(environment.apiUrl+'/api/v1/signUp',user).subscribe((data) => {
+      this.users.push(data['user']);
+      this.usersChange.next(this.users.slice());
+      this.authService.login(new_user);
+     },error => {
+      console.log('Error',error);
+   });*/
+    
   }
+
+
   findUserbyUsername(username:string){
     /*if(this.users==undefined){
       await this.leerDatosDelJSON();
