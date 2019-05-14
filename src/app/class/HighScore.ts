@@ -6,7 +6,7 @@ export class HighScore{
     carrera: string;
     sexo: string;*/
     constructor(
-        public id_usuario: number,
+        public username: String,
         public score: number,
         ) {
         }
