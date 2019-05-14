@@ -106,7 +106,7 @@ export class ProfileComponent implements OnInit {
       ///Create record
       let new_follower:Follower=new Follower(all_followers.length+1,this.authService.user.id,[this.profile.id]);
       this.usuarioService.update_follower(new_follower);
-      //all_followers.push(new_follower);
+      all_followers.push(new_follower);
       //this.usuarioService.replaceAllFollowersFile(all_followers);
       this.following=true;
     }
