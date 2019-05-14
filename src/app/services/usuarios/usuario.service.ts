@@ -17,8 +17,10 @@ export class UsuarioService {
   private all_followers:Follower[];
   usersChange = new Subject<User[]>();
   private lastId = 1;
-  //private urlJSON = 'https://api.myjson.com/bins/wse9o';
-  //private followersJSON = 'https://api.myjson.com/bins/b3u6w';
+  private lives = 0;
+  updateLives = new Subject<number>();
+  private urlJSON = 'https://api.myjson.com/bins/wse9o';
+  private followersJSON = 'https://api.myjson.com/bins/b3u6w';
   // leerDatosDelJSON();
   leerFollowers(){
     console.log('LEYENDO FOLLOWERS...');
@@ -146,4 +148,21 @@ export class UsuarioService {
     return users_found;
   }
 
+  resetLives() {
+    console.log('reset lives');
+    this.lives = 3;
+  }
+
+  private getLivesUpdate() {
+    this.updateLives.next(this.lives);
+  }
+
+  loseLive() {
+    this.lives --;
+    this.getLivesUpdate();
+  }
+
+  getLives(){
+    return this.lives;
+  }
 }
