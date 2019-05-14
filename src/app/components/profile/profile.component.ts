@@ -99,15 +99,16 @@ export class ProfileComponent implements OnInit {
     if(index>=0){
       //Update record
       all_followers[index].followers.push(this.profile.id);
-      this.usuarioService.update_follower(all_followers[index]);
+      //this.usuarioService.update_follower(all_followers[index]);
+      this.authService.update_follower(all_followers[index]);
       //this.usuarioService.replaceAllFollowersFile(all_followers);
       this.following=true;
     }else{
       ///Create record
       let new_follower:Follower=new Follower(all_followers.length+1,this.authService.user.id,[this.profile.id]);
-      this.usuarioService.update_follower(new_follower);
+      //this.usuarioService.update_follower(new_follower);
+      this.authService.update_follower(new_follower);
       all_followers.push(new_follower);
-      //this.usuarioService.replaceAllFollowersFile(all_followers);
       this.following=true;
     }
     this.authService.get_my_followers();
@@ -119,8 +120,8 @@ export class ProfileComponent implements OnInit {
     });
     let postition_following=all_followers[index].followers.findIndex(item=>item==this.profile.id);
     all_followers[index].followers.splice(postition_following,1);
-    this.usuarioService.update_follower(all_followers[index]);
-    //this.usuarioService.replaceAllFollowersFile(all_followers);
+    //this.usuarioService.update_follower(all_followers[index]);
+    this.authService.update_follower(all_followers[index]);
     this.following=false;
     this.authService.get_my_followers();
   }

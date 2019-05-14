@@ -16,6 +16,7 @@ import { GameService } from '../../services/games/higher-lower/game.service';
 export class HeaderComponent implements OnInit {
   logged:boolean=false;
   loginStatus: Subscription;
+  logoutStatus: Subscription;
   formMainSearch:FormGroup;
   user:User;
   userSearchResults:User[];
@@ -33,6 +34,12 @@ export class HeaderComponent implements OnInit {
         //this.usuarioService.get_my_followers();
         //console.log('FOLLOWERS2',this.usuarioService.get_my_followers());
     });
+    this.logoutStatus=this.authService.logoutChange.subscribe((logout:boolean)=>{
+      ///IF LOGOUT///
+      this.logged=logout;
+    });
+
+
     this.formMainSearch = new FormGroup({
       search: new FormControl(''),
     });
