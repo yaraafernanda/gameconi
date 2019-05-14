@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
         return true;
       }
     });
-    console.log('ENTRO ACA');
+    //console.log('ENTRO ACA');
     if (index_username >= 0) {
       // YA EXISTE ESE USERNAME
       this.errMsg = 'Sorry that username has been already taken';
@@ -69,10 +69,14 @@ export class SignupComponent implements OnInit {
         this.formSignUp.value.password,
         'https://api.adorable.io/avatars/285/' + image + '.png'
       );
-      this.usuarioService.createUser(new_user);
+      this.authService.createUser(new_user);
+      //this.usuarioService.createUser(new_user);
       /// AUTH USER AND REDIRECT TO PROFILE////
-      this.authService.login(new_user);
-      this.router.navigate(['/profile', new_user.username]);
+
+      //this.authService.login(new_user);
+
+
+      //this.router.navigate(['/profile', new_user.username]);
     }
     // this.formSignUp.value.username;
   }

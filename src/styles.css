@@ -4,6 +4,9 @@
 body{
     background-color:#3D2C73 !important;
 }
+.btn-group-toggle{
+  flex-wrap: wrap;
+}
 .button{
   cursor: pointer;
 }
