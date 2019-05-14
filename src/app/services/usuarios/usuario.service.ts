@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { User } from '../../class/User';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Follower } from '../../class/Follower';
 import { environment } from '../../../environments/environment.prod';
 
@@ -40,20 +40,24 @@ export class UsuarioService {
 
   }
 
-  update_follower(follower:Follower){
+  updateAllFollowers(data:Follower[]){
+    this.all_followers=data;
+    console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
+  }
+  /*update_follower(follower:Follower){
     this.httpClient.put(environment.apiUrl+'api/v1/user/follow',follower).subscribe((data:Follower[]) => {
       console.log('PUT FOLLOWER',data);
       this.all_followers=data;
       console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
      });
-  }
+  }*/
 
-  replaceAllFollowersFile(all_followers){
+  /*replaceAllFollowersFile(all_followers){
     this.httpClient.put(this.followersJSON,all_followers).subscribe((data:Follower[]) => {
       this.all_followers=data;
       console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
      });
-  }
+  }*/
   
   getAllUsers(){
     return this.users;
