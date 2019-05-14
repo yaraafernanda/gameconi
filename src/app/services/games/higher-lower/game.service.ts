@@ -131,6 +131,7 @@ gamesplayed: Partida[];
 updateGamePlayed = new Subject<Partida[]>();
 private lastId = 1;
 private sameCategoryGames: VideoGame[] = [];
+aux: number;
 
 constructor(private httpClient: HttpClient) { }
 
@@ -178,7 +179,7 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
   this.updateGamePlayed.next(this.gamesplayed.slice());
   }
 
-  updateGame(id, userid, score) {
+  updateGame(id, userid, score, username, date) {
     this.notificarCambiosGames();
 
     console.log('datos entry', id, score, 'juegos', this.gamesplayed);
@@ -188,10 +189,12 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
       if (userid == this.gamesplayed[pos].user_id) {
         this.gamesplayed[pos].score = score;
         this.gamesplayed[pos].turn_user_id = this.gamesplayed[pos].opponent_id;
+        this.gamesplayed[pos].createDate = date;
       } else {
         if (userid == this.gamesplayed[pos].opponent_id) {
           this.gamesplayed[pos].opponent_score = score;
           this.gamesplayed[pos].game_over = 1;
+          this.gamesplayed[pos].answerDate = date;
           if (this.gamesplayed[pos].opponent_score > this.gamesplayed[pos].score) {
             this.gamesplayed[pos].winner_id = this.gamesplayed[pos].opponent_id;
           } else {
@@ -199,7 +202,7 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
           }
         }
       }
-     this.updateHighScore(score,pos, userid);
+     this.updateHighScore(score,pos, username);
      let xhr = new XMLHttpRequest();
     xhr.open('PUT', this.urlJSON);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -219,17 +222,18 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
     }
   }
 
-  updateHighScore(score, pos, id) {
+  updateHighScore(score, pos, username) {
     let cat= this.categories.findIndex(c => c.id == this.gamesplayed[pos].category_id);
     console.log('categoria que etamos actualizando hs: ', cat);
-    let hs = this.categories[cat].highscore.findIndex(h => h.id_usuario === id);
+
+    let hs = this.categories[cat].highscore.findIndex(h => h.username === username);
 
     if (hs >= 0) {
       if (score > this.categories[cat].highscore[hs].score) {
         this.categories[cat].highscore[hs].score = score;
       }
     } else {
-      this.categories[cat].highscore.push(new HighScore(id, score));
+      this.categories[cat].highscore.push(new HighScore(username, score));
     }
     // ordenarlo
     for (let i = 1; i < this.categories[cat].highscore.length; i++) {
@@ -262,6 +266,7 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
   }
 
   getGames(id) {
+    this.sameCategoryGames.splice(0, this.sameCategoryGames.length);
     let pos = this.gamesplayed.findIndex(ga => ga.game_id == id );
     let cat = this.gamesplayed[pos].category_id;
     console.log('game index: ', pos, 'categoria: ', cat);
@@ -276,10 +281,11 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
   }
 
   getcurrentGame() {
-    console.log('samecategory: ', this.sameCategoryGames);
+    this.aux ++;
+    console.log('samecategory: ', this.sameCategoryGames, 'aux: ', this.aux,);
 
     if (this.points + 1 < this.sameCategoryGames.length) {
-      return this.sameCategoryGames.slice(this.points, this.points + 2);
+      return this.sameCategoryGames.slice(this.aux, this.aux + 2);
     } else {
       return Object.assign({});
     }
@@ -291,6 +297,7 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
 
   reset() {
     this.points = 0;
+    this.aux =0;
   }
 
   sumPoints() {
@@ -298,6 +305,8 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
     this.getPointsUpdate();
   }
 
-
-
+  getInitialScore()
+{
+  return this.points;
+}
 }

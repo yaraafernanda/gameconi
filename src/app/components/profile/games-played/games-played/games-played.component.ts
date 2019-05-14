@@ -26,11 +26,37 @@ export class GamesPlayedComponent implements OnInit {
 
   // //provisional
   private srcgames: Partida[] = [
-     new Partida(1, 1, 2, 3, 5, 3, 0, 1, 0),
-     new Partida(2, 2, 1, 2, 7, 1, 0, 0, 0),
-     new Partida(3, 3, 3, 3, 5, 1, 0, 1, 0)
-   ];
+    new Partida(1, 1, 1, 0, 0, 3, 1, 0, 0, new Date(), new Date()), // alvaro me reta
+    new Partida(4, 3, 3, 0, 0, 2, 0, 0, 0,new Date(), new Date()), // reto a mariana
+    new Partida(2, 2, 1, 0, 0, 3, 1, 0, 0,new Date(), new Date()), // alvaro me reta
+    new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0,new Date(), new Date())
+  ]; 
+
   //private srcgames: Partida[] = [];
+    /*
+    constructor(
+        public game_id: number,
+        public category_id: number,
+        public user_id: number,
+        public score: number,
+        public opponent_score: number,
+        public opponent_id: number,
+        public turn_user_id: number,
+        public game_over: number,
+        public winner_id: number,
+           public createDate: Date,
+        public answerDate: Date,
+        public lives_user: number,
+        public lives_opponent: number) {
+        }
+}
+  private srcgames: Partida[] = [
+     new Partida(1, 1, 1, 0, 0, 3, 1, 0, 0), // alvaro me reta
+     new Partida(4, 3, 3, 0, 0, 2, 0, 0, 0), // reto a mariana
+     new Partida(2, 2, 1, 0, 0, 3, 1, 0, 0), // alvaro me reta
+     new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0)
+   ];
+  */
 
   mygames: CurrentGame[] = [];
   user: User;
@@ -117,7 +143,7 @@ export class GamesPlayedComponent implements OnInit {
     //obtener el id del perfil visitado en el arreglo de usuarios 
       const indexProfileV = this.allusers.findIndex(item => item.id == this.profileV.id);
       this.allcategories.forEach(item => {
-        if (item.highscore.findIndex(h => h.id_usuario === this.allusers[indexProfileV].id)) {
+        if (item.highscore.findIndex(h => h.username === this.allusers[indexProfileV].username)) {
           this.mycategories.push(item);
         }
       });

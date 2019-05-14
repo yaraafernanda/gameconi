@@ -6,6 +6,7 @@ import { VideoGame } from '../../class/VideoGame';
 import { User } from '../../class/User';
 import { Partida } from '../../class/Partida';
 import { AuthService } from '../../services/auth.service';
+import { UsuarioService } from '../../services/usuarios/usuario.service';
 
 @Component({
   selector: 'app-gameplay',
@@ -20,6 +21,7 @@ export class GameplayComponent implements OnInit {
   game1: VideoGame;
   game2: VideoGame;
   points: number;
+  lives: number;
   gid:number;
   cid: number;
 
@@ -27,13 +29,18 @@ export class GameplayComponent implements OnInit {
   subscript: Subscription;
   readg: Subscription;
   readc: Subscription;
+  liveUpdated: Subscription;
+  date: Date;
 
-  constructor(private authService: AuthService, private gService: GameService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private uService: UsuarioService,
+    private gService: GameService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     // this.gService.leerJSON();
     this.gService.notificarCambiosGames();
 
+    //hora y fecha de inicio juego
+    this.date = new Date();
     // checa si esta loggeado para poder jugar
     this.logged = this.authService.isAuthehticated();
     this.user =  this.authService.user;
@@ -43,6 +50,9 @@ export class GameplayComponent implements OnInit {
 
     // toma los datos de los juegos
     this.gService.reset();
+    this.uService.resetLives();
+    this.lives = this.uService.getLives();
+    this.points = this.gService.getInitialScore();
     // get same category videogames
     if (this.gService.gamesplayed) {
       this.gService.getGames(this.gid);
@@ -54,15 +64,18 @@ export class GameplayComponent implements OnInit {
 
       });
     }
+
     this.getCurrentGamePlay();
 
     this.subscript = this.gService.updatePoints.subscribe(
       (n: number) => { this.points = n; }
     );
+    this.liveUpdated = this.uService.updateLives.subscribe((n: number) => {this.lives = n; });
     }
 
 
   getCurrentGamePlay() {
+
     this.games = this.gService.getcurrentGame();
     if (this.games.length === undefined) {
       this.endGame();
@@ -80,7 +93,14 @@ export class GameplayComponent implements OnInit {
       //to get the nex game
       this.getCurrentGamePlay();
     } else {
-      this.endGame();
+      if(this.lives >= 1) {
+        this.uService.loseLive();
+        console.log('incorrecta', this.lives);
+        this.getCurrentGamePlay();
+      }
+      else{
+        this.endGame();
+      }
     }
   }
 
@@ -91,7 +111,14 @@ export class GameplayComponent implements OnInit {
       //to get the nex game
       this.getCurrentGamePlay();
     } else {
-      this.endGame();
+      if(this.lives >= 1) {
+        this.uService.loseLive();
+        console.log('incorrecta', this.lives);
+        this.getCurrentGamePlay();
+      }
+      else{
+        this.endGame();
+      }
     }
   }
   endGame() {
@@ -108,14 +135,13 @@ export class GameplayComponent implements OnInit {
      }
      if (this.gService.gamesplayed.findIndex(g => g.game_id == this.gid)){
        console.log('encontrado');
-      this.gService.updateGame(this.gid, this.user.id, this.points);
+      this.gService.updateGame(this.gid, this.user.id, this.points, this.user.username, this.date);
      } else {
       this.readg = this.gService.updateGamePlayed.subscribe((rg: Partida[]) => {
         console.log('ACTUALIZADO', rg);
-        this.gService.updateGame(this.gid, this.user.id, this.points);
+        this.gService.updateGame(this.gid, this.user.id, this.points, this.user.username, this.date );
       });
-     }
-    
+     } 
 
     this.router.navigate(['gameover'], {relativeTo: this.route});
 }

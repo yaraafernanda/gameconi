@@ -106,9 +106,11 @@ export class GameComponent implements OnInit {
     this.userSelected = user;
     console.log('USER SELECTeD', user);
   }
+
+ 
   goToGameplay() {
     this.partida = new Partida(this.gService.getnextId(), this.r_category,
-    this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, 0);
+    this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, 0, new Date(), new Date() );
     console.log('t:', this.partida.user_id, this.partida.opponent_id, this.partida.category_id);
 
     this.gService.addGamePlayed(this.partida);
