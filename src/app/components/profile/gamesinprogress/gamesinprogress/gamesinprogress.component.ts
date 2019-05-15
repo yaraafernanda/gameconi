@@ -7,7 +7,6 @@ import { User } from '../../../../class/User';
 import { Subscription, Subject } from 'rxjs';
 import { Category } from '../../../../class/Category';
 import { CurrentGame } from '../../../../class/CurrentGame';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gamesinprogress',
@@ -27,15 +26,18 @@ export class GamesinprogressComponent implements OnInit {
   allusers: User[];
   user: User;
   r_option = 0;
+  turn: number;
 
-  //estos arreglos simulan el servicio
-  // private srcgames: Partida[] = [
-  //   new Partida(1, 1, 1, 0, 0, 3, 0, 0, 1),
-  //   new Partida(4, 3, 3, 0, 0, 2, 0, 0, 1),
-  //   new Partida(2, 2, 1, 0, 0, 3, 0, 0, 1),
-  //   new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0)
-  // ];
- private srcgames: Partida[] = [];
+  cPage = 1;
+
+  // estos arreglos simulan el servicio
+   private srcgames: Partida[] = [
+     new Partida(1, 1, 1, 0, 0, 3, 1, 0, 0), // alvaro me reta
+     new Partida(4, 3, 3, 0, 0, 2, 0, 0, 0), // reto a mariana
+     new Partida(2, 2, 1, 0, 0, 3, 1, 0, 0), // alvaro me reta
+     new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0)
+   ];
+ // private srcgames: Partida[] = [];
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
     private auth: AuthService) { }
@@ -64,8 +66,8 @@ export class GamesinprogressComponent implements OnInit {
         }
       );
     }
-    this.gService.notificarCambiosGames();
-    this.srcgames = this.gService.getGamesPlayed();
+    //this.gService.notificarCambiosGames();
+    //this.srcgames = this.gService.getGamesPlayed();
     console.log('partidas check:', this.srcgames);
     this.allcategories = this.gService.getCategories();
     console.log('Categorias: ', this.allcategories);
@@ -87,6 +89,7 @@ export class GamesinprogressComponent implements OnInit {
             this.allcategories[indexCat].name, this.allcategories[indexCat].image,
             this.allusers[indexOpponent].username, 0, 0, 0);
           this.mygames.push(newCurrentG);
+          console.log('YO RETE', this.mygames);
         }
       });
     }
@@ -98,8 +101,9 @@ export class GamesinprogressComponent implements OnInit {
           const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.user_id);
           const newCurrentG = new CurrentGame(item.game_id,
             this.allcategories[indexCat].name, this.allcategories[indexCat].image,
-            this.allusers[indexOpponent].username, 0, 0, 0);
+            this.allusers[indexOpponent].username, 1, 0, 0);
           this.mygames.push(newCurrentG);
+          console.log('ME RETARON', this.mygames);
         }
       });
     }

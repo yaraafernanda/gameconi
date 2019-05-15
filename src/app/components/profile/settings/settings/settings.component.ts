@@ -56,6 +56,7 @@ export class SettingsComponent implements OnInit {
     });
     if (index >= 0) {
       this.errMsg = 'That username is already taken';
+      return;
     } else {
       index = this.users.findIndex(item => {
         if (this.auth.isAuthehticated) {
@@ -102,6 +103,7 @@ export class SettingsComponent implements OnInit {
   updatePassword() {
     console.log('Usuario a modificar', this.user);
     this.infMsg = '';
+    this.updateMsg = '';
     // obtener index de usuario loggeado
     const index = this.users.findIndex(item => {
       if (this.auth.isAuthehticated) {

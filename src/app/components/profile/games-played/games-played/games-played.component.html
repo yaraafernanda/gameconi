@@ -1,68 +1,83 @@
 <div class="container">
   <div class="container" *ngIf="!owner">
-    <div *ngFor="let item of mycategories" class="card mb-3" id="gamePlayedCard">
-      <div class="row">
-        <div class="col">
-          <img
-            src="{{item.image}}"
-            class="card-img" alt="...">
-        </div>
-        <div class="col" id="col2">
-          <div class="card-body">
-            <h5 class="card-title">{{item.name}}</h5>
-            <h6 class="card-text">Highscore Table</h6>
-            <table class="table table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">Username</th>
-                  <th scope="col">Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>yaraafernanda</td>
-                  <td>468</td>
-                </tr>
-                <tr>
-                  <td>thornton</td>
-                  <td>274</td>
-                </tr>
-                <tr>
-                  <td>littleguy</td>
-                  <td>247</td>
-                </tr>
-              </tbody>
-            </table>
+    <ul id="catPagination">
+      <li *ngFor="let item of mycategories | paginate: { itemsPerPage: 1, currentPage: actualPage}">
+        <div class="card mb-3" id="gamePlayedCard">
+          <div class="row">
+            <div class="col">
+              <img src="{{item.image}}" class="card-img" alt="...">
+            </div>
+            <div class="col" id="col2">
+              <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <h6 class="card-text">Highscore Table</h6>
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col">Username</th>
+                      <th scope="col">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>yaraafernanda</td>
+                      <td>{{item.highscore[0].score}}</td>
+                    </tr>
+                    <tr>
+                      <td>alvarocardenas</td>
+                      <td>{{item.highscore[1].score}}</td>
+                    </tr>
+                    <tr>
+                      <td>marianasalas</td>
+                      <td>{{item.highscore[2].score}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
+    <pagination-controls class="gc_pagination" (pageChange)="actualPage = $event"></pagination-controls>
   </div>
 
-  <div class="row" *ngIf="owner">
-    <div *ngFor="let item of mygames" class="col-sm-6" id="gameFinishedCard">
-      <!--Individual Card-->
-      <div class="card text-center border-info">
-        <div *ngIf="item.user_score > item.opponent_score" class="card-header">
-          You won
-        </div>
-        <div *ngIf="item.opponent_score > item.user_score" class="card-header">
-          You lost
-        </div>
-        <img src="{{item.category_img}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{item.category_name}}</h5>
-          <p class="card-text">You played vs {{item.opponent_name}}</p>
-          <span>
-            <div class="col">
-              <p class="card-text">Your score: {{item.user_score}}</p>
-            </div>
-            <div class="col">
-              <p class="card-text">{{item.opponent_name}}'s score: {{item.opponent_score}}</p>
-            </div>
-          </span>
-        </div>
+  <div class="row" *ngIf="owner" id="ownerimg">
+
+    <div class="container">
+      <div class="col-md-4">
+        AQUÍ VA EL FILTRO
       </div>
     </div>
+
+    <div class="col-sm-6" id="gameFinishedCard">
+      <ul id="catPagination">
+        <li *ngFor="let item of mygames | paginate: { itemsPerPage: 2, currentPage: cPage}">
+          <!--Individual Card-->
+          <div class="card text-center border-info">
+            <div *ngIf="item.user_score > item.opponent_score" class="card-header">
+              You won
+            </div>
+            <div *ngIf="item.opponent_score > item.user_score" class="card-header">
+              You lost
+            </div>
+            <img src="{{item.category_img}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.category_name}}</h5>
+              <p class="card-text">You played vs {{item.opponent_name}}</p>
+              <span>
+                <div class="col">
+                  <p class="card-text">Your score: {{item.user_score}}</p>
+                </div>
+                <div class="col">
+                  <p class="card-text">{{item.opponent_name}}'s score: {{item.opponent_score}}</p>
+                </div>
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <pagination-controls class="gc_pagination" (pageChange)="cPage = $event"></pagination-controls>
   </div>
 </div>

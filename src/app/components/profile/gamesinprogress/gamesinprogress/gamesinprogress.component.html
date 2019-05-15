@@ -1,5 +1,4 @@
 <!-- Cards -->
-<!-- PADRE -->
 <div class="row">
 
   <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="r_option" style="width: 100%;">
@@ -14,24 +13,28 @@
     </label>
   </div>
 
-  <div *ngFor="let item of mygames" class="col-sm-6">
-    <!--Individual Card-->
-    <div class="card text-center border-info">
-      <div *ngIf="item.turn==1" class="card-header">
-        Your turn
-      </div>
-      <div *ngIf="item.turn==0" class="card-header">
-        Waiting for {{item.opponent_name}} to play
-      </div>
-      <img src="{{item.category_img}}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{item.category_name}}</h5>
-        <p *ngIf="item.turn==1" class="card-text">{{item.opponent_name}} challenged you</p>
-        <p *ngIf="item.turn==0" class="card-text">You challenged {{item.opponent_name}}</p>
-
-        <a *ngIf="item.turn==1" href="/gameplay/{{item.game_id}}" class="btn btn-primary">Jugar</a>
-        <p *ngIf="item.turn==0" id="space"></p>
-      </div>
-    </div>
+  <div class="col-sm-6">
+    <ul id="catPagination">
+      <li *ngFor="let item of mygames | paginate: { itemsPerPage: 2, currentPage: cPage}">
+        <!--Individual Card-->
+        <div class="card text-center border-info">
+          <div *ngIf="item.turn==1" class="card-header">
+            Your turn
+          </div>
+          <div *ngIf="item.turn==0" class="card-header">
+            Waiting for {{item.opponent_name}} to play
+          </div>
+          <img src="{{item.category_img}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{item.category_name}}</h5>
+            <p *ngIf="item.turn==1" class="card-text">{{item.opponent_name}} challenged you</p>
+            <p *ngIf="item.turn==0" class="card-text">You challenged {{item.opponent_name}}</p>
+            <a *ngIf="item.turn==1" href="/gameplay/{{item.game_id}}" class="btn btn-primary">Jugar</a>
+            <p *ngIf="item.turn==0" id="space"></p>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
+  <pagination-controls class="gc_pagination" (pageChange)="cPage = $event"></pagination-controls>
 </div>

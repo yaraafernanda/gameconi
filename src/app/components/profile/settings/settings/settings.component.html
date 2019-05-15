@@ -37,14 +37,14 @@
           <span class="input-group-text" id="basic-addon1">Current password:</span>
         </div>
         <input type="password" class="form-control" id="pass1" placeholder="Type current password"
-        formControlName="password">
+          formControlName="password">
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">New Password:</span>
         </div>
         <input type="password" class="form-control" id="pass2" placeholder="Type new password"
-        formControlName="newpassword">
+          formControlName="newpassword">
       </div>
       <div class="input-group">
         <div class="input-group-prepend">
@@ -56,10 +56,10 @@
       <button class="btn btn-style-1 btn-primary" type="submit" id="pswbtn">Save</button>
     </form>
     <div *ngIf="infMsg!=''" class="alert alert-info" role="alert">
-        {{infMsg}}
-      </div>
-  </div>
-  <div *ngIf="updateMsg!=''" class="alert alert-info" role="alert">
+      {{infMsg}}
+    </div>
+    <div *ngIf="updateMsg!=''" class="alert alert-info" role="alert">
       {{updateMsg}}
     </div>
+  </div>
 </div>

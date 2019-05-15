@@ -32,15 +32,20 @@ export class GamesPlayedComponent implements OnInit {
   user: User;
   allusers: User[] = [];
   allgames: Partida[];
-  allcategories: Category[];
-  mycategories: Category[];
+  allcategories: Category[] = [];
+  mycategories: Category[] = [];
   owner = true;
   profileV: User;
+
+  actualPage = 1;
+  cPage = 1;
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
     private auth: AuthService, private route: ActivatedRoute, private profService: ProfileService) { }
 
   ngOnInit() {
+    console.log('ON INITTTTT');
+    this.gService.leerJSON();
     this.user = this.auth.user;
     if (this.usuarioService.getUsers()) {
       console.log('ENTRÓ AL IF');
@@ -69,12 +74,13 @@ export class GamesPlayedComponent implements OnInit {
     this.profileVisited = this.profService.updateUserVisited.subscribe(
       (profile: User) => {
         this.profileV = profile;
-        console.log(this.profileV);
+        console.log('Perfil visitado: ', this.profileV);
       }
     );
     this.allcategories = this.gService.getCategories();
     console.log('Categorias: ', this.allcategories);
     this.allgames = this.srcgames;
+    //this.fillArrays();
     this.getMyGames();
     this.getCategoriesPlayed();
     console.log('Partidas: ', this.mygames);
@@ -110,11 +116,33 @@ export class GamesPlayedComponent implements OnInit {
   getCategoriesPlayed() {
     console.log('getting my categories...');
     //obtener el id del perfil visitado en el arreglo de usuarios 
-    const indexProfileV = this.allusers.findIndex(item => item.id == this.profileV.id);
-    this.allcategories.forEach(item => {
-      //this.mycategories.push();
-    });
-    //const newCat = new Category();
+
+    if (this.profileV == undefined) {
+      this.allcategories.forEach(item => {
+        if (item.highscore.findIndex(h => h.id_usuario === this.user.id)) {
+          this.mycategories.push(item);
+        }
+      });
+    } else {
+      const indexProfileV = this.allusers.findIndex(item => item.id == this.profileV.id);
+      this.allcategories.forEach(item => {
+        if (item.highscore.findIndex(h => h.id_usuario === this.allusers[indexProfileV].id)) {
+          this.mycategories.push(item);
+        }
+      });
+    }
+
+    console.log('categorias mias', this.mycategories);
+  }
+
+  fillArrays() {
+    console.log('filling arrays...');
+    console.log('owner: ', this.owner);
+    if (this.owner) {
+      this.getMyGames();
+    } else {
+      this.getCategoriesPlayed();
+    }
   }
 
 }

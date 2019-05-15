@@ -39,12 +39,11 @@ td {
 
 #gamePlayedCard img {
   border-radius: 15px;
-  width: auto;
+  width: 400px;
   height: 250px;
 }
 
-
-.row {
+#ownerimg {
   padding: 15px;
 }
 
@@ -52,11 +51,11 @@ td {
   height: 150px;
 }
 
-#gameFinishedCard:hover .card{
+#gameFinishedCard:hover .card {
   box-shadow: 0 30px 70px rgba(0, 0, 0, .2);
 }
 
-#gameFinishedCard .card{
+#gameFinishedCard .card {
   border-radius: 15px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, .1);
   margin-bottom: 20px;
@@ -71,4 +70,17 @@ td {
 
 #space {
   height: 22px;
+}
+
+.gc_pagination {
+  width: 100%;
+  /* its width according to input width */
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  overflow: auto;
+  text-align: center;
+}
+.flex-container {
+  display: flex;
 }
