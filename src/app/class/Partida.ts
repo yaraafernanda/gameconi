@@ -14,6 +14,8 @@ export class Partida {
         public opponent_id: number,
         public turn_user_id: number,
         public game_over: number,
-        public winner_id: number) {
+        public winner_id: number,
+        public createDate: Date,
+        public answerDate: Date) {
         }
 }

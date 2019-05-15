@@ -12,14 +12,18 @@
             {{userSelected.username}}
         </div>
       </div>
-      <button *ngIf="my_followers.length>0" class="btn col-3  btn-lg btn-purple" (click)="open(content)">Select from Following list</button>
-      <button class="btn col-3  btn-lg btn-purple" (click)="randomRival()">Random</button>
+      <div class="row">
+        <button *ngIf="my_followers.length>0" class="btn col-md-6 btn-lg btn-purple" (click)="open(content)">Select from Following list</button>
+        <button class="btn col-md-6  btn-lg btn-purple" (click)="randomRival()">Random</button>
+      </div>
     </div>
     <h3 class="margin-t10">Choose category</h3>
-    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="r_category">
+    <div class="row">
+    <div class="col-md-12 btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="r_category">
         <label *ngFor="let category of gameCategories" ngbButtonLabel class="btn-purple-fill">
           <input ngbButton type="radio" [value]="category.id"> {{category.name}}
         </label>
+    </div>
     </div>
     <div>
         <button (click)="goToGameplay()" [disabled]="!shouldPlay()" type="button" class="btn col-3 btn-primary btn-lg btn-green">

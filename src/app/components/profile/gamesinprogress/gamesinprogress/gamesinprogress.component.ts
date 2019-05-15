@@ -19,7 +19,7 @@ export class GamesinprogressComponent implements OnInit {
   updateGamePlayed = new Subject<Partida[]>();
   userChangeSub: Subscription;
 
-  //estas son las variables oficiales a usar
+  // estas son las variables oficiales a usar
   allgames: Partida[];
   mygames: CurrentGame[] = [];
   allcategories: Category[];
@@ -31,13 +31,12 @@ export class GamesinprogressComponent implements OnInit {
   cPage = 1;
 
   // estos arreglos simulan el servicio
-   private srcgames: Partida[] = [
-     new Partida(1, 1, 1, 0, 0, 3, 1, 0, 0), // alvaro me reta
-     new Partida(4, 3, 3, 0, 0, 2, 0, 0, 0), // reto a mariana
-     new Partida(2, 2, 1, 0, 0, 3, 1, 0, 0), // alvaro me reta
-     new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0)
-   ];
- // private srcgames: Partida[] = [];
+  private srcgames: Partida[] = [
+    new Partida(1, 1, 1, 0, 0, 3, 1, 0, 0, new Date(), new Date()), // alvaro me reta
+    new Partida(4, 3, 3, 0, 0, 2, 0, 0, 0, new Date(), new Date()), // reto a mariana
+    new Partida(2, 2, 1, 0, 0, 3, 1, 0, 0, new Date(), new Date()), // alvaro me reta
+    new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0, new Date(), new Date())
+  ];
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
     private auth: AuthService) { }
@@ -45,8 +44,8 @@ export class GamesinprogressComponent implements OnInit {
   ngOnInit() {
     this.gService.leerJSON();
     this.user = this.auth.user;
-    //this.gService.getGamesPlayed();
-    //ALTOAQUI
+    // this.gService.getGamesPlayed();
+    // ALTOAQUI
     if (this.usuarioService.getUsers()) {
       console.log('ENTRÓ AL IF');
       this.allusers = this.usuarioService.getUsers();
@@ -66,20 +65,23 @@ export class GamesinprogressComponent implements OnInit {
         }
       );
     }
-    //this.gService.notificarCambiosGames();
-    //this.srcgames = this.gService.getGamesPlayed();
+    // this.gService.notificarCambiosGames();
+    // this.srcgames = this.gService.getGamesPlayed();
     console.log('partidas check:', this.srcgames);
     this.allcategories = this.gService.getCategories();
     console.log('Categorias: ', this.allcategories);
     this.allgames = this.srcgames;
     this.getMyGames();
-    console.log('Partidas: ', this.mygames);
+    console.log('partidas check:', this.allgames);
+
+  //  console.log('Partidas: ', this.mygames);
   }
 
   getMyGames() {
     console.log('getting my games...');
     this.mygames.splice(0, this.mygames.length);
-    //yo reté
+
+    // yo reté
     if (this.r_option === 2 || this.r_option === 0) {
       this.allgames.forEach(item => {
         if ((item.user_id === this.user.id) && (item.game_over === 0)) {
@@ -93,9 +95,11 @@ export class GamesinprogressComponent implements OnInit {
         }
       });
     }
-    //me retaron
+    // me retaron
     if (this.r_option === 1 || this.r_option === 0) {
       this.allgames.forEach(item => {
+        console.log('retaron', item.turn_user_id);
+
         if ((item.opponent_id === this.user.id) && (item.game_over === 0)) {
           const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
           const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.user_id);
