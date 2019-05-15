@@ -223,11 +223,14 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
     console.log('posicion: ', pos);
     if (pos >= 0) {
       if (userid == this.gamesplayed[pos].user_id) {
+        console.log('user', userid, this.gamesplayed[pos].user_id);
+
         this.gamesplayed[pos].score = score;
         this.gamesplayed[pos].turn_user_id = this.gamesplayed[pos].opponent_id;
         this.gamesplayed[pos].createDate = date;
       } else {
         if (userid == this.gamesplayed[pos].opponent_id) {
+          console.log('OPPONENT');
           this.gamesplayed[pos].opponent_score = score;
           this.gamesplayed[pos].game_over = 1;
           this.gamesplayed[pos].answerDate = date;
@@ -307,7 +310,12 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
     let index = this.gamesplayed.findIndex(i => i.game_id === id);
     console.log('INDEX:', index);
     if (index >= 0) {
-      return this.gamesplayed[index].score;
+      if(this.gamesplayed[index].game_over == 0){
+        return this.gamesplayed[index].score;
+      }
+      else{
+        return this.gamesplayed[index].opponent_score;
+      }
     }
     return null;
   }
