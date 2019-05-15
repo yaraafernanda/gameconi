@@ -6,7 +6,7 @@ export class User {
     carrera: string;
     sexo: string;*/
     constructor(
-        public id: number,
+        public id: String,
         public username: string,
         public email: string,
         public password: string,

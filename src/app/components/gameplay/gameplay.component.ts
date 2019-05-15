@@ -22,15 +22,17 @@ export class GameplayComponent implements OnInit {
   game2: VideoGame;
   points: number;
   lives: number;
-  gid:number;
+  gid:String;
   cid: number;
 
+  gamescat: Subscription;
   loginS: Subscription;
   subscript: Subscription;
   readg: Subscription;
   readc: Subscription;
   liveUpdated: Subscription;
   date: Date;
+  partidaid:String;
 
   constructor(private authService: AuthService, private uService: UsuarioService,
     private gService: GameService, private router: Router, private route: ActivatedRoute) { }
@@ -45,9 +47,12 @@ export class GameplayComponent implements OnInit {
     this.logged = this.authService.isAuthehticated();
     this.user =  this.authService.user;
     this.route.params.subscribe((params) => {
-     this.gid = Number(params.id);
+     this.gid = params.cat;
+     this.partidaid = params.id;
+     console.log('checar parametros: ', this.gid, this.gid.toString());
     });
 
+    //this.catid = this.gService.getCatID(this.gid.toString());
     // toma los datos de los juegos
     this.gService.reset();
     this.uService.resetLives();
@@ -65,7 +70,11 @@ export class GameplayComponent implements OnInit {
       });
     }
 
-    this.getCurrentGamePlay();
+    this.gamescat = this.gService.updateGames.subscribe((v: VideoGame[])=> {
+     // this.games=v;
+      this.getCurrentGamePlay();
+
+    });
 
     this.subscript = this.gService.updatePoints.subscribe(
       (n: number) => { this.points = n; }
@@ -75,10 +84,12 @@ export class GameplayComponent implements OnInit {
 
 
   getCurrentGamePlay() {
-
+    console.log('GETTING CURRENT GAME');
     this.games = this.gService.getcurrentGame();
     if (this.games.length === undefined) {
+      console.log('finalizando');
       this.endGame();
+
     } else {
       this.game1 = this.games[0];
       this.game2 =  this.games[1];
@@ -131,18 +142,17 @@ export class GameplayComponent implements OnInit {
      }
      if(!this.gService.getCategories()){
       this.gService.leerCategorias();
-
      }
+  
      if (this.gService.gamesplayed.findIndex(g => g.game_id == this.gid)){
        console.log('encontrado');
-      this.gService.updateGame(this.gid, this.user.id, this.points, this.user.username, this.date);
+      this.gService.updateGame(this.partidaid, this.user.id, this.points, this.user.username, this.date);
      } else {
       this.readg = this.gService.updateGamePlayed.subscribe((rg: Partida[]) => {
         console.log('ACTUALIZADO', rg);
-        this.gService.updateGame(this.gid, this.user.id, this.points, this.user.username, this.date );
+        this.gService.updateGame(this.partidaid, this.user.id, this.points, this.user.username, this.date );
       });
      } 
-
     this.router.navigate(['gameover'], {relativeTo: this.route});
 }
 

@@ -27,8 +27,8 @@ const routes: Routes = [
   { path: 'game', component: GameComponent, canActivate: [AuthGuardService]},
   { path: 'gameplay', children: [
     {path: '', redirectTo: '/game', pathMatch: 'full'},
-    {path: ':id', component: GameplayComponent, canActivate: [AuthGuardService]},
-    { path: ':id/gameover', component: GameoverComponent, canActivate: [AuthGuardService] }
+    {path: ':id/:cat', component: GameplayComponent, canActivate: [AuthGuardService]},
+    { path: ':id/:cat/gameover', component: GameoverComponent, canActivate: [AuthGuardService] }
   ]}
 ];
 

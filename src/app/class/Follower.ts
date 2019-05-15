@@ -6,8 +6,8 @@ export class Follower {
     carrera: string;
     sexo: string;*/ 
     constructor(
-        public id: number,
-        public user_id: number,
-        public followers:number[]) {
+        public id: String,
+        public user_id: String,
+        public followers:String[]) {
         }
 }
