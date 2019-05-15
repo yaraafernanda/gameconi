@@ -133,7 +133,7 @@ getCategoriesPlayed() {
      // if (item.highscore.findIndex(h => h.id_usuario === this.user.id)) {
         this.mycategories.push(item);
       }
-    }); 
+    });
   } else {
     console.log('ELSE CATEGORIESPLAYED');
     // tslint:disable-next-line: triple-equals
