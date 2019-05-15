@@ -30,10 +30,12 @@ export class GameComponent implements OnInit {
   userSelected: User;
   user: User;
   gameCategories: Category[];
-  r_category = 0;
+  r_category = '';
 
   ngOnInit() {
     this.gService.leerJSON();
+    this.gService.leerVideoGames();
+
     this.user = this.authService.user;
     if (this.usuarioService.getUsers()) {
       this.my_followers = this.authService.my_followers.slice();
@@ -57,10 +59,10 @@ export class GameComponent implements OnInit {
       );
     }
     this.gameCategories = this.gameService.getCategories();
-    
+
   }
   shouldPlay() {
-    if (this.userSelected && this.r_category > 0) {
+    if (this.userSelected && this.r_category != '') {
       return true;
     }
     return false;
@@ -109,11 +111,15 @@ export class GameComponent implements OnInit {
 
  
   goToGameplay() {
-    this.partida = new Partida(this.gService.getnextId(), this.r_category,
-    this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, 0, new Date(), new Date() );
+    if(!this.gService.getVideoGames()){
+      this.gService.leerVideoGames();}
+
+    let id = this.gService.getnextId();
+    this.partida = new Partida(id.toString(), this.r_category,
+    this.user.id, 0, 0, this.userSelected.id, this.user.id, 0, "0", new Date(), new Date() );
     console.log('t:', this.partida.user_id, this.partida.opponent_id, this.partida.category_id);
 
     this.gService.addGamePlayed(this.partida);
-    this.router.navigate(['gameplay', this.partida.game_id]);
+    this.router.navigate(['gameplay', id, this.partida.category_id]);
   }
 }

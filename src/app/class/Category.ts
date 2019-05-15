@@ -8,7 +8,7 @@ export class Category{
     carrera: string;
     sexo: string;*/
     constructor(
-        public id: number,
+        public id: String,
         public name: string,
         public image: string,
         public highscore: HighScore[]

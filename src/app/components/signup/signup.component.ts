@@ -63,7 +63,8 @@ export class SignupComponent implements OnInit {
       console.log('ENTRO CREAR');
       /// SUBMIT NEW USER//
       const image = Math.floor(Math.random() * 100) + 1;
-      const new_user: User = new User(this.usuarioService.getNextId(),
+      let nextu=this.usuarioService.getNextId();
+      const new_user: User = new User(nextu.toString(),
         this.formSignUp.value.username,
         this.formSignUp.value.email,
         this.formSignUp.value.password,

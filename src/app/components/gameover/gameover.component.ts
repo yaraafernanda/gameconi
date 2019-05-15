@@ -25,7 +25,7 @@ export class GameoverComponent implements OnInit {
 
     this.gamesplayed = this.gService.getGamesPlayed();
     this.route.params.subscribe((params) => {
-      this.idg = Number(params.id);
+      this.idg = params.id;
      });
      console.log('id del juego terminado: ',this.idg);
      if (this.gService.gamesplayed){
