@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { User } from '../class/User';
 import { UsuarioService } from './usuarios/usuario.service';
 import { Follower } from '../class/Follower';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,6 +15,7 @@ export class AuthService {
   token = '';
   user: User;
   loginStatusChange = new Subject<User>();
+  logoutChange = new Subject<Boolean>();
   my_followers:User[];
   constructor(private usuarioService:UsuarioService,private httpClient:HttpClient,private route: ActivatedRoute, private router: Router) { }
   isAuthehticated(): boolean {
@@ -63,6 +64,29 @@ export class AuthService {
       console.log('Error',error);
    });
   }
+
+
+  update_follower(follower:Follower){
+    const headers = new  HttpHeaders().set("x-auth",this.token);
+    this.httpClient.put(environment.apiUrl+'api/v1/user/follow',follower,{headers}).subscribe((data:Follower[]) => {
+      console.log('PUT FOLLOWER',data);
+      this.usuarioService.updateAllFollowers(data);
+     },
+     error  => {
+       if(error.status==401){
+          ///TOKEN ERROR
+          this.token = '';
+          this.user = null;
+          this.logoutChange.next(false);
+          this.router.navigate(['/login']);
+       }
+     }
+     );
+  }
+
+
+
+
   login(user: User,tokenDb) {
     this.token = tokenDb;
     this.user = user;
