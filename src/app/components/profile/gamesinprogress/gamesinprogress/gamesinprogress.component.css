@@ -40,3 +40,18 @@ label {
 h5 {
   font-family: 'Exo', sans-serif;
 }
+
+.gc_pagination {
+  width: 100%;
+  /* its width according to input width */
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  overflow: auto;
+  text-align: center;
+}
+
+li {
+  display: inline-block !important;
+  width: 450px !important;
+}
