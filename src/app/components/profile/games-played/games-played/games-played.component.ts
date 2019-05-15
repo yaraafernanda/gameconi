@@ -102,7 +102,7 @@ export class GamesPlayedComponent implements OnInit {
       const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
       // tslint:disable-next-line: triple-equals
       const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.opponent_id);
-      const newCurrentG = new CurrentGame(item.game_id,
+      const newCurrentG = new CurrentGame(item.game_id, this.allcategories[indexCat].id,
         this.allcategories[indexCat].name, this.allcategories[indexCat].image,
         this.allusers[indexOpponent].username, '0', item.score, item.opponent_score);
       this.mygames.push(newCurrentG);
@@ -115,7 +115,7 @@ export class GamesPlayedComponent implements OnInit {
       const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
       // tslint:disable-next-line: triple-equals
       const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.user_id);
-      const newCurrentG = new CurrentGame(item.game_id,
+      const newCurrentG = new CurrentGame(item.game_id, this.allcategories[indexCat].id,
         this.allcategories[indexCat].name, this.allcategories[indexCat].image,
         this.allusers[indexOpponent].username, '1', item.opponent_score, item.score);
       this.mygames.push(newCurrentG);

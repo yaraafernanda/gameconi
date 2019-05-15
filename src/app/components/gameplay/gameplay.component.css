@@ -18,6 +18,11 @@ html, body, .gameContainer{
     align-items: center;
 }
 
+.score{
+  display: flexbox;
+  flex-direction: row;
+  justify-content: space-around;
+}
        /*
   ==============
   GAME PLAY DETAILS
