@@ -1,4 +1,4 @@
-export class HighScore{
+export class HighScore {
     /*id:number;
     nombre: string;
     edad: number;

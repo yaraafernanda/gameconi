@@ -20,15 +20,15 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>yaraafernanda</td>
+                      <td>{{item.highscore[0].username}}</td>
                       <td>{{item.highscore[0].score}}</td>
                     </tr>
                     <tr>
-                      <td>alvarocardenas</td>
+                      <td>{{item.highscore[1].username}}</td>
                       <td>{{item.highscore[1].score}}</td>
                     </tr>
                     <tr>
-                      <td>marianasalas</td>
+                      <td>{{item.highscore[2].username}}</td>
                       <td>{{item.highscore[2].score}}</td>
                     </tr>
                   </tbody>
@@ -43,13 +43,13 @@
   </div>
 
   <div class="row" *ngIf="owner" id="ownerimg">
-
+<!--
     <div class="container">
       <div class="col-md-4">
         AQUÍ VA EL FILTRO
       </div>
     </div>
-
+-->
     <div class="col-sm-6" id="gameFinishedCard">
       <ul id="catPagination">
         <li *ngFor="let item of mygames | paginate: { itemsPerPage: 2, currentPage: cPage}">

@@ -10,11 +10,11 @@ import { environment } from '../../../environments/environment.prod';
 })
 export class UsuarioService {
   // https://api.myjson.com/bins/wse9o
-  constructor(private httpClient:HttpClient) { 
+  constructor(private httpClient: HttpClient) {
 
   }
   private users: User[];
-  private all_followers:Follower[];
+  private all_followers: Follower[];
   usersChange = new Subject<User[]>();
   private lastId = 1;
   private lives = 0;
@@ -22,15 +22,15 @@ export class UsuarioService {
   private urlJSON = 'https://api.myjson.com/bins/wse9o';
   private followersJSON = 'https://api.myjson.com/bins/b3u6w';
   // leerDatosDelJSON();
-  leerFollowers(){
+  leerFollowers() {
     console.log('LEYENDO FOLLOWERS...');
-    this.httpClient.get(environment.apiUrl+'api/v1/followers/getAll').subscribe((data:Follower[]) => {
-      if(data){
-        this.all_followers=data;
-        console.log('READING ALL FOLLOWERS',this.all_followers);
+    this.httpClient.get(environment.apiUrl + 'api/v1/followers/getAll').subscribe((data: Follower[]) => {
+      if (data) {
+        this.all_followers = data;
+        console.log('READING ALL FOLLOWERS', this.all_followers);
       }
-      },error => {
-        console.log('Error',error);
+      }, error => {
+        console.log('Error', error);
       });
 
     /*this.httpClient.get(this.followersJSON).subscribe((data:Follower[]) => {
@@ -40,9 +40,9 @@ export class UsuarioService {
 
   }
 
-  updateAllFollowers(data:Follower[]){
-    this.all_followers=data;
-    console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
+  updateAllFollowers(data: Follower[]) {
+    this.all_followers = data;
+    console.log('READING ALL FOLLOWERS.JSON', this.all_followers);
   }
   /*update_follower(follower:Follower){
     this.httpClient.put(environment.apiUrl+'api/v1/user/follow',follower).subscribe((data:Follower[]) => {
@@ -58,43 +58,43 @@ export class UsuarioService {
       console.log('READING ALL FOLLOWERS.JSON',this.all_followers);
      });
   }*/
-  
-  getAllUsers(){
+
+  getAllUsers() {
     return this.users;
   }
-  getAllFollowers():Follower[]{
-    console.log('FOLLOWERS',this.all_followers);
+  getAllFollowers(): Follower[] {
+    console.log('FOLLOWERS', this.all_followers);
     return this.all_followers;
   }
   async leerDatosDelJSON() {
-    this.httpClient.get(environment.apiUrl+'api/v1/users/getAll').subscribe((data:User[]) => {
-        if(data){
-          this.users=data;
+    this.httpClient.get(environment.apiUrl + 'api/v1/users/getAll').subscribe((data: User[]) => {
+        if (data) {
+          this.users = data;
           this.usersChange.next(this.users.slice());
           this.lastId = this.users.length + 1;
           this.leerFollowers();
-          //console.log('===All users loaded',data);
-          //console.log('===USERS',this.users);
+          // console.log('===All users loaded',data);
+          // console.log('===USERS',this.users);
         }
-     },error => {
-       console.log('Error',error);
+     }, error => {
+       console.log('Error', error);
     });
     /*const response = await fetch(this.urlJSON);
     if (response.status != 200) { return []; }
     const arreglo = await response.json();
     this.users = arreglo.slice();*/
-    
+
   }
   getNextId(): number {
     return this.lastId;
   }
-  getUsers():User[]{
-    if(this.users){
+  getUsers(): User[] {
+    if (this.users) {
       return this.users.slice();
     }
     return this.users;
   }
-  pushUser(user:User){
+  pushUser(user: User) {
     this.users.push(user);
   }
   createUser(user: User) {
@@ -119,22 +119,22 @@ export class UsuarioService {
      },error => {
       console.log('Error',error);
    });*/
-    
+
   }
 
 
-  findUserbyUsername(username:string){
+  findUserbyUsername(username: string) {
     /*if(this.users==undefined){
       await this.leerDatosDelJSON();
     }*/
-    let index=this.users.findIndex(item=>{
-      if(item.username==username){
+    const index = this.users.findIndex(item => {
+      if (item.username == username) {
         return true;
-      };
+      }
     });
-    if(index>=0){
+    if (index >= 0) {
       return Object.assign({}, this.users[index]);
-      //return this.users[index];
+      // return this.users[index];
     }
     return null;
   }
@@ -162,7 +162,7 @@ export class UsuarioService {
     this.getLivesUpdate();
   }
 
-  getLives(){
+  getLives() {
     return this.lives;
   }
 }

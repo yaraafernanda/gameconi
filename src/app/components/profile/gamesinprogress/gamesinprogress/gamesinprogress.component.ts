@@ -15,7 +15,7 @@ import { CurrentGame } from '../../../../class/CurrentGame';
 })
 export class GamesinprogressComponent implements OnInit {
 
-  private urlJSON = 'https://api.myjson.com/bins/s4q5o';
+  // private urlJSON = 'https://api.myjson.com/bins/s4q5o';
   updateGamePlayed = new Subject<Partida[]>();
   userChangeSub: Subscription;
 
@@ -30,22 +30,23 @@ export class GamesinprogressComponent implements OnInit {
 
   cPage = 1;
 
+  private srcgames: Partida[] = [];
+
   // estos arreglos simulan el servicio
-  private srcgames: Partida[] = [
-    new Partida(1, 1, 1, 0, 0, 3, 1, 0, 0, new Date(), new Date()), // alvaro me reta
-    new Partida(4, 3, 3, 0, 0, 2, 0, 0, 0, new Date(), new Date()), // reto a mariana
-    new Partida(2, 2, 1, 0, 0, 3, 1, 0, 0, new Date(), new Date()), // alvaro me reta
-    new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0, new Date(), new Date())
-  ];
+  // private srcgames: Partida[] = [
+  //  new Partida(1, 1, 1, 0, 0, 3, 1, 0, 0, new Date(), new Date()), // alvaro me reta
+  //  new Partida(4, 3, 3, 0, 0, 2, 0, 0, 0, new Date(), new Date()), // reto a mariana
+  //  new Partida(2, 2, 1, 0, 0, 3, 1, 0, 0, new Date(), new Date()), // alvaro me reta
+  //   new Partida(3, 1, 6, 0, 0, 1, 0, 1, 0, new Date(), new Date())
+  // ];
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
     private auth: AuthService) { }
 
   ngOnInit() {
+    console.log('ON INIT, leyendo BD...');
     this.gService.leerJSON();
     this.user = this.auth.user;
-    // this.gService.getGamesPlayed();
-    // ALTOAQUI
     if (this.usuarioService.getUsers()) {
       console.log('ENTRÓ AL IF');
       this.allusers = this.usuarioService.getUsers();
@@ -62,19 +63,18 @@ export class GamesinprogressComponent implements OnInit {
           if (index >= 0) {
             this.allusers.splice(index, 1);
           }
-        }
-      );
+        });
     }
-    // this.gService.notificarCambiosGames();
-    // this.srcgames = this.gService.getGamesPlayed();
-    console.log('partidas check:', this.srcgames);
+    console.log('Agregando todas las Partidas a srcgames...');
+    this.srcgames = this.gService.getGamesPlayed();
+    console.log('Todas las Partidas: ', this.srcgames);
+    console.log('Agregando todas las categorías a allcategories...');
     this.allcategories = this.gService.getCategories();
-    console.log('Categorias: ', this.allcategories);
+    console.log('Todas las categorias: ', this.allcategories);
     this.allgames = this.srcgames;
+    console.log('Transferencia de srcgames a allgames...', this.allgames);
     this.getMyGames();
-    console.log('partidas check:', this.allgames);
-
-  //  console.log('Partidas: ', this.mygames);
+    console.log('Mis Partidas en curso: ', this.mygames);
   }
 
   getMyGames() {

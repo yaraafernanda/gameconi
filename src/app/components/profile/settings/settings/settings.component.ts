@@ -32,9 +32,9 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.auth.user;
-    console.log(this.user); // YA SIRVE
+    console.log('Mi usuario: ', this.user); // YA SIRVE
     this.users = this.usuarioService.getUsers();
-    console.log(this.users);
+    console.log('Todos los usuarios: ', this.users);
     this.formUsername = new FormGroup({
       newusername: new FormControl('', [Validators.required, checkUsername])
     });
