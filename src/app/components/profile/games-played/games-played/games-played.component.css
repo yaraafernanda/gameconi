@@ -62,6 +62,11 @@ td {
   margin-top: 5px;
 }
 
+#gameFinishedCard li {
+  display: inline-block !important;
+  width: 450px !important;
+}
+
 #gameFinishedCard .card-body .btn {
   font-family: 'Exo', sans-serif;
   background: linear-gradient(45deg, #26A4B5, #6BE0CC);

@@ -5,7 +5,9 @@ import { User } from '../../../../class/User';
 import { UsuarioService } from '../../../../services/usuarios/usuario.service';
 import { AuthService } from '../../../../services/auth.service';
 import { checkUsername } from '../../../../validators/check-username';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
 
-  private urlJSON = 'https://api.myjson.com/bins/wse9o';
+  // private urlJSON = 'https://api.myjson.com/bins/wse9o';
   user: User;
   private users: User[];
   usersChange = new Subject<User[]>();
@@ -27,8 +29,8 @@ export class SettingsComponent implements OnInit {
   infMsg = '';
   updateMsg = '';
 
-  constructor(private usuarioService: UsuarioService, private auth: AuthService,
-    private router: Router) { }
+  constructor(private usuarioService: UsuarioService,
+    private auth: AuthService, private router: Router, private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.user = this.auth.user;
@@ -46,11 +48,10 @@ export class SettingsComponent implements OnInit {
   }
 
   updateUsername() {
-    console.log('Usuario a modificar', this.user);
+    console.log('Usuario a modificar: ', this.user);
     this.errMsg = '';
     let index = this.users.findIndex(item => {
-      // tslint:disable-next-line: triple-equals
-      if (this.formUsername.value.newusername == item.username) {
+      if (this.formUsername.value.newusername === item.username) {
         return true;
       }
     });
@@ -71,28 +72,27 @@ export class SettingsComponent implements OnInit {
       });
     }
     if (index >= 0) {
-      console.log('Cambiando username...');
+      console.log('Cambiando username...'); // aqui ya puse el nuevo username
       this.users[index]['username'] = this.formUsername.value.newusername;
-      console.log('USUARIOS', this.users);
-      // 1. Crear XMLHttpRequest object
-      const xhr = new XMLHttpRequest();
-      // 2. Configurar:  PUT actualizar archivo
-      xhr.open('PUT', this.urlJSON);
-      // 3. indicar tipo de datos JSON
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      // 4. Enviar solicitud a la red
-      xhr.send(JSON.stringify(this.users));
-      // 5. Una vez recibida la respuesta del servidor
-      xhr.onload = function () {
-        // tslint:disable-next-line: triple-equals
-        if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP
-          // Ocurrió un error
-          alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
-        } else {
-          console.log(xhr.responseText); // Significa que fue existoso
+      console.log('USUARIOS', this.users); // debe aparecer modificado
+      // Update BD
+      const headers = new HttpHeaders().set('x-auth', this.auth.token);
+      console.log('My token', this.auth.token);
+      this.httpClient.put(environment.apiUrl + 'api/v1/user/updateUsername', this.users[index], { headers }).subscribe(
+        (data: User[]) => {
+          console.log('PUT USER', data);
+          this.users = data;
+          console.log('All users... ', this.users);
+        },
+        error => {
+          if (error.status === 401) {
+            console.log('No estás autorizado', error);
+          }
         }
-      };
-      this.usersChange.next(this.users.slice());
+      );
+      // fin
+      this.user = this.users[index];
+      this.auth.loginStatusChange.next(this.user);
       this.router.navigateByUrl('/profile/' + this.users[index].username + '/settings');
       this.updateMsg = 'Username updated';
       console.log('Username updated');
@@ -104,7 +104,6 @@ export class SettingsComponent implements OnInit {
     console.log('Usuario a modificar', this.user);
     this.infMsg = '';
     this.updateMsg = '';
-    // obtener index de usuario loggeado
     const index = this.users.findIndex(item => {
       if (this.auth.isAuthehticated) {
         if (this.auth.user.username === item.username) {
@@ -117,49 +116,48 @@ export class SettingsComponent implements OnInit {
       }
     });
     if (index >= 0) {
-      // tslint:disable-next-line: triple-equals
-      if (this.formPassword.value.password == this.users[index]['password']) {
-        // tslint:disable-next-line: triple-equals
-        if (this.formPassword.value.newpassword == this.formPassword.value.confirmedpassword) {
-          if (this.formPassword.valid) {
-            console.log('Cambiando contraseña...');
-            this.users[index]['password'] = this.formPassword.value.newpassword;
-            console.log('USUARIOS', this.users);
-            // 1. Crear XMLHttpRequest object
-            const xhr = new XMLHttpRequest();
-            // 2. Configurar:  PUT actualizar archivo
-            xhr.open('PUT', this.urlJSON);
-            // 3. indicar tipo de datos JSON
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            // 4. Enviar solicitud a la red
-            xhr.send(JSON.stringify(this.users));
-            // 5. Una vez recibida la respuesta del servidor
-            xhr.onload = function () {
-              // tslint:disable-next-line: triple-equals
-              if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP
-                // Ocurrió un error
-                alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
-              } else {
-                console.log(xhr.responseText); // Significa que fue existoso
+      // if (this.formPassword.value.password === this.users[index]['password']) {
+      if (this.formPassword.value.newpassword === this.formPassword.value.confirmedpassword) {
+        if (this.formPassword.valid) {
+          console.log('Cambiando contraseña...');
+          this.users[index]['password'] = this.formPassword.value.newpassword;
+          console.log('USUARIOS', this.users);
+          // Update BD
+          const headers = new HttpHeaders({
+            'x-auth': this.auth.token,
+            'x-pass': this.formPassword.value.password
+          });
+          console.log('My token', this.auth.token);
+          this.httpClient.put(environment.apiUrl + 'api/v1/user/updatePassword', this.users[index], { headers }).subscribe(
+            (data: User[]) => {
+              console.log('PUT PASWORD', data);
+              this.users = data;
+              console.log('All users... ', this.users);
+            },
+            error => {
+              if (error.status === 401) {
+                console.log('No estás autorizado', error);
               }
-            };
-            this.usersChange.next(this.users.slice());
-            console.log('Password updated');
-            this.updateMsg = 'Password updated';
-            this.formPassword.setValue({
-              password: '',
-              newpassword: '',
-              confirmedpassword: ''
-            });
-          } else {
-            this.infMsg = 'Password must be at least 6 characters';
-          }
+            }
+          );
+          // fin
+          this.usersChange.next(this.users.slice());
+          console.log('Password updated');
+          this.updateMsg = 'Password updated';
+          this.formPassword.setValue({
+            password: '',
+            newpassword: '',
+            confirmedpassword: ''
+          });
         } else {
-          this.infMsg = 'Confirmation does not match';
+          this.infMsg = 'Password must be at least 6 characters';
         }
       } else {
-        this.infMsg = 'Current password is not correct';
+        this.infMsg = 'Confirmation does not match';
       }
+      // } else {
+      //  this.infMsg = 'Current password is not correct';
+      // }
     }
   }
 

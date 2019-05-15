@@ -50,3 +50,8 @@ h5 {
   overflow: auto;
   text-align: center;
 }
+
+li {
+  display: inline-block !important;
+  width: 450px !important;
+}

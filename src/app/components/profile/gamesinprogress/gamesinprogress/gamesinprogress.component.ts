@@ -78,18 +78,18 @@ export class GamesinprogressComponent implements OnInit {
   }
 
   getMyGames() {
+    // let turn = 0;
     console.log('getting my games...');
     this.mygames.splice(0, this.mygames.length);
-
     // yo reté
     if (this.r_option === 2 || this.r_option === 0) {
       this.allgames.forEach(item => {
         if ((item.user_id === this.user.id) && (item.game_over === 0)) {
           const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
           const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.opponent_id);
-          const newCurrentG = new CurrentGame(item.game_id,
+          const newCurrentG = new CurrentGame(item.game_id, this.allcategories[indexCat].id,
             this.allcategories[indexCat].name, this.allcategories[indexCat].image,
-            this.allusers[indexOpponent].username, 0, 0, 0);
+            this.allusers[indexOpponent].username, item.turn_user_id !== this.user.id ? 0 : 1, 0, 0); // turno 0
           this.mygames.push(newCurrentG);
           console.log('YO RETE', this.mygames);
         }
@@ -99,13 +99,12 @@ export class GamesinprogressComponent implements OnInit {
     if (this.r_option === 1 || this.r_option === 0) {
       this.allgames.forEach(item => {
         console.log('retaron', item.turn_user_id);
-
         if ((item.opponent_id === this.user.id) && (item.game_over === 0)) {
           const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
           const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.user_id);
-          const newCurrentG = new CurrentGame(item.game_id,
+          const newCurrentG = new CurrentGame(item.game_id, this.allcategories[indexCat].id,
             this.allcategories[indexCat].name, this.allcategories[indexCat].image,
-            this.allusers[indexOpponent].username, 1, 0, 0);
+            this.allusers[indexOpponent].username, item.turn_user_id === this.user.id ? 1 : 0, 0, 0); // turno 1
           this.mygames.push(newCurrentG);
           console.log('ME RETARON', this.mygames);
         }

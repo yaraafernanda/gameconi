@@ -16,33 +16,34 @@ export class AuthService {
   user: User;
   loginStatusChange = new Subject<User>();
   logoutChange = new Subject<Boolean>();
-  my_followers:User[];
-  constructor(private usuarioService:UsuarioService,private httpClient:HttpClient,private route: ActivatedRoute, private router: Router) { }
+  my_followers: User[];
+  constructor(private usuarioService: UsuarioService, private httpClient: HttpClient,
+    private route: ActivatedRoute, private router: Router) { }
   isAuthehticated(): boolean {
-    console.log('AUTH',this.token.length > 0);
+    console.log('AUTH', this.token.length > 0);
     return this.token.length > 0;
   }
-  get_my_followers(){
-    //console.log('AUTHUSER',this.authService.user);
-    if(this.usuarioService.getAllFollowers()){
-      let follower_object:Follower=this.usuarioService.getAllFollowers().find((item)=>{
-        if(item.user_id==this.user.id){
+  get_my_followers() {
+    // console.log('AUTHUSER',this.authService.user);
+    if (this.usuarioService.getAllFollowers()) {
+      const follower_object: Follower = this.usuarioService.getAllFollowers().find((item) => {
+        if (item.user_id == this.user.id) {
           return true;
         }
       });
-      if(follower_object){
-        let users:User[]=this.usuarioService.getAllUsers().filter((item)=>{
+      if (follower_object) {
+        const users: User[] = this.usuarioService.getAllUsers().filter((item) => {
           return follower_object.followers.includes(item.id);
       });
-      console.log('FOLLOWERS USUARIO',users);
-      this.my_followers=users;
-      }else{
-        this.my_followers=[];
+      console.log('FOLLOWERS USUARIO', users);
+      this.my_followers = users;
+      } else {
+        this.my_followers = [];
       }
-    }else{
-      this.my_followers=[];
+    } else {
+      this.my_followers = [];
     }
-    
+
 
   }
   searchFollowers(search: string): User[] {
@@ -55,26 +56,26 @@ export class AuthService {
     return users_found;
   }
   createUser(user: User) {
-    this.httpClient.post(environment.apiUrl+'api/v1/signUp',user).subscribe((data) => {
+    this.httpClient.post(environment.apiUrl + 'api/v1/signUp', user).subscribe((data) => {
       this.usuarioService.pushUser(data['user']);
       this.usuarioService.usersChange.next(this.usuarioService.getUsers());
-      this.login(data['user'],data['token']);
+      this.login(data['user'], data['token']);
       this.router.navigate(['/profile', data['user']['username']]);
-     },error => {
-      console.log('Error',error);
+     }, error => {
+      console.log('Error', error);
    });
   }
 
 
-  update_follower(follower:Follower){
-    const headers = new  HttpHeaders().set("x-auth",this.token);
-    this.httpClient.put(environment.apiUrl+'api/v1/user/follow',follower,{headers}).subscribe((data:Follower[]) => {
-      console.log('PUT FOLLOWER',data);
+  update_follower(follower: Follower) {
+    const headers = new  HttpHeaders().set('x-auth', this.token);
+    this.httpClient.put(environment.apiUrl + 'api/v1/user/follow', follower, {headers}).subscribe((data: Follower[]) => {
+      console.log('PUT FOLLOWER', data);
       this.usuarioService.updateAllFollowers(data);
      },
      error  => {
-       if(error.status==401){
-          ///TOKEN ERROR
+       if (error.status == 401) {
+          /// TOKEN ERROR
           this.token = '';
           this.user = null;
           this.logoutChange.next(false);
@@ -84,13 +85,10 @@ export class AuthService {
      );
   }
 
-
-
-
-  login(user: User,tokenDb) {
+  login(user: User, tokenDb) {
     this.token = tokenDb;
     this.user = user;
-    console.log('USER LOGED',this.user);
+    console.log('USER LOGED', this.user);
     this.loginStatusChange.next(user);
     /*GET FOLLOWERS OF CURRENT USER*/
     this.get_my_followers();

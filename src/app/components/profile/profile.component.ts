@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   profile: User;
   aparam: string;
   userChangeSub: Subscription;
-  following:boolean=false;
+  following = false;
   owner: boolean;
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
         if (params.username) {
           this.profile = this.usuarioService.findUserbyUsername(params.username);
           this.profService.currentUserProfile(this.profile);
-          this.following=false;
+          this.following = false;
           this.checkFollowing();
           this.isHisProfile();
         }
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
             if (params.username) {
               this.profile = this.usuarioService.findUserbyUsername(params.username);
               this.profService.currentUserProfile(this.profile);
-              this.following=false;
+              this.following = false;
               this.checkFollowing();
               this.isHisProfile();
             }
@@ -62,12 +62,12 @@ export class ProfileComponent implements OnInit {
     }
 
   }
-  isLogged(){
+  isLogged() {
     return this.authService.isAuthehticated();
   }
   isHisProfile() {
     if (this.authService.isAuthehticated()) {
-      //console.log('AUTHSERVICE USER',this.authService.user.username);
+      // console.log('AUTHSERVICE USER',this.authService.user.username);
       if (this.authService.user.username === this.profile.username) {
         this.profService.setOwner(true);
         return true;
@@ -80,49 +80,49 @@ export class ProfileComponent implements OnInit {
       return false;
     }
   }
-  checkFollowing(){
-    //console.log('entro checkFollowing');
+  checkFollowing() {
+    // console.log('entro checkFollowing');
     if (this.authService.isAuthehticated()) {
-      this.authService.my_followers.map((item)=>{
-          if(item.id==this.profile.id){
-            this.following=true;
+      this.authService.my_followers.map((item) => {
+          if (item.id == this.profile.id) {
+            this.following = true;
           }
       });
     }
   }
 
-  follow(){    
-    let all_followers=this.usuarioService.getAllFollowers();
-    let index=all_followers.findIndex(item=>{
-      return item.user_id==this.authService.user.id;
+  follow() {
+    const all_followers = this.usuarioService.getAllFollowers();
+    const index = all_followers.findIndex(item => {
+      return item.user_id == this.authService.user.id;
     });
-    if(index>=0){
-      //Update record
+    if (index >= 0) {
+      // Update record
       all_followers[index].followers.push(this.profile.id);
-      //this.usuarioService.update_follower(all_followers[index]);
+      // this.usuarioService.update_follower(all_followers[index]);
       this.authService.update_follower(all_followers[index]);
-      //this.usuarioService.replaceAllFollowersFile(all_followers);
-      this.following=true;
-    }else{
-      ///Create record
-      let new_follower:Follower=new Follower(all_followers.length+1,this.authService.user.id,[this.profile.id]);
-      //this.usuarioService.update_follower(new_follower);
+      // this.usuarioService.replaceAllFollowersFile(all_followers);
+      this.following = true;
+    } else {
+      /// Create record
+      const new_follower: Follower = new Follower(all_followers.length + 1, this.authService.user.id, [this.profile.id]);
+      // this.usuarioService.update_follower(new_follower);
       this.authService.update_follower(new_follower);
       all_followers.push(new_follower);
-      this.following=true;
+      this.following = true;
     }
     this.authService.get_my_followers();
   }
-  unfollow(){
-    let all_followers=this.usuarioService.getAllFollowers();
-    let index=all_followers.findIndex(item=>{
-      return item.user_id==this.authService.user.id;
+  unfollow() {
+    const all_followers = this.usuarioService.getAllFollowers();
+    const index = all_followers.findIndex(item => {
+      return item.user_id == this.authService.user.id;
     });
-    let postition_following=all_followers[index].followers.findIndex(item=>item==this.profile.id);
-    all_followers[index].followers.splice(postition_following,1);
-    //this.usuarioService.update_follower(all_followers[index]);
+    const postition_following = all_followers[index].followers.findIndex(item => item == this.profile.id);
+    all_followers[index].followers.splice(postition_following, 1);
+    // this.usuarioService.update_follower(all_followers[index]);
     this.authService.update_follower(all_followers[index]);
-    this.following=false;
+    this.following = false;
     this.authService.get_my_followers();
   }
 
