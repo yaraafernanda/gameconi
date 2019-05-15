@@ -7,6 +7,7 @@ import { User } from '../../../../class/User';
 import { Subscription, Subject } from 'rxjs';
 import { Category } from '../../../../class/Category';
 import { CurrentGame } from '../../../../class/CurrentGame';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-gamesinprogress',
@@ -41,7 +42,7 @@ export class GamesinprogressComponent implements OnInit {
   // ];
 
   constructor(private gService: GameService, private usuarioService: UsuarioService,
-    private auth: AuthService) { }
+    private auth: AuthService, private route: ActivatedRoute, private router: Router ) { }
 
   ngOnInit() {
     console.log('ON INIT, leyendo BD...');
@@ -87,7 +88,7 @@ export class GamesinprogressComponent implements OnInit {
         if ((item.user_id === this.user.id) && (item.game_over === 0)) {
           const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
           const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.opponent_id);
-          const newCurrentG = new CurrentGame(item.game_id,
+          const newCurrentG = new CurrentGame(item.game_id, this.allcategories[indexCat].id,
             this.allcategories[indexCat].name, this.allcategories[indexCat].image,
             this.allusers[indexOpponent].username, '0', 0, 0);
           this.mygames.push(newCurrentG);
@@ -103,7 +104,7 @@ export class GamesinprogressComponent implements OnInit {
         if ((item.opponent_id === this.user.id) && (item.game_over === 0)) {
           const indexCat = this.allcategories.findIndex(item2 => item2.id == item.category_id);
           const indexOpponent = this.allusers.findIndex(item3 => item3.id == item.user_id);
-          const newCurrentG = new CurrentGame(item.game_id,
+          const newCurrentG = new CurrentGame(item.game_id, this.allcategories[indexCat].id,
             this.allcategories[indexCat].name, this.allcategories[indexCat].image,
             this.allusers[indexOpponent].username, '1', 0, 0);
           this.mygames.push(newCurrentG);
@@ -112,4 +113,5 @@ export class GamesinprogressComponent implements OnInit {
       });
     }
   }
+
 }

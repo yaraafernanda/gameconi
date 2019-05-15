@@ -15,6 +15,9 @@ import { UsuarioService } from '../../services/usuarios/usuario.service';
 })
 export class GameplayComponent implements OnInit {
   logged: boolean = false;
+  length1: number;
+  length2: number;
+
   user: User;
 
   games: VideoGame[] = [];
@@ -92,7 +95,10 @@ export class GameplayComponent implements OnInit {
 
     } else {
       this.game1 = this.games[0];
+      this.length1 = this.game1.name.length;
       this.game2 =  this.games[1];
+      this.length2 = this.game2.name.length;
+
     }
 
   }

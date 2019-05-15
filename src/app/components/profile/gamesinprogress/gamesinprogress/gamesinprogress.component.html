@@ -28,8 +28,8 @@
         <h5 class="card-title">{{item.category_name}}</h5>
         <p *ngIf="item.turn==1" class="card-text">{{item.opponent_name}} challenged you</p>
         <p *ngIf="item.turn==0" class="card-text">You challenged {{item.opponent_name}}</p>
-
-        <a *ngIf="item.turn==1" href="/gameplay/{{item.game_id}}" class="btn btn-primary">Play</a>
+        
+        <a *ngIf="item.turn==1" routerLink="/gameplay/{{item.game_id}}/{{item.category_id}}" class="btn btn-primary">Play</a>
         <p *ngIf="item.turn==0" id="space"></p>
       </div>
     </div>
