@@ -19,8 +19,8 @@ export class UsuarioService {
   private lastId = 1;
   private lives = 0;
   updateLives = new Subject<number>();
-  private urlJSON = 'https://api.myjson.com/bins/wse9o';
-  private followersJSON = 'https://api.myjson.com/bins/b3u6w';
+  //private urlJSON = 'https://api.myjson.com/bins/wse9o';
+  //private followersJSON = 'https://api.myjson.com/bins/b3u6w';
   // leerDatosDelJSON();
   leerFollowers(){
     console.log('LEYENDO FOLLOWERS...');

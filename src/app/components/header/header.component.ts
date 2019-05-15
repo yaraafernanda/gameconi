@@ -30,16 +30,15 @@ export class HeaderComponent implements OnInit {
     this.loginStatus=this.authService.loginStatusChange.subscribe((usuario:User)=>{
         this.logged=true;
         this.user=this.authService.user;
-        console.log('USUARIO LOGEADO',usuario);
+        console.log('======loginStatus====',this.logged);  
         //this.usuarioService.get_my_followers();
         //console.log('FOLLOWERS2',this.usuarioService.get_my_followers());
     });
     this.logoutStatus=this.authService.logoutChange.subscribe((logout:boolean)=>{
       ///IF LOGOUT///
+      console.log('LOGOUT');
       this.logged=logout;
     });
-
-
     this.formMainSearch = new FormGroup({
       search: new FormControl(''),
     });

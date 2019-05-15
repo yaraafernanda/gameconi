@@ -90,7 +90,6 @@ export class AuthService {
   login(user: User,tokenDb) {
     this.token = tokenDb;
     this.user = user;
-    console.log('USER LOGED',this.user);
     this.loginStatusChange.next(user);
     /*GET FOLLOWERS OF CURRENT USER*/
     this.get_my_followers();
