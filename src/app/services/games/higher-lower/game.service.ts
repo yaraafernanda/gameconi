@@ -5,12 +5,13 @@ import { Partida } from '../../../class/Partida';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Category } from '../../../class/Category';
 import { HighScore } from '../../../class/HighScore';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-
+/*
 games: VideoGame[] = [
 
 new VideoGame(1, 'FIFA 19', 230000,
@@ -121,12 +122,15 @@ new VideoGame(80, 'Diablo III: Reaper of Souls', 86300,
 'https://static-cdn.jtvnw.net/ttv-boxart/Diablo%20III:%20Reaper%20of%20Souls-285x380.jpg', 6),
 new VideoGame(81, 'Total War: Warhammer II', 86400,
 'https://static-cdn.jtvnw.net/ttv-boxart/Total%20War:%20Warhammer%20II-285x380.jpg', 6)
-];
+]; */
 
 private categories: Category[];
+private videogames: VideoGame[];
+
 updateCategories: Subject<Category[]>;
 private points = 0;
 updatePoints = new Subject<number>(); 
+updateGames = new Subject<VideoGame[]>(); 
 gamesplayed: Partida[]; 
 updateGamePlayed = new Subject<Partida[]>();
 private lastId = 1;
@@ -138,51 +142,83 @@ constructor(private httpClient: HttpClient) { }
 private urlJSON = 'https://api.myjson.com/bins/s4q5o';
 private urlCategories = 'https://api.myjson.com/bins/1856js';
 
-  async leerJSON() {
-    let response = await fetch(this.urlJSON);
-    if (response.status !== 200 ) {return []; }
-    let arreglo =  await response.json();
-    this.gamesplayed = arreglo.slice();
-    this.updateGamePlayed.next(this.gamesplayed.slice());
-    this.lastId = this.gamesplayed.length + 1;
+  leerJSON() {
+    this.httpClient.get(environment.apiUrl+'api/v1/games/getAll').subscribe((data:Partida[]) =>{
+      if(data){
+        this.gamesplayed=data;
+        this.updateGamePlayed.next(this.gamesplayed.slice());
+        console.log('READING ALL games.JSON', this.gamesplayed);
+
+        this.lastId = this.gamesplayed.length + 1;
+        //console.log('===All users loaded',data);
+        //console.log('===USERS',this.users);
+      }
+   },error => {
+     console.log('Error',error);
+    });
   }
 
    leerCategorias() {
-    this.httpClient.get(this.urlCategories).subscribe((data: Category[]) => {
-      this.categories = data;
-      console.log('READING ALL CATEGORIES.JSON', this.categories);
+    this.httpClient.get(environment.apiUrl+'api/v1/categories/getAll').subscribe((data: Category[]) => {
+      if (data) {
+        this.categories = data;
+  
+      console.log('READING ALL CATEGORIES', this.categories);
+      }
+     },error => {
+      console.log('Error',error);
      });
 
    }
+
+   leerVideoGames() {
+    this.httpClient.get(environment.apiUrl+'api/v1/videogames/getAll').subscribe((data: VideoGame[]) => {
+      if (data) {
+        this.videogames = data;
+      console.log('READING ALL Games', this.videogames);
+      }
+     },error => {
+      console.log('Error',error);
+     });
+
+   }
+
   getCategories(): Category[] {
+    console.log('READING ALL CATEGORIES', this.categories);
+
     return this.categories.slice();
+
   }
+
+  getVideoGames(): VideoGame[]{
+    console.log('READING ALL VIDEOGAMES', this.videogames);
+
+    return this.videogames.slice();
+  }
+
   getGamesPlayed(): Partida[] {
     return this.gamesplayed;
   }
 
-  addGamePlayed(gp: Partida) {
-    this.gamesplayed.push(gp);
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('PUT', this.urlJSON);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(this.gamesplayed));
-    xhr.onload = function () {
-      if (xhr.status != 200) { // analizar el estatus de la respuesta HTTP
-          // Ocurrió un error
-          alert(xhr.status + ': ' + xhr.statusText); // e.g. 404: Not Found
-      } else {
-           console.log('added successfully'); // Significa que fue existoso
+   addGamePlayed(gp: Partida) {
+    console.log('try to add game');
+    this.httpClient.post(environment.apiUrl+'api/v1/games/newgame',gp).subscribe((data)=>{
+      this.gamesplayed.push(gp);
+      console.log('PUT PARTIDA', data);
+      this.updateGamePlayed.next(this.getGamesPlayed());
+      console.log('games: ', this.gamesplayed);
+    }, error =>{
+      if(error.status == 404){
+        console.log('error', error);
       }
-  };
-  this.updateGamePlayed.next(this.gamesplayed.slice());
+    });
   }
+
 
   updateGame(id, userid, score, username, date) {
     this.notificarCambiosGames();
 
-    console.log('datos entry', id, score, 'juegos', this.gamesplayed);
+    console.log('datos entry', id, score);
     let pos = this.gamesplayed.findIndex(ga => ga.game_id === id );
     console.log('posicion: ', pos);
     if (pos >= 0) {
@@ -203,8 +239,24 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
         }
       }
      this.updateHighScore(score,pos, username);
-     let xhr = new XMLHttpRequest();
-    xhr.open('PUT', this.urlJSON);
+     // Update BD
+     console.log('updated game: ', this.gamesplayed[pos]);
+
+     this.httpClient.put(environment.apiUrl + 'api/v1/updateGame', this.gamesplayed[pos]).subscribe(
+       (data: Partida[]) => {
+         console.log('PUT UPDATES', data);
+         this.gamesplayed = data;
+         console.log('All games... ', this.gamesplayed);
+       },
+       error => {
+         if (error.status === 401) {
+           console.log('No estás autorizado', error);
+         }
+       }
+     );
+     // fin
+   /*   let xhr = new XMLHttpRequest();
+     xhr.open('PUT', this.urlJSON);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(this.gamesplayed));
     xhr.onload = function () {
@@ -214,9 +266,8 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
       } else {
            console.log('update exitoso'); // Significa que fue existoso
       }
-    };
+    }; */
     this.updateGamePlayed.next(this.gamesplayed.slice());
-    console.log('updated game: ', this.gamesplayed[pos]);
     } else {
       console.log('not founded');
     }
@@ -265,19 +316,18 @@ private urlCategories = 'https://api.myjson.com/bins/1856js';
     this.updateGamePlayed.next(this.gamesplayed.slice());
   }
 
-  getGames(id) {
-    this.sameCategoryGames.splice(0, this.sameCategoryGames.length);
-    let pos = this.gamesplayed.findIndex(ga => ga.game_id == id );
-    let cat = this.gamesplayed[pos].category_id;
-    console.log('game index: ', pos, 'categoria: ', cat);
-    for (let i = 0; i < this.games.length; i++) {
-      if (this.games[i].category_id == cat) {
-        this.sameCategoryGames.push(this.games[i]);
-        console.log('pushed:', this.games[i]);
-      }
-    }
-    console.log('SAMECAT CREATED: ', this.sameCategoryGames);
-    this.sameCategoryGames.sort(() => Math.random() - 0.5);
+  async getGames(id) {
+    this.httpClient.get(environment.apiUrl+'api/v1/getSameCategory?id='+id).subscribe((data: VideoGame[]) => {
+      if (data) {
+        this.sameCategoryGames = data;
+      console.log('READING SAME CATEGORY', this.sameCategoryGames);
+      this.updateGames.next(this.sameCategoryGames);
+
+      this.sameCategoryGames.sort(() => Math.random() - 0.5);
+      
+      }},error => {
+      console.log('Error',error);
+     });
   }
 
   getcurrentGame() {
