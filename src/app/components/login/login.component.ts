@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
     this.httpClient.post(environment.apiUrl+'api/v1/login',this.formLogin.value).subscribe((data) => {
         if(data){
           //console.log('Corerecto login',data['user']);
@@ -54,6 +53,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/profile', data['user']['username']]);
           }
         }
+        console.log('DATA',data);
      },error => {
       this.errMsg = true;
       //console.log('error login',error);
