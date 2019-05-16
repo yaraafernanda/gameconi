@@ -43,6 +43,13 @@ html, body, .gameContainer{
     margin-bottom: 0px;
     font-weight: 800;
 }
+.title-game{
+  width: 40vw;
+  overflow:hidden;
+  background-color: rgba(0, 0, 0, 0.712);
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}
 
 .small{
     font-size: 20px;
