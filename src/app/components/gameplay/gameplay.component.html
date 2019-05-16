@@ -2,7 +2,7 @@
 <div class="row" *ngIf="game1 != undefined">
     <div class="col-6 w-50" [style.background-image] ="'url('+game1.imgSrc+')'" id="firstGame" >
         <ul class="gameContent"> 
-               <li><p class="large">{{game1.name}}</p></li>
+               <li><div class="large title-game">{{game1.name}}</div></li>
                <li><p class="small">has</p></li>
                <li><p class="large">{{game1.searches}}</p></li>
                <li> <p class="small">average monthly searches</p></li>            
@@ -14,7 +14,7 @@
     </div> -->
     <div class="col-6 w-50" id="secondGame" [style.background-image] ="'url('+game2.imgSrc+')'">
         <ul class="gameContent">
-            <li><p class="large">{{game2.name}}</p></li>
+            <li><div class="large title-game">{{game2.name}}</div></li>
             <li><p class="small">has</p> </li>
             <li><button type="button" class="btn btn-sm btn-light col-4" (click)= isHigher()>Higher</button></li>
             <li><button type="button" class="btn btn-sm btn-light col-4"(click)= isLower()>Lower</button></li>

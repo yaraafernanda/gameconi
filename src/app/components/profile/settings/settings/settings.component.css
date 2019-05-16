@@ -1,33 +1,33 @@
-  .row {
-      padding: 25px;
-  }
+.row {
+  padding: 25px;
+}
 
-  p {
-    font-family: 'Exo', sans-serif;
-    color:white;
-    font-size: 1rem;
-  }
+p {
+font-family: 'Exo', sans-serif;
+color:white;
+font-size: 1rem;
+}
 
-  #puser{
-      margin-top: 20px;
-  }
+#puser{
+  margin-top: 20px;
+}
 
-  button {
-    width: 100px;
-    margin-top: 25px;
-    background: linear-gradient(45deg, #26A4B5, #6BE0CC);
-    color: #fff;
-    padding:5px 10px 5px 10px;
-  }
+button {
+width: 100px;
+margin-top: 25px;
+background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+color: #fff;
+padding:5px 10px 5px 10px;
+}
 
-  .input-group {
-    margin-bottom: 15px;
-  }
+.input-group {
+margin-bottom: 15px;
+}
 
-  form #pswbtn {
-      margin-top: 30px;
-  }
+form #pswbtn {
+  margin-top: 30px;
+}
 
-  .alert {
-    margin-top: 15px;
-  }
+.alert {
+margin-top: 15px;
+}
