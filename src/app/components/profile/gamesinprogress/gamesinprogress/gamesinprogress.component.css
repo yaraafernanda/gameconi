@@ -1,57 +1,57 @@
 .row {
-    padding: 20px;
+  padding: 20px;
 }
 
 .row img {
-    height: 150px;
+  height: 150px;
 }
 
 .card:hover {
-  box-shadow:0 30px 70px rgba(0,0,0,.2);
+box-shadow:0 30px 70px rgba(0,0,0,.2);
 }
 
 .card{
-  border-radius: 15px;
-  box-shadow:0 20px 50px rgba(0,0,0,.1);
-  margin-bottom: 20px;
+border-radius: 15px;
+box-shadow:0 20px 50px rgba(0,0,0,.1);
+margin-bottom: 20px;
 }
 
 .card-body .btn {
-  font-family: 'Exo', sans-serif;
-  background: linear-gradient(45deg, #26A4B5, #6BE0CC);
-  width: 200px;
+font-family: 'Exo', sans-serif;
+background: linear-gradient(45deg, #26A4B5, #6BE0CC);
+width: 200px;
 }
 
 #space {
-  height: 22px;
+height: 22px;
 }
 
 label {
-  margin: 5px;
+margin: 5px;
 }
 
 .btn-group .btn {
-  background-color: azure;
-  color: black;
-  border-radius: 10px;
-  margin-bottom: 15px;
+background-color: azure;
+color: black;
+border-radius: 10px;
+margin-bottom: 15px;
 }
 
 h5 {
-  font-family: 'Exo', sans-serif;
+font-family: 'Exo', sans-serif;
 }
 
 .gc_pagination {
-  width: 100%;
-  /* its width according to input width */
-  height: auto;
-  padding: 0px;
-  margin: 0px;
-  overflow: auto;
-  text-align: center;
+width: 100%;
+/* its width according to input width */
+height: auto;
+padding: 0px;
+margin: 0px;
+overflow: auto;
+text-align: center;
 }
 
 li {
-  display: inline-block !important;
-  width: 450px !important;
+display: inline-block !important;
+width: 450px !important;
 }
