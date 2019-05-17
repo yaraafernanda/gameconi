@@ -43,7 +43,8 @@ export class GameplayComponent implements OnInit {
   ngOnInit() {
     // this.gService.leerJSON();
     this.gService.notificarCambiosGames();
-
+    var audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3');
+    audio.play(); 
     //hora y fecha de inicio juego
     this.date = new Date();
     // checa si esta loggeado para poder jugar
